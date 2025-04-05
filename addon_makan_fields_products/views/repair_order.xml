@@ -304,6 +304,9 @@
                      <field name="tanque_combustible" widget="slider"/>
                      <field name="kilometrajebd" string="Kilometraje Inicial"/>
                  </xpath>
+
+
+                 
  
                
    <!-- Crear nueva Página Chequeo de Cortesía -->
@@ -400,7 +403,18 @@
                     <attribute name="string">Servicios M.O.</attribute>
                 </xpath>
 
-              
+
+                           <!-- AGREGAR TOTALES EN OPERATIONS POR ELDER GIRON 05042025 -->     
+<xpath expr="//page[@name='operations']" position="inside">
+    <group class="oe_subtotal_footer oe_right" style="margin-top: 15px;">
+        <div class="oe_subtotal_footer_separator oe_inline">
+            <div class="o_form_label" style="font-weight: bold; margin-right: 10px;">Total Servicios M.O.</div>
+            <field name="total_fees" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        </div>
+    </group>
+</xpath>
+
+                    <!-- FIN AGREGACIÓN TOTALES -->
 
                           
                          
@@ -558,8 +572,8 @@
         <field name="inherit_id" ref="repair.view_repair_order_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='sale_order_id']" position="after">
-                <field name="amount_total" string="Total"/>
-                
+                <field name="amount_total" string="Total Piezas"/>
+                 <field name="total_fees" string="Total M.O."/> <!-- AGREGADO 05042025 POR ELDER GIRON -->
             </xpath>
         </field>
     </record>

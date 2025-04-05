@@ -113,6 +113,20 @@ class RepairOrder(models.Model):
                                              string="Líneas de Tabla Taller1")
     order_line_ids_taller2 = fields.One2many('repair.order.table2.taller', 'order_id_taller2')
     
+    #AGREGAR METODO DE COMPUTO PARA REPAIR ORDER EN SERVICIOS M.O HECHO POR ELDER GIRON #05/04/2025
+    total_fees = fields.Monetary(
+        string='Total de Servicios',
+        compute='_compute_total_fees',
+        currency_field='currency_id',
+        store=True
+    )
+
+    @api.depends('fees_lines.price_subtotal')
+    def _compute_total_fees(self):
+        for record in self:
+            record.total_fees = sum(line.price_subtotal for line in record.fees_lines)
+
+    #AQUI TERMINO ----------------------------------------------------------------------------------
 
     # Métodos
     @api.onchange('location_id')
