@@ -4,16 +4,15 @@
         <field name="res_model">repair.line.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <!-- <field name="view_id" ref="view_repair_order_form_inherit_report"/> -->
-        <!-- <field name="view_id" ref="view_repair_line_wizard_form"/> -->
+        <field name="view_id" ref="view_repair_line_wizard_form"/>
     </record>
 
-      <record id="action_repair_line_wizard_nuevo" model="ir.actions.act_window">
+     <record id="action_repair_line_wizard_nuevo" model="ir.actions.act_window">
         <field name="name">Seleccionar Nuevas Cotizaciones</field>
         <field name="res_model">repair.line.wizard.nuevo</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <!-- <field name="view_id" ref="view_repair_order_form_inherit_report_nuevo"/> -->
+        <field name="view_id" ref="view_repair_line_wizard_nuevo_form"/>
     </record>
 
     <record id="action_repair_line_wizard_manoobra" model="ir.actions.act_window">
@@ -21,7 +20,7 @@
         <field name="res_model">repair.line.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <!-- <field name="view_id" ref="view_repair_order_form_inherit_report_manoobra"/> -->
-    </record> 
+        <field name="view_id" ref="view_repair_line_wizard_nuevo_form_manoobra"/>
+    </record>
 
 </odoo>

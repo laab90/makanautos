@@ -10,6 +10,7 @@
         'views/product_template.xml',
         'views/repair_order.xml',
         'views/repair_line.xml',
+         'views/repair_line_wizard_view.xml',
         'views/sale_order_view.xml',
         'views/stock_picking.xml',
         'views/repair_order_tree.xml',

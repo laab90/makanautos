@@ -460,7 +460,19 @@
         </field>
     </record>
 
-   
+   <record id="view_repair_order_form_inherit_report" model="ir.ui.view">
+    <field name="name">repair.order.form.report.inherit</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+            <button name="%(action_repair_line_wizard)d" type="action" string="Generar Reporte de Cotizaciones" class="btn-primary"/>
+            <button name="%(action_repair_line_wizard_nuevo)d" type="action" string="Cotizaciones Taller" class="btn-primary"/>
+            <button name="%(action_repair_line_wizard_manoobra)d" type="action" string="Cotizaciones M.O" class="btn-primary"/>
+            
+        </xpath>
+    </field>
+</record>
 
     <!--<record id="view_repair_order_form_inherit_report" model="ir.ui.view">
         <field name="name">repair.order.form.report.inherit</field>
