@@ -462,7 +462,7 @@
 
    
 
-    <record id="view_repair_order_form_inherit_report" model="ir.ui.view">
+    <!--<record id="view_repair_order_form_inherit_report" model="ir.ui.view">
         <field name="name">repair.order.form.report.inherit</field>
         <field name="model">repair.order</field>
         <field name="inherit_id" ref="repair.view_repair_order_form"/>
@@ -501,7 +501,7 @@
               
             </xpath>
         </field>
-    </record>
+    </record>-->
 
     
 
