@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="fiscal_book_header_layout">
+            <div class="container" id="header">
+                <div class="row">
+                    <div class="col-12">
+                        <strong><span t-esc="company_name"/></strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Dirección:</strong>
+                        <span t-esc="company_street"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>NIT:</strong>
+                        <span t-esc="company_nit"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h5>LIBRO DE VENTAS Y SERVICIOS PRESTADOS</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Período:</strong>
+                        <span t-esc="dates"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>(VALORES EXPRESADOS EN QUETZALES)</strong>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="fiscal_purchase_book_header_layout">
+            <div class="container" id="header">
+                <div class="row">
+                    <div class="col-12">
+                        <strong><span t-esc="company_name"/></strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Dirección:</strong>
+                        <span t-esc="company_street"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>NIT:</strong>
+                        <span t-esc="company_nit"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h5>REGISTRO DE COMPRAS Y SERVICIOS</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Período:</strong>
+                        <span t-esc="dates"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>(VALORES EXPRESADOS EN QUETZALES)</strong>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>

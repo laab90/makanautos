@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_repair" model="ir.actions.report">
+        <field name="name">Informe de Reparación</field>
+        <field name="model">repair.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">addon_makan_fields_products.report_repair_order</field>
+        <field name="report_file"></field>
+        <field name="print_report_name">('Reparacion - {}').format(object.name)</field>
+        <field name="binding_model_id" ref="model_repair_order" />
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+
+    <template id="report_repair_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size: 14px; line-height: 1.4;">
+
+                        <!-- Orden de Reparación -->
+                        <h2 style="font-size: 18px; margin-bottom: 8px;">Orden de Reparación</h2>
+                        <p><strong>Nombre del Propietario:</strong> <span t-field="doc.propietario.name" /></p>
+                        <div style="margin-bottom: 10px;">
+                            <span t-field="doc.name"/>
+                        </div>
+
+                        <!-- Información del Vehículo -->
+                        <h2 style="font-size: 14px; margin-bottom: 5px;">Información del Vehículo</h2>
+                        <div class="row mt8">
+                            <div class="col-4">
+                                <table class="table table-sm" style="font-size: 12px;">
+                                    <tr><td><strong>Modelo:</strong></td><td><span t-field="doc.product_id.modelo"/></td></tr>
+                                    <tr><td><strong>Marca:</strong></td><td><span t-field="doc.product_id.marca"/></td></tr>
+                                    <tr><td><strong>Kilometraje:</strong></td><td><span t-field="doc.kilometrajebd"/></td></tr>
+                                </table>
+                            </div>
+                            <div class="col-4">
+                                <table class="table table-sm" style="font-size: 12px;">
+                                    <tr><td><strong>Año:</strong></td><td><span t-field="doc.product_id.anio"/></td></tr>
+                                    <tr><td><strong>Placa:</strong></td><td><span t-field="doc.product_id.placa"/></td></tr>
+                                    <tr><td><strong>Color:</strong></td><td><span t-field="doc.product_id.color"/></td></tr>
+                                </table>
+                            </div>
+                        </div>
+
+<!-- Tabla combinada de Repuestos y Servicios -->
+<table class="table table-bordered" style="font-size: 11px; width: 100%; margin: 10px 0 5px 0; border-collapse: collapse;">
+    <thead>
+        <tr style="background: #f1f1f1; text-align: center;">
+            <th style="padding: 2px 5px; border: 1px solid #ddd;">Tipo</th>
+            <th style="padding: 2px 5px; border: 1px solid #ddd;">Descripción</th>
+            <th style="padding: 2px 5px; border: 1px solid #ddd;">Cantidad</th>
+            <th style="padding: 2px 5px; border: 1px solid #ddd;">Precio Unitario</th>
+            <th style="padding: 2px 5px; border: 1px solid #ddd;">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Repuestos -->
+        <t t-foreach="doc.operations" t-as="operation">
+            <tr style="line-height: 1; text-align: center;">
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">Repuesto</td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd; text-align: left;">
+                    <span t-field="operation.product_id.name"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-field="operation.product_uom_qty"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-field="operation.price_unit"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-esc="operation.price_total"/>
+                </td>
+            </tr>
+        </t>
+        
+        <!-- Servicios -->
+        <t t-foreach="doc.fees_lines" t-as="operation1">
+            <tr style="line-height: 1; text-align: center;">
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">Servicio</td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd; text-align: left;">
+                    <span t-field="operation1.name"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-field="operation1.product_uom_qty"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-field="operation1.price_unit"/>
+                </td>
+                <td style="padding: 2px 5px; border: 1px solid #ddd;">
+                    <span t-esc="operation1.price_total"/>
+                </td>
+            </tr>
+        </t>
+    </tbody>
+</table>
+
+
+
+                        <!-- Total -->
+<div style="width: 100%; text-align: right; margin-top: 5px; margin-right: 50px;">
+    <h2 style="font-size: 14px; margin-bottom: 6px; display: inline;">Total:</h2>
+    <span t-field="doc.amount_total" style="font-size: 14px; font-weight: bold; padding-left: 5px;"/>
+</div>
+
+
+                        <!-- Taller Cierre -->
+                        <t t-if="doc.order_line_ids_taller2">
+                            <div class="row mt8">
+                                <div class="col-12">
+                                    <h2 style="font-size: 14px; margin-bottom: 3px;">Descripción de Trabajo</h2>
+                                    <div style="border: 1px solid #ccc; padding: 6px; border-radius: 3px; background: #f9f9f9;">
+                                        <ul style="padding-left: 10px;">
+                                            <t t-foreach="doc.order_line_ids_taller2" t-as="line">
+                                                <li><span t-field="line.one2manyproducttaller2"/></li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        
+                        
+                                                <!-- Notas de Cierre -->
+                        <t t-if="doc.notas_internal_cierre">
+                            <div class="row mt8">
+                                <div class="col-12">
+                                    <h2 style="font-size: 14px; margin-bottom: 3px;">Notas</h2>
+                                    <div style="border: 1px solid #ccc; padding: 6px; border-radius: 3px; background: #f9f9f9;">
+                                        <t t-raw="doc.notas_internal_cierre"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+

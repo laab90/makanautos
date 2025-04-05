@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_journal_digifact_form" model="ir.ui.view">
+        <field name="name">account.journal.digifact.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="page_document_resolution" string="Resoluciones">
+                    <group>
+                        <group>
+                            <field name="cai"/>
+                            <field name="serie"/>
+                            <field name="date_due"/>
+                        </group>
+                        <group>
+                            <field name="prefix"/>
+                            <field name="counter_start"/>
+                            <field name="counter_finish"/>
+                        </group>
+                    </group>
+                    <field name="resolution_ids">
+                        <tree editable="top">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="prefix"/>
+                            <field name="serie"/>
+                            <field name="date_authorization"/>
+                            <field name="date_due"/>
+                            <field name="counter_start"/>
+                            <field name="counter_finish"/>
+                            <field name="active"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

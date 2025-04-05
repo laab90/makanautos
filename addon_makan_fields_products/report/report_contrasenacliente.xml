@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_repair_contrasenacliente" model="ir.actions.report">
+        <field name="name">Informe de Recepción de Vehiculo</field>
+        <field name="model">repair.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">addon_makan_fields_products.report_contrasenacliente</field>
+        <field name="report_file"></field>
+        <field name="print_report_name">('Recepción de Vehiculo - {}').format(object.name)</field>
+        <field name="binding_model_id" ref="model_repair_order" />
+        <field name="binding_type">report</field>
+    </record>
+
+
+<template id="report_contrasenacliente">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.external_layout">
+                <div class="page" style="font-size: 14px; line-height: 1.6; padding: 15px;">
+
+                    <h2 style="font-size: 18px; margin-bottom: 10px;">RECEPCIÓN DE VEHÍCULO</h2>
+                    <div style="margin-bottom: 15px;">
+                        <span t-field="doc.name"/>
+                    </div>
+
+                    <!-- Información del Cliente -->
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-12">
+                            <p><strong>Nombre del Propietario:</strong> <span t-field="doc.propietario.name" /></p>
+                        </div>
+                    </div>
+
+                    <!-- Información del Vehículo -->
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-4">
+                            <table class="table table-sm" style="font-size: 10px;">
+                                <tr><td><strong>Modelo:</strong></td><td><span t-field="doc.product_id.modelo"/></td></tr>
+                                <tr><td><strong>Marca:</strong></td><td><span t-field="doc.product_id.marca"/></td></tr>
+                                <tr><td><strong>Kilometraje:</strong></td><td><span t-field="doc.kilometrajebd"/></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-4">
+                            <table class="table table-sm" style="font-size: 10px;">
+                                <tr><td><strong>Placa:</strong></td><td><span t-field="doc.product_id.placa"/></td></tr>
+                                <tr><td><strong>Tanque:</strong></td><td><span t-field="doc.tanque_combustible"/></td></tr>
+                            </table>
+                        </div>
+                        <div class="col-4">
+                            <table class="table table-sm" style="font-size: 10px;">
+                                <tr><td><strong>Motor:</strong></td><td><span t-field="doc.product_id.motor"/></td></tr>
+                                <tr><td><strong>Año:</strong></td><td><span t-field="doc.product_id.anio"/></td></tr>
+                                <tr><td><strong>Color:</strong></td><td><span t-field="doc.product_id.color"/></td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Categoría -->
+                    <div style="margin-top: 15px; margin-bottom: 10px;">
+                        <strong>Categoria:</strong>
+                        <ul style="list-style: none; padding: 0; margin-top: 5px;">
+                            <t t-foreach="doc.tag_ids" t-as="tag">
+                                <li style="background-color: orange; color: white; border-radius: 15px; padding: 6px 12px; display: inline-block; font-size: 10px; margin-right: 5px;">
+                                    <t t-esc="tag.name"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <!-- Notas de Recepción -->
+                    <h2 style="font-size: 14px; color: #d9534f; margin-top: 20px;">Notas de Recepción</h2>
+                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background: #f9f9f9; font-size: 10px;">
+                        <p style="margin: 0;"><t t-esc="doc.quotation_notes"/></p>
+                    </div>
+
+<!-- Contenedor en DOS COLUMNAS con Condiciones con letra más pequeña -->
+<div style="display: table; width: 100%; margin-top: 10px;">
+
+  
+<h2 style="font-size: 14px; color: #d9534f; margin-bottom: 5px;">Observaciones</h2>
+    <div class="row" style="display: flex; font-size: 10px; justify-content: space-between; padding-left: 20px;">
+
+
+        <!-- Primera columna -->
+        <div class="col-3" style="padding: 0 5px; width: 32%;">
+            <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                <li><strong>Documentos:</strong> <span t-if="doc.documentos">Sí</span><span t-if="not doc.documentos">No</span></li>
+                <li><strong>Manuales:</strong> <span t-if="doc.manuales">Sí</span><span t-if="not doc.manuales">No</span></li>
+                <li><strong>Herramienta:</strong> <span t-if="doc.herramienta">Sí</span><span t-if="not doc.herramienta">No</span></li>
+            </ul>
+        </div>
+
+        <!-- Segunda columna -->
+        <div class="col-3" style="padding: 0 5px; width: 32%;">
+            <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                <li><strong>Llanta de Repuesto:</strong> <span t-if="doc.llanta_rep">Sí</span><span t-if="not doc.llanta_rep">No</span></li>
+                <li><strong>Alfombra:</strong> <span t-if="doc.alfombra">Sí</span><span t-if="not doc.alfombra">No</span></li>
+            </ul>
+        </div>
+
+        <!-- Tercera columna -->
+        <div class="col-3" style="padding: 0 5px; width: 32%;">
+            <ul class="list-unstyled" style="margin: 0; padding: 0;">
+                <li><strong>Encendedor:</strong> <span t-if="doc.encendedor">Sí</span><span t-if="not doc.encendedor">No</span></li>
+                <li><strong>Extintor:</strong> <span t-if="doc.extintor">Sí</span><span t-if="not doc.extintor">No</span></li>
+                <li><strong>Control de Alarma:</strong> <span t-if="doc.ctrlalarma">Sí</span><span t-if="not doc.ctrlalarma">No</span></li>
+                <li><strong>Platos/Aros:</strong> <span t-if="doc.platosaros">Sí</span><span t-if="not doc.platosaros">No</span></li>
+            </ul>
+        </div>
+
+    </div>
+   
+
+    <!-- Columna de Condiciones (Misma información, fuente más pequeña) -->
+    <div style="display: table-cell; width: 35%; vertical-align: top;">
+        <h2 style="font-size: 14px; color: #d9534f; margin-bottom: 5px;">Condiciones</h2>
+        <div style="font-size: 7px; line-height: 1.1;">
+            <p><strong>1.</strong> La presente autorización expresa que: <strong>Siendo el propietario o actuando como representante del mismo</strong>, estoy en condiciones de autorizar los servicios o reparaciones anotadas.</p>
+            <p><strong>2.</strong> A partir del segundo día después de la notificación de haber terminado el trabajo, se empezará a cargar Q. 50.00 diarios por parqueo.</p>
+            <p><strong>3.</strong> Makan Servicios y Accesorios no es responsable de percances o fallos después de la entrega.</p>
+            <p><strong>4.</strong> Cualquier reclamación debe presentarse en un máximo de <strong>5 días</strong>.</p>
+            <p><strong>5.</strong> No nos hacemos responsables de pérdidas o daños fuera de nuestras instalaciones.</p>
+            <p><strong>6.</strong> No somos responsables de golpes o rayones no registrados en la orden.</p>
+            <p><strong>7.</strong> El único documento válido para la entrega del vehículo es la <strong>contraseña de la orden de trabajo</strong>.</p>
+        </div>
+    </div>
+
+</div>
+
+                    
+                    
+
+                        <!-- Firmas -->
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <div>
+                                <span>Firma del Cliente</span>
+                                <img t-att-src="'data:image/png;base64,%s' % to_text(doc.firma_cliente)" style="max-width: 100px; max-height: 100px;"/>
+                            </div>
+                            <div>
+                                <span>Firma Autorizada</span>
+                                <img t-att-src="'data:image/png;base64,%s' % to_text(doc.firma_autorizado)" style="max-width: 100px; max-height: 100px;"/>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </t>
+            </t>
+        </t>
+</template>
+
+</odoo>

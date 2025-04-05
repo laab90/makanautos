@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Formato Libro Diario-->
+    <record id="report_journal_ledger_format" model="report.paperformat">
+        <field name="name">Libro Diario PDF</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">110</field>
+    </record>
+
+    <!--Libro Diario-->
+    <record id="report_journal_ledger_book" model="ir.actions.report">
+        <field name="model">wizard.financial.reports</field>
+        <field name="name">Journal Ledger</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_gt_financial_reports.journal_ledger_document</field>
+        <field name="report_file">l10n_gt_financial_reports.journal_ledger_document</field>
+        <field name="print_report_name">'Journal Ledger ' + (object.date_from.month or '') + '-' + (str(object.date_to.month) or '')</field>
+        <field name="paperformat_id" ref="l10n_gt_financial_reports.report_journal_ledger_format"/>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+
+    <!--Libro Mayor-->
+    <record id="general_ledger_format" model="report.paperformat">
+		<field name="name">Libro Mayor</field>
+		<field name="format">Letter</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">5</field>
+		<field name="margin_bottom">10</field>
+		<field name="margin_left">5</field>
+		<field name="margin_right">5</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">0</field>
+		<field name="dpi">90</field>
+	</record>
+
+
+    <record id="daily_general_ledger_report" model="ir.actions.report">
+        <field name="model">account.move</field>
+        <field name="name">Libro Mayor</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_gt_financial_reports.daily_general_ledger_tmp</field>
+        <field name="report_file">l10n_gt_financial_reports.daily_general_ledger_tmp</field>
+        <field name="print_report_name">Libro Mayor</field>
+        <field name="paperformat_id" ref="l10n_gt_financial_reports.general_ledger_format"/>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+    <record id="action_report_trial_balance" model="ir.actions.report">
+            <field name="name">Trial Balance</field>
+            <field name="model">account.balance.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_gt_financial_reports.report_trialbalance</field>
+            <field name="report_file">l10n_gt_financial_reports.report_trialbalance</field>
+        </record>
+
+    
+</odoo>

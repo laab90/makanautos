@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <!-- Heredar la vista de árbol de órdenes de reparación -->
+        <record id="view_account_move_form" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <!-- Añadir el campo propietario antes del campo existente -->
+               
+                   <xpath expr="//field[@name='partner_bank_id']" position="after">
+                   
+                        <field name="serie_fel_marvin" string="Serie FEL"/>
+                        <field name="numero_fel_marvin" string="Numero FEL"/>
+                   
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

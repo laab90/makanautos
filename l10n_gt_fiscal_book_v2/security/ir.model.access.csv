@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_fiscal_book_gt_user,account.fiscal.book.gt.user,model_wizard_fiscal_book,account.group_account_invoice,1,1,1,0
+account_fiscal_book_gt_manager,account.fiscal.book.gt.manager,model_wizard_fiscal_book,account.group_account_user,1,1,1,1
+account_move_type_user,account.move.type.user,model_account_move_type_tr,account.group_account_invoice,1,1,1,0
+account_move_type_manager,account.move.type.manager,model_account_move_type_tr,account.group_account_user,1,1,1,1

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="inherited_template_export">
+			<field name="name">inherited.template.export</field>
+			<field name="model">export.templates</field>
+			<field name="inherit_id" ref="odoo_multi_connect_sales_aagam.export_odoo_templates_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='cancel']" position='after'>
+					<button name="submit" string="Submit" type="object"/>
+				</xpath>
+			</field>
+		</record>
+    </data>
+</odoo>

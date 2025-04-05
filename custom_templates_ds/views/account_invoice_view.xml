@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.journal.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page id="page_orders" string="Exentos/Exonerados" invisible="0" groups="custom_templates_ds.group_admin_customs">
+                        <group>
+                            <field name="orden_compra_exenta"/>
+                            <field name="numero_reg_exoneracion"/>
+                            <field name="numero_sag"/>
+                        </group>
+                    </page>
+                </notebook>
+                <field name="tax_totals_json" position="after">
+                    <field name="amount_subtotal" groups="custom_templates_ds.group_admin_customs_sv"/>
+                    <field name="gravado_15" invisible="True"/>
+                </field>
+                <xpath expr="//field[@name='invoice_line_ids']//field[@name='price_unit']" position="after">
+                    <field name="price_unit_without_taxes" invisible="1"/>
+                    <field name="price_unit_with_taxes" invisible="1"/>
+                    <field name="price_total_with_taxes" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    
+        <record model="ir.ui.view" id="view_partner_view_extends">
+            <field name="name">view.partner.view.extends</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="giro_number"/>
+                    <field name="registro_number"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

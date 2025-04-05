@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="InformationFelinTicket" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
+			<div class="pos-receipt">
+				<t t-if="receipt.company.logo">
+					<img class="pos-receipt-logo" t-att-src="receipt.company.logo" alt="Logo"/>
+                    <br/>
+				</t>
+                <!--<t t-if="!receipt.company.logo">
+                    <h2 class="pos-receipt-center-align">
+                        <t t-esc="receipt.company.name" />
+                    </h2>
+                    <br/>
+                </t>-->
+                <div class="pos-receipt-contact">
+					<!--Branch Information-->
+                    <h4 class="pos-receipt-center-align">
+						<div><t t-esc="env.pos.get_order().company_branch_name" /></div>
+					</h4>
+                    <!--End-->
+                    <t t-if="env.pos.get_order().company_address">
+						<div><t t-esc="env.pos.get_order().company_address" /></div>
+					</t>
+                    <!--Company Information-->
+                    <t t-if="receipt.company.name">
+						<div> <t t-esc="env.pos.get_order().company_name"/></div>
+					</t>
+                    <t t-if="receipt.company.vat">
+						<div>NIT:<t t-esc="receipt.company.vat"/></div>
+					</t>
+                    <t t-if="receipt.company.phone">
+						<div>Tel:<t t-esc="receipt.company.phone"/></div>
+					</t>
+                    <t t-if="receipt.company.email">
+						<div><t t-esc="receipt.company.email" /></div>
+					</t>
+                    <t t-if="receipt.company.website">
+						<div><t t-esc="receipt.company.website" /></div>
+					</t>
+                    <!--End-->
+                    <t t-if="receipt.header_html">
+						<t t-raw="receipt.header_html"/>
+					</t>
+                    <t t-if="!receipt.header_html and receipt.header">
+						<div style="white-space:pre-line"><t t-esc="receipt.header" /></div>
+					</t>
+                    <t t-if="receipt.cashier">
+						<div class="cashier">
+							<div>--------------------------------</div>
+                            <div>Vendedor: <t t-esc="receipt.cashier"/></div>
+						</div>
+					</t>
+				</div>
+                <div style="margin-top 5px">
+					<h4 class="pos-receipt-center-align" style="margin-top 0px; margin-bottom: 0px">
+						<div>
+							<t t-esc="env.pos.get_order().fel_type"/>
+						</div>
+					</h4>
+				</div>
+                <!--FEL Information-->
+                <t t-if="env.pos.get_order().is_fel == true">
+					<t t-if="env.pos.get_order().active_contingencia == true">
+						<div style="text-align: center;">
+							<strong><u>Documento en Contingencia</u></strong>
+                            <br/>
+                            <strong><u>Número de Acceso:</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().no_acceso"/>
+                            <br/>
+                            <strong><u>N° de Documento</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().invoice_number"/>
+                            <br/>
+                            <strong><u>Fecha y Hora Certificación:</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().fel_date"/>
+						</div>
+					</t>
+                    <t t-if="env.pos.get_order().active_contingencia == false">
+						<div style="text-align: center; font-size:14px">
+							<strong><u>Serie FEL:</u></strong>
+                            <t t-esc="env.pos.get_order().fel_serie"/>
+							<br/>
+                            <strong><u>Número FEL:</u></strong>
+                            <t t-esc="env.pos.get_order().fel_number"/>
+                            <br/>
+                            <strong><u>Autorización:</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().fel_uuid"/>
+                            <br/>
+                            <strong><u>Fecha y Hora Certificación:</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().fel_date"/>
+                            <br/>
+                            <strong><u>N° de Documento</u></strong>
+                            <br/>
+                            <t t-esc="env.pos.get_order().invoice_number"/>
+						</div>
+					</t>
+				</t>
+                <br/>
+                <!--Customer Information-->
+                <div style="text-align: center;">
+					<br/>
+                    <strong><u>NIT:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_vat"/>
+                    <br/>
+                    <strong><u>Cliente:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_name"/>
+                    <br/>
+                    <strong><u>Dirección:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_street"/>
+				</div>
+                <br/>
+
+                <!-- Orderlines -->
+
+                <div class="orderlines">
+					<t t-call="FelOrderLinesReceipt"/>
+				</div>
+
+                <!-- Subtotal -->
+
+                <t t-if="!isTaxIncluded">
+					<div class="pos-receipt-right-align">--------</div>
+                    <br/>
+                    <div>Subtotal<span t-esc="env.pos.format_currency(receipt.subtotal)"
+                                       class="pos-receipt-right-align"/></div>
+                    <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+						<div class="responsive-price">
+							<t t-esc="tax.name"/>
+                            <span t-esc='env.pos.format_currency_no_symbol(tax.amount)'
+                                  class="pos-receipt-right-align"/>
+						</div>
+					</t>
+				</t>
+
+                <!-- Total -->
+                <div class="pos-receipt-right-align">--------</div>
+                <br/>
+                <div class="pos-receipt-amount">
+					TOTAL
+					<span t-esc="env.pos.format_currency(receipt.total_with_tax)" class="pos-receipt-right-align"/>
+				</div>
+                <t t-if="receipt.total_rounded != receipt.total_with_tax">
+					<div class="pos-receipt-amount">
+					Rounding
+					<span t-esc='env.pos.format_currency(receipt.rounding_applied)' class="pos-receipt-right-align"/>
+					</div>
+                    <div class="pos-receipt-amount">
+					To Pay
+					<span t-esc='env.pos.format_currency(receipt.total_rounded)' class="pos-receipt-right-align"/>
+				</div>
+				</t>
+                <br/>
+                <br/>
+
+
+                <!-- Payment Lines -->
+
+                <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+					<div>
+						<t t-esc="line.name"/>
+                        <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
+					</div>
+				</t>
+                <br/>
+
+                <div class="pos-receipt-amount receipt-change">
+					CHANGE
+					<span t-esc="env.pos.format_currency(receipt.change)" class="pos-receipt-right-align"/>
+				</div>
+                <br/>
+
+                <!-- Extra Payment Info -->
+
+                <t t-if="receipt.total_discount">
+					<div>
+						Discounts
+						<span t-esc="env.pos.format_currency(receipt.total_discount)" class="pos-receipt-right-align"/>
+					</div>
+				</t>
+                <t t-if="isTaxIncluded">
+					<t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+						<div>
+							<t t-esc="tax.name"/>
+                            <span t-esc="env.pos.format_currency_no_symbol(tax.amount)"
+                                  class="pos-receipt-right-align"/>
+						</div>
+					</t>
+                    <div>
+						Total Taxes
+						<span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
+					</div>
+				</t>
+
+                <div class="before-footer"/>
+
+                <!-- Footer -->
+                <div t-if="receipt.footer_html" class="pos-receipt-center-align">
+					<t t-raw="receipt.footer_html"/>
+				</div>
+
+                <div t-if="!receipt.footer_html and receipt.footer" class="pos-receipt-center-align"
+                     style="white-space:pre-line">
+					<br/>
+                    <t t-esc="receipt.footer"/>
+                    <br/>
+                    <br/>
+				</div>
+
+                <div class="after-footer">
+					<t t-foreach="receipt.paymentlines" t-as="line">
+						<t t-if="line.ticket">
+							<br/>
+                            <div class="pos-payment-terminal-receipt">
+								<t t-raw="line.ticket"/>
+							</div>
+						</t>
+					</t>
+				</div>
+
+                <br/>
+                <div class="pos-receipt-order-data">
+					<div><t t-esc="receipt.name" /></div>
+                    <t t-if="receipt.date.localestring">
+						<div><t t-esc="receipt.date.localestring" /></div>
+					</t>
+                    <t t-else="">
+						<div><t t-esc="receipt.date.validation_date" /></div>
+					</t>
+				</div>
+        </div>
+		</xpath>
+        <!--<xpath expr="//div[hasclass('pos-receipt-contact')]" position="after">
+            <t t-if="env.pos.get_order().invoice_number">
+                <br/>
+                <div style="text-align: center;">
+                    <strong><u>Numero de Factura</u></strong>
+                    <br/>
+                    <t t-esc="env.pos.get_order().invoice_number"/>
+                    <br/>
+                    <strong><u>Serie:</u></strong>
+                    <br/>
+                    <t t-esc="env.pos.get_order().fel_serie"/>
+                    <br/>
+                    <strong><u>Numero:</u></strong>
+                    <br/>
+                    <t t-esc="env.pos.get_order().fel_number"/>
+                    <br/>
+                    <strong><u>Autorización:</u></strong>
+                    <br/>
+                    <t t-esc="env.pos.get_order().fel_uuid"/>
+                    <br/>
+                    <strong><u>Fecha Certificación:</u></strong>
+                    <br/>
+                    <t t-esc="env.pos.get_order().fel_date"/>
+                </div>
+                <div style="text-align: center;">
+                    <br/>
+                    <strong><u>NIT:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_vat"/>
+                    <br/>
+                    <strong><u>Cliente:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_name"/>
+                    <br/>
+                    <strong><u>Dirección:</u></strong>
+                    <t t-esc="env.pos.get_order().customer_street"/>
+                </div>
+            </t>
+        </xpath>-->
+    </t>
+
+    <t t-name="FelOrderLinesReceipt" owl="1">
+		<!--<t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">-->
+        <table style="width: 100%;">
+			<colgroup>
+				<col width='25%'/>
+                <col width='25%'/>
+                <col width='25%'/>
+                <col width='25%'/>
+			</colgroup>
+            <thead>
+				<tr style="border-bottom: 1px solid black; border-top: 1px solid black;">
+					<th>Código</th>
+                    <th>Cant.</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+				</tr>
+			</thead>
+            <tbody>
+				<t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+					<tr>
+						<td>
+							
+						</td>
+                        <td>
+							<t t-esc="line.quantity" class="pos-receipt-right-align"/>
+						</td>
+                        <td>
+							<t t-esc="env.pos.format_currency_no_symbol(line.price)"
+                               class="price_display pos-receipt-right-align"/>
+						</td>
+                        <td>
+							<t t-esc="env.pos.format_currency_no_symbol(line.price_display)"
+                               class="price_display pos-receipt-right-align"/>
+						</td>
+					</tr>
+                    <tr style="border-bottom: 1px solid black;">
+						<td colspan="4">
+							<t t-esc="line.product_name_wrapped[0]"/>
+						</td>
+					</tr>
+				</t>
+			</tbody>
+		</table>
+        <!--</t>-->
+    </t>
+
+</templates>

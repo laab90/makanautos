@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_coupon_program_form_inherit_pos" model="ir.ui.view">
+        <field name="name">coupon.program.form.inherit.pos</field>
+        <field name="model">coupon.program</field>
+        <field name="inherit_id" ref="coupon.coupon_program_view_promo_program_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rule_date_to']" position="after">
+                <field name="pos_config_ids" widget="many2many_tags" 
+                    string="Punto de Venta"
+                    placeholder="Todos los puntos de venta"
+                    help="Restringir las publicaciones a estas tiendas."
+                    readonly="0"
+                    force_save="1"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

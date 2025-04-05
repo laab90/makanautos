@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Menuitem Root for Financial Reports-->
+    <menuitem id="menu_root_financial_reports" name="Libros Financieros/Contables" parent="account.menu_finance_reports" sequence="1" groups="account.group_account_user,account.group_account_readonly"/>
+
+    <record id="wizard_financial_reports_form" model="ir.ui.view">
+        <field name="name">wizard.financial.reports.form</field>
+        <field name="model">wizard.financial.reports</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Please select date range and account journals">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="company_id" readonly="1" options="{'no_create_edit': True}" groups="base.group_multi_company"/>
+                            <field name="type_report" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                            <field name="type_book" widget="radio" readonly="1"/>
+                            <field name="type_entries" widget="radio"/>
+                            <field name="page_number"/>
+                        </group>
+                        <group>
+                            
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Diarios">
+                                <field name="journal_ids" nolabel="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <footer>
+                    <!--PDF Buttons-->
+					<!--<button name="print_report_sale" string="Generar" attrs="{'invisible': ['|', ('type_book','=','purchase'), ('type_report', '=', 'xls')]}" type="object" class="btn-primary"/>
+                    <button name="print_report_purchase" string="Generar" attrs="{'invisible': ['|', ('type_book','=','sale'), ('type_report', '=', 'xls')]}" type="object" class="btn-primary"/>-->
+                    <!--Excel Buttons-->
+                    <!--<button name="print_sale_excel" string="Excel" attrs="{'invisible': ['|', ('type_book','=','purchase'), ('type_report', '=', 'pdf')]}" type="object" class="btn-primary"/>
+                    <button name="print_purchase_excel" string="Excel" attrs="{'invisible': ['|', ('type_book','=','sale'), ('type_report', '=', 'pdf')]}" type="object" class="btn-primary"/>-->
+                    <button name="print_journal_ledger" string="Generar" attrs="{'invisible': [('type_report', '=', 'xls')]}" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_financial_reports" model="ir.actions.act_window">
+        <field name="name">Journal Ledger</field>
+        <field name="res_model">wizard.financial.reports</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_financial_reports_form"/>
+        <field name="context">{'default_type_book': 'journal_ledger', 'default_type_report': 'pdf'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_financial_reports" id="menu_wizard_financial_reports" parent="l10n_gt_financial_reports.menu_root_financial_reports"/>
+</odoo>

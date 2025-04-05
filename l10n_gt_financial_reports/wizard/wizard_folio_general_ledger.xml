@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_folio_general_ledger" model="ir.ui.view">
+        <field name="name">wizard.folio.general.ledger</field>
+        <field name="model">wizard.folio.general.ledger</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet> 
+                    <group>
+                       <field name="folio"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="get_folio" string="Generar"  type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

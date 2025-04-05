@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_trialbalance">
+        <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="32"/>
+            <t t-set="data_report_header_spacing" t-value="30"/>
+            <t t-call="web.basic_layout">
+                <div class="header">
+                    <br/>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                           <h5><b><span t-esc="res_company.name"/></b></h5>
+                        </div>
+                        <div class="col-2 offset-2 text-right">
+                            <t t-set="od" t-value="folio"/>
+                            <ul class="list-inline">
+									<b>Folio: <t t-call="l10n_gt_financial_reports.counter_folio"></t></b>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                               <h6><b>BALANCE DE COMPROBACIÓN</b></h6>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                        <t t-if="data['date_from'] or data['date_to']">
+                                <b>Periodo: 
+                                <t t-if="data['date_from']">del <span t-esc="data['date_from']"/></t> 
+                                <t t-if="data['date_to']">al <span t-esc="data['date_to']"/></t></b>
+                        </t>
+                        </div>
+                        <div class="col-2 offset-3 text-right">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><b>NIT:  <span t-esc="res_company.vat"/></b>
+                        </div>
+                        <div class="col-5 offset-3 text-right">
+                            <b>(CIFRAS EXPRESADAS EN QUETZALES)</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                <link href="/l10n_gt_financial_reports/static/src/css/style.css" rel="stylesheet"/>
+                    <table class="table table-sm table-reports">
+                        <thead>
+                            <tr style="border: 2px solid black;">
+                                <th><b>Codigo</b></th>
+                                <th><b>Cuenta</b></th>
+                                <th><b>Saldo Inicial</b></th>
+                                <th class="text-right"><b>Debito</b></th>
+                                <th class="text-right"><b>Credito</b></th>
+                                <th class="text-right"><b>Balance</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="Accounts" t-as="account">
+                                <td>
+                                    <span t-att-style="style" t-esc="account['code']"/>
+                                </td>
+                                <td>
+                                    <span style="color: white;" t-esc="'..'"/>
+                                    <span t-att-style="style" t-esc="account['name']"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['saldo']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &#160;
+                                </td>
+                                <td>
+                                    <span class="td-total"/>
+                                    <b>GRAN TOTAL: </b>
+                                </td>
+                                <td class="td-sum">
+                                   <b> <span t-att-style="style" t-esc="total_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></b>
+                                </td>
+                                <td class="td-sum">
+                                    <b><span t-att-style="style" t-esc="total_debito" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></b>
+                                </td>
+                                <td class="td-sum">
+                                    <b><span t-att-style="style" t-esc="total_credito" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></b>
+                                </td>
+                                <td class="td-sum">
+                                    <b><span t-att-style="style" t-esc="total_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    <div class="row">
+                <div class="col-12">
+                    <span style="float:left;margin-left:25px;font-size:16px;">Fecha y Hora de Generación:
+                        <b>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                        </b>
+                    </span>
+                    <span style="float:right;margin-right:25px;font-size:16px;">Página:
+                        <b>
+                            <span class="page"/>
+                        </b>
+                        de
+                        <b>
+                            <span class="topage"/>
+                        </b>
+                    </span>
+                </div>
+            </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

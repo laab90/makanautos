@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pos_gift_card.gift_card_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t t-call = "lilipink_gift_card_ticket.custom_header"/>
+                    <br></br>
+                    <div style="margin:0px; font-size:14px; font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:20px; color:#333333; text-align: center">
+                        VOUCHER DE CRÉDITO
+                    </div>
+                    <div style="margin:0px; font-size:14px; text-align: left">
+                        <table>
+                            <tr>
+                                <td>Fecha:</td>
+                                <td>
+                                    <span t-field="o.create_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cliente:</td>
+                                <td>
+                                    <span t-field="o.partner_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nit:</td>
+                                <td>
+                                    <span t-field="o.partner_id.vat"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--div style="padding-top:20px; padding-bottom:20px">
+                        <img src="/gift_card/static/img/gift_card.png" style="display:block; border:0; outline:none; text-decoration:none; margin:auto;" width="300"/>
+                    </div-->
+                    <div style="padding:0; margin:0px; padding-top:5px; padding-bottom:5px; text-align:center;">
+                        <h3 style="margin:0px; font-family:arial, 'helvetica neue', helvetica, sans-serif; font-size:18px; font-style:normal; font-weight:normal; color:#333333; text-align:center">
+                            <strong>
+                                <p>Credito Cliente:
+                                    <span t-field="o.initial_amount"/>
+                                </p>
+                            </strong>
+                        </h3>
+                    </div>
+                    <!--   <div style="padding:0; margin:0px; padding-top:5px; padding-bottom:5px; text-align:center;">
+                           <p style="margin:0px; font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:21px; color:#333333">
+                               <strong># Voucher de Crédito</strong>
+                           </p>
+                           <p style="margin:0px; font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:38px;">
+                               <span t-field="o.code"/>
+                           </p>
+                       </div>-->
+                    <!--  <div style="padding:0; margin:0px; padding-top:5px; padding-bottom:5px; text-align:center;">
+                          <h3 style="margin:0px; line-height:17px; font-family:arial, 'helvetica neue', helvetica, sans-serif; font-size:14px; font-style:normal; font-weight:normal; color:#A9A9A9; text-align:center">
+                              Card expires
+                              <span t-field="o.expired_date"/>
+                          </h3>
+                      </div>/-->
+                    <div style="padding-top:10px; padding-bottom:10px;">
+                       <center> <img t-att-src="'/report/barcode/Code128/'+o.code" style="width:300px;height:100px"
+                             alt="Barcode"/> </center>
+                        <p style="font-size:16px;font-family:arial, 'helvetica neue', helvetica, sans-serif; text-align:center">
+                            <span t-field="o.code"/>
+                        </p>
+                    </div>
+                     <t t-call = "lilipink_gift_card_ticket.custom_footer"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+

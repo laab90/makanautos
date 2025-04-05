@@ -1,0 +1,378 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* Partner_ageing_book
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-30 16:46+0000\n"
+"PO-Revision-Date: 2023-05-30 11:45-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "0 - 30"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "120 +"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "30 - 60"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "60 - 90"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "90 - 120"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid ": Partner Ageing"
+msgstr ": Vencidos de Empresas"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "<span>-</span>"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "<strong> As On Date:</strong>"
+msgstr ""
+
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "<strong>Account Type:</strong>"
+msgstr "<strong>Tipo de Cuenta:</strong>"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "<strong>Partner Tag :</strong>"
+msgstr "<strong>Etiqueta de Socio :</strong>"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "<strong>Partners :</strong>"
+msgstr "<strong>Socios :</strong>"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+#, python-format
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Account Type:"
+msgstr "Tipo de Cuenta:"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "All Entries"
+msgstr "Todas las entradas"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "As on Date"
+msgstr ""
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "As on Date :"
+msgstr ""
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Calendar"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Dates"
+msgstr "Fechas"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: Partner_ageing_book
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+msgid "Due date"
+msgstr "Fecha de vencimiento"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "DueDate"
+msgstr "Fecha de Vencimiento"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__date_to
+msgid "End Date"
+msgstr "Fecha final"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+#, python-format
+msgid "Entry Label"
+msgstr "Etiqueta de entrada"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Export (XLSX)"
+msgstr "Exportar (XLSX)"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+#, python-format
+msgid "JRNL"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model:ir.model,name:Partner_ageing_book.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__journal_ids
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+#, python-format
+msgid "Not Due"
+msgstr "No Vencido"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__partner_ids
+#, python-format
+msgid "Partner"
+msgstr "Socio"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model:ir.actions.client,name:Partner_ageing_book.action_ageing_partner
+#: model:ir.actions.report,name:Partner_ageing_book.action_print_ageing_partner
+#, python-format
+msgid "Partner Ageing"
+msgstr "Vencidos de socios"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__partner_category_ids
+msgid "Partner Tag"
+msgstr "Etiqueta de socio"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Partner tag:"
+msgstr "Etiqueta de Socio:"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__result_selection
+msgid "Partner's"
+msgstr "Socios"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Partners:"
+msgstr "Socios:"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model:ir.model.fields.selection,name:Partner_ageing_book.selection__account_partner_ageing__result_selection__supplier
+#, python-format
+msgid "Payable Accounts"
+msgstr "Cuentas por pagar"
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__period_length
+msgid "Period Length (days)"
+msgstr "Duración del período (días)"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Posted Entries"
+msgstr "Entradas Publicadas"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Print (PDF)"
+msgstr "Imprimir (PDF)"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model:ir.model.fields.selection,name:Partner_ageing_book.selection__account_partner_ageing__result_selection__customer
+#, python-format
+msgid "Receivable Accounts"
+msgstr "Cuentas por cobrar"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model:ir.model.fields.selection,name:Partner_ageing_book.selection__account_partner_ageing__result_selection__customer_supplier
+#, python-format
+msgid "Receivable and Payable Accounts"
+msgstr "Cuentas por cobrar y por pagar"
+
+#. module: Partner_ageing_book
+#: model:ir.ui.menu,name:Partner_ageing_book.menu_report_ageing
+msgid "Saldos abiertos de Empresas"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__date_from
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Target Move:"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model:ir.model.fields,field_description:Partner_ageing_book.field_account_partner_ageing__target_move
+msgid "Target Moves"
+msgstr "Movimientos objetivo"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#: model_terms:ir.ui.view,arch_db:Partner_ageing_book.partner_ageing
+#, python-format
+msgid "Total"
+msgstr ""
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "Unfolded"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: code:addons/Partner_ageing_book/wizard/ageing.py:0
+#, python-format
+msgid "Unknown Partner"
+msgstr "Socio No Encontrado"
+
+#. module: Partner_ageing_book
+#. openerp-web
+#: code:addons/Partner_ageing_book/static/src/xml/ageing.xml:0
+#, python-format
+msgid "View Source move"
+msgstr "Ver Movimiento origen"
+
+#. module: Partner_ageing_book
+#: model:ir.model,name:Partner_ageing_book.model_account_partner_ageing
+msgid "account.partner.ageing"
+msgstr ""
+
+#. module: Partner_ageing_book
+#: model:ir.model,name:Partner_ageing_book.model_report_Partner_ageing_book_partner_ageing
+msgid "report.Partner_ageing_book.partner_ageing"
+msgstr ""

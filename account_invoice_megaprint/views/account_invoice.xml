@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.fel.digifact.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="frase_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                </xpath>
+                <xpath expr="//button[@id='account_invoice_payment_btn']" position="after">
+                    <button name="action_cancel_fel" class="oe_highlight" string="Anular FEL" type="object" groups="account.group_account_invoice"
+                    attrs="{'invisible': ['|', ('state', '!=', 'open'),  ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')), ('is_fel', '=', False)]}"/>
+                    <button name="action_print_fel" class="oe_highlight" string="Imprimir FEL" type="object" groups="account.group_account_invoice" 
+                    attrs="{'invisible': ['|', ('state', '!=', 'open'), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')), ('is_fel', '=', False)]}"/>
+                    <button name="action_certificate_dte" class="oe_highlight" string="Certificar Contigencia" type="object" groups="account.group_account_invoice" 
+                    attrs="{'invisible': ['|', '|', ('state', 'in', ('draft', 'cancel')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')), ('active_contingencia', '=', False)]}"/>
+                </xpath>                   
+                <notebook position="inside">
+                    <page id="page_fel_information" string="FEL" attrs="{'invisible': ['|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')), ('is_fel', '=', False)]}">
+                        <group>
+                            <group>
+                                <field name="fel_serie" readonly="1"/>
+                                <field name="fel_no" readonly="1"/>
+                                <field name="uuid" attrs="{'invisible': [('move_type','in', ('out_refund', 'in_refund'))]}" readonly="1"/>
+                                <field name="uuid_refund" attrs="{'invisible': [('move_type','not in', ('out_refund', 'in_refund'))]}" readonly="1"/>
+                                <field name="numero_origen"/>
+                                <field name="serie_origen"/>
+                                <field name="no_acceso" readonly="1"/>
+                                <field name="active_contingencia" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="invoice_refund_id"/>
+                                <field name="fel_date" readonly="1"/>
+                                <field name="fel_received_sat" readonly="1"/>
+                                <field name="is_fel" invisible="1"/>
+                                <field name="uuid_fel" invisible="1"/>
+                                
+                                <field name="be_cancel" invisible="1"/>
+                            </group>
+                        </group>					
+                        <group>
+                            <field name="txt_filename_xml" invisible="1"/>
+                            <field name="file_xml" filename="txt_filename_xml" nolabel="1"/>
+                            <field name="txt_filename" invisible="1"/>
+                            <field name="file" filename="txt_filename" nolabel="1"/>
+                        </group>
+                    </page>
+                    <page id="page_fel_payments" string="Pagos" attrs="{'invisible': ['|', '|', ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')), ('factura_cambiaria','!=', True), ('is_fel', '=', False)]}">
+                        <group>
+                            <group>
+                                <field name="number_of_payments" attrs="{'invisible': [('factura_cambiaria','!=', True)]}"/>
+                                <field name="frecuencia_de_vencimiento" attrs="{'invisible': [('factura_cambiaria','!=', True)]}"/>
+                                <field name="factura_cambiaria" invisible="1"/>
+                            </group>
+                            <group>
+                                <button string="Agregar" name="calculate_payment_info"
+                                        icon="fa-refresh" type="object" class="btn-primary"/>
+                                <field name="megaprint_payment_lines" nolabel="1" readonly="1">
+                                    <tree create="false" delete="false" edit="false">
+                                        <field name="serial_no"/>
+                                        <field name="amount"/>
+                                        <field name="due_date"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group/>
+                        </group>
+                    </page>
+                    <page id="page_xml_request_contigencia" string="XML Request Contigencia" invisible="1" groups="account.group_account_manager,account_invoice_megaprint.group_request_response_fel_manager">
+                        <field name="xml_request_contingencia" nolabel="1"/>
+                    </page>
+                    <page id="page_xml_request" string="XML Request" invisible="1" groups="account.group_account_manager,account_invoice_megaprint.group_request_response_fel_manager">
+                        <field name="xml_request" nolabel="1"/>
+                    </page>
+                    <page id="page_xml_response" string="Response XML" invisible="1" groups="account.group_account_manager,account_invoice_megaprint.group_request_response_fel_manager">
+                        <field name="xml_response" nolabel="1"/>
+                        <field name="xml_notes" nolabel="1"/>
+                    </page>
+                    <page id="page_xml_response_cancel" string="Response Cancel XML" invisible="1" groups="account.group_account_manager,account_invoice_megaprint.group_request_response_fel_manager">
+                        <field name="xml_response_cancel" nolabel="1"/>
+                        <!--<field name="xml_notes" nolabel="1"/>-->
+                    </page>
+                </notebook>
+
+            </field>
+        </record>
+
+    <record id="view_res_partner_form_megaprint" model="ir.ui.view">
+        <field name="name">res.partner.form.megaprint</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="type_document"/>
+            </field>
+        </field>
+    </record>
+    </data>
+</odoo>

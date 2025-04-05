@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="channel_shippchannel_shipping_mappings_searching_mappings_search" model="ir.ui.view">
+            <field name="name">shipping.mapping.search</field>
+            <field name="model">shipping.mapping</field>
+            <field name="arch" type="xml">
+            <search string="Shipping Mapping" >
+                 <group expand="0" string="Group By...">
+                    <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                    <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                    <filter string="Need Update" name='need_sync'  domain="[]" context="{'group_by':'need_sync'}"/>
+                    <group string='Filters'>
+                        <filter icon="terp-check" name="store_selection" string="Channel"
+                            domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                            <filter icon="terp-check" name="channel_id" string="Channel"
+                            domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                    </group>
+
+                 </group>
+            </search>
+            </field>
+        </record>
+      </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="view_company_form" model="ir.ui.view">
+            <field name="name">view.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="fe" string="Electronic Invoice">
+                        <group>
+                            <field name="fe_user" />
+                            <field name="fe_sign_token" />
+                            <field name="fe_key_webservice" />
+                            <field name="fe_phrase_ids" widget="many2many_tags"/>
+                            <field name="fe_establishment_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="fe_tradename" />
+                                    <field name="fe_code" />
+                                    <field name="fe_tradename_street" />
+                                    <field name="fe_tradename_city" />
+                                    <field name="fe_tradename_state_id" />
+                                    <field name="export_code" />
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <field name="fe_other_email" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+
+</odoo>

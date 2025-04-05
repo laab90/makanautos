@@ -1,0 +1,38 @@
+<odoo>
+    <template id="report_cotizaciones_template_taller">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+                    <!-- Mostrar Nota Taller arriba de la tabla, solo una vez -->
+                    <t t-if="repair_line_data and repair_line_data[0]['nota_taller']">
+                        <h3>Nota Taller:</h3>
+                        <p><t t-esc="repair_line_data[0]['nota_taller']"/></p>
+                    </t>
+
+                    <!-- Título de la tabla -->
+                    <h2>Detalle de Cotizaciones</h2>
+                    
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>N. Cotizacion</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iterar sobre las cotizaciones -->
+                            <t t-foreach="repair_line_data" t-as="line">
+                                <tr>
+                                    <td><t t-esc="line['cotizacion']"/></td>
+                                    <td><t t-esc="line['one2manyproduct']"/></td>
+                                    <td><t t-esc="line['one2manycantidad']"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </t>
+    </template>
+</odoo>

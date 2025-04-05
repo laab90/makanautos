@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_fel_format_document">
+            <t t-call="web.basic_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <div class="header"></div>
+                <div class="page">
+                    <style>
+
+                        hr {
+                            border-top: 2px solid gray;
+                        }
+
+                        .bd {
+                            border-right: 1px solid black;
+                        }
+                        .bi {
+                            border-left: 1px solid black;
+                        }
+                        table .lineas td {
+                        font-size: 9px;
+                        }
+                    </style>
+
+                    <div class="row justify-content-between">
+                        <div class="col-3 text-left" align="center">
+                            <img class="img-fluid" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height:90px;"/>
+                        </div>
+                        <div class="col-5 text-left" style="border-left:1px solid lightgrey;">
+                            <span style="font-size: 14px; font-weight:bold;" t-field="o.company_id.nombre_comercial"/><br/>
+                            <span style="font-size: 13px;">NIT: <span t-field="o.company_id.vat"/></span><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.street"/><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.city"/>,
+                            <span style="font-size: 13px;" t-field="o.company_id.country_id.name"/>
+                        </div>
+                        <div class="col-4 text-right" align="center">
+                            <img class="img" src="/account_invoice_megaprint/static/src/img/fel.PNG" style="max-height: 45px;"/>
+                            <ul style="list-style-type: none; font-size:12px;">
+                                <li>
+                                    <span t-if="o.type != 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        FACTURA
+                                    </span>
+                                    <span t-if="o.type == 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        NOTA DE CRÉDITO
+                                    </span>
+                                </li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">Serie: </b><span t-field="o.fel_serie"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No.: </b><span t-field="o.fel_no"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No. interno: </b><span t-field="o.name"/></li>
+                                <t t-foreach="o.frase_ids" t-as="frase">
+                                    <li style="font-size:13px;"><b style="font-weight:bold;"><t t-raw="frase.name"/></b></li>
+                                </t>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-12 justify-content-center" style="border: 1px solid black; border-radius: 7px;">
+                                <table width="100%" style="border-collapse: separate; border-spacing: 0 15px;">
+                                    <tr>
+                                        <td style="font-size:18;"><b>Fecha:</b> <span t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:14px;"><b style="font-size:18px;">Nombre:</b> <t t-raw="o.partner_id.name"/></td>
+                                        <td class="text-right" width="50%"><span style="color: white;"/><b style="font-size:18;">NIT:</b> <t t-raw="o.partner_id.vat"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" width="100%"><b style="font-size:18;">Dirección:</b> <t t-raw="o.partner_id.street"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .tableparentdiv::-webkit-scrollbar {
+                        display: none;
+                        }
+
+                        /* Hide scrollbar for IE, Edge and Firefox */
+                        .tableparentdiv {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                        }
+                    </style>
+                    <div class="container" style="border: 1px solid black; border-radius: 7px;">
+                        <div class="row">
+                            <div class="col-12 tableparentdiv" style="height: 640px; padding: 0px; overflow: auto;">
+                                <table class="lineas" width="100%">
+                                    <thead style="background-color: black; color: white;">
+                                        <tr>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">CANTIDAD</th>
+                                            <th width="50%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCRIPCIÓN</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">PRECIO UNITARIO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCUENTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">IMPUESTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="len_lines" t-value="len(o.invoice_line_ids)"/>
+                                        <t t-set="lines" t-value="o.invoice_line_ids"/>
+                                        <t t-set="lineas_totales" t-value="0"/>
+                                        <t t-set="total_fe" t-value="int(0)"/>
+
+                                        <t t-foreach="lines" t-as="line">
+                                          <t t-set="lineas_totales" t-value="int(lineas_totales + 1)"/>
+                                            <t t-if="lineas_totales &lt; 21">
+                                                <tr>
+                                                    <td class="text-center bd"><span t-field="line.quantity"/></td>
+                                                    <td class="text-left bd" style="margin-left:15px;"><span t-field="line.name"/></td>
+                                                    <td class="text-right bd"><span t-field="line.currency_id.symbol"/> <span t-field="line.price_unit"/></td>
+                                                    <td class="text-right bd"><span t-field="line.discount"/> </td>
+                                                    <t t-set="taxes" t-value="round(line.price_total - line.price_subtotal, 2)"/>
+                                                    <td class="text-right bd">
+                                                        <t t-esc="round(taxes,2)"/>
+
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span t-field="line.price_total"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+
+                                            </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="o.journal_id.factura_cambiaria == True">
+                            <div class="row">
+                                <div class="col-12" style="padding:0px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="50%" class="text-center"><strong>No. Abono:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Fecha:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Monto:</strong></th>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="10%" class="text-center"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="o.megaprint_payment_lines" t-as="payment_line">
+                                            <tr>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="50%" class="text-center"><span t-field="payment_line.serial_no"/> </td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.due_date"/></td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.amount"/></td>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="10%" class="text-center"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                            <table width="100%">
+                                <tr>
+                                    <th width="15%" class="text-center"></th>
+                                    <th width="55%" class="text-center"></th>
+                                    <th width="15%" class="text-center"></th>
+                                    <th width="15%" class="text-center"></th>
+                                </tr>
+                                <tr style="height: 50px;">
+                                    <td style="font-size:15px;" colspan="4"><span style="font-weight:bold;">TOTAL EN LETRAS: <span t-esc="o.text_amount"/> </span></td>
+                                    <td style="background-color:black; color:white; font-size:15px;" class="text-right"><b>TOTAL: </b></td>
+                                    <td class="text-center">
+                                        <span t-field="o.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="height:100px; border: 1px solid black; border-radius: 7px;">
+                                <span t-field="o.comment"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center" style="background-color:black; color: white;">
+                            <b>CERTIFICADOR</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table width="100%">
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">No. AUTORIZACION: </span> <span style="font-weight:normal;" t-field="o.uuid"/></td>
+                                    <td class="text-left"><span style="font-weight:bold;">MEGAPRINT, S.A.</span> NIT: 50510231</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">FECHA CERTIFICACIÓN</span> <span style="font-weight:normal;" t-field="o.date_invoice"/> </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+                <t t-if="len(o.invoice_line_ids) &gt; 20">
+                    <div style="page-break-after: always;"/>
+                    <div class="page">
+                    <style>
+
+                        hr {
+                            border-top: 2px solid gray;
+                        }
+
+                        .bd {
+                            border-right: 1px solid black;
+                        }
+                        .bi {
+                            border-left: 1px solid black;
+                        }
+                    </style>
+
+                    <div class="row justify-content-between">
+                        <div class="col-3 text-left" align="center">
+                            <img class="img-fluid" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height:90px;"/>
+                        </div>
+                        <div class="col-5 text-left" style="border-left:1px solid lightgrey;">
+                            <span style="font-size: 14px; font-weight:bold;" t-field="o.company_id.nombre_comercial"/><br/>
+                            <span style="font-size: 13px;">NIT: <span t-field="o.company_id.vat"/></span><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.street"/><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.city"/>,
+                            <span style="font-size: 13px;" t-field="o.company_id.country_id.name"/>
+                        </div>
+                        <div class="col-4 text-right" align="center">
+                            <img class="img" src="/account_invoice_megaprint/static/src/img/fel.PNG" style="max-height: 45px;"/>
+                            <ul style="list-style-type: none; font-size:12px;">
+                                <li>
+                                    <span t-if="o.type != 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        FACTURA
+                                    </span>
+                                    <span t-if="o.type == 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        NOTA DE CRÉDITO
+                                    </span>
+                                </li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">Serie: </b><span t-field="o.fel_serie"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No.: </b><span t-field="o.fel_no"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No. interno: </b><span t-field="o.name"/></li>
+                                <t t-foreach="o.frase_ids" t-as="frase">
+                                    <li style="font-size:13px;"><b style="font-weight:bold;"><t t-raw="frase.name"/></b></li>
+                                </t>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-12 justify-content-center" style="border: 1px solid black; border-radius: 7px;">
+                                <table width="100%" style="border-collapse: separate; border-spacing: 0 15px;">
+                                    <tr>
+                                        <td style="font-size:18;"><b>Fecha:</b> <span t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:14px;"><b style="font-size:18px;">Nombre:</b> <t t-raw="o.partner_id.name"/></td>
+                                        <td class="text-right" width="50%"><span style="color: white;"/><b style="font-size:18;">NIT:</b> <t t-raw="o.partner_id.vat"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" width="100%"><b style="font-size:18;">Dirección:</b> <t t-raw="o.partner_id.street"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .tableparentdiv::-webkit-scrollbar {
+                        display: none;
+                        }
+
+                        /* Hide scrollbar for IE, Edge and Firefox */
+                        .tableparentdiv {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                        }
+                    </style>
+                    <div class="container" style="border: 1px solid black; border-radius: 7px;">
+                        <div class="row">
+                            <div class="col-12 tableparentdiv" style="height: 640px; padding: 0px; overflow: auto;">
+                                <table width="100%">
+                                    <thead style="background-color: black; color: white;">
+                                        <tr>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">CANTIDAD</th>
+                                            <th width="50%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCRIPCIÓN</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">PRECIO UNITARIO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCUENTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">IMPUESTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="len_lines" t-value="len(o.invoice_line_ids)"/>
+                                        <t t-set="lines" t-value="o.invoice_line_ids"/>
+                                        <t t-set="lineas_totales" t-value="0"/>
+                                        <t t-set="total_fe" t-value="0"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <t t-set="lineas_totales" t-value="lineas_totales + 1"/>
+                                            <t t-if="lineas_totales &lt; 41 and lineas_totales &gt; 20">
+                                                <tr>
+                                                    <td class="text-center bd"><span t-field="line.quantity"/></td>
+                                                    <td class="text-left bd" style="margin-left:15px;"><span t-field="line.name"/></td>
+                                                    <td class="text-right bd"><span t-field="line.currency_id.symbol"/> <span t-field="line.price_unit"/></td>
+                                                    <td class="text-right bd"><span t-field="line.discount"/> </td>
+                                                    <t t-set="taxes" t-value="round(line.price_total - line.price_subtotal, 2)"/>
+                                                    <td class="text-right bd">
+
+
+                                                    </td>
+                                                    <td class="text-right">
+
+                                                    </td>
+                                                </tr>
+                                            </t>
+
+
+                                            </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="o.journal_id.factura_cambiaria == True">
+                            <div class="row">
+                                <div class="col-12" style="padding:0px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="50%" class="text-center"><strong>No. Abono:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Fecha:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Monto:</strong></th>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="10%" class="text-center"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="o.megaprint_payment_lines" t-as="payment_line">
+                                            <tr>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="50%" class="text-center"><span t-field="payment_line.serial_no"/> </td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.due_date"/></td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.amount"/></td>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="10%" class="text-center"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="55%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="55%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                    </tr>
+                                    <tr style="height: 50px;">
+                                        <td style="font-size:15px;" colspan="4"><span style="font-weight:bold;">TOTAL EN LETRAS: <span t-esc="o.text_amount"/> </span></td>
+                                        <td style="background-color:black; color:white; font-size:15px;" class="text-right"><b>TOTAL: </b></td>
+                                        <td class="text-center">
+                                                <span t-field="o.amount_total"/>
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="height:100px; border: 1px solid black; border-radius: 7px;">
+                                <span t-field="o.comment"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center" style="background-color:black; color: white;">
+                            <b>CERTIFICADOR</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table width="100%">
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">No. AUTORIZACION: </span> <span style="font-weight:normal;" t-field="o.uuid"/></td>
+                                    <td class="text-left"><span style="font-weight:bold;">MEGAPRINT, S.A.</span> NIT: 50510231</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">FECHA CERTIFICACIÓN</span> <span style="font-weight:normal;" t-field="o.date_invoice"/> </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+
+                </t>
+                <t t-if="len(o.invoice_line_ids) &gt; 40">
+                    <div style="page-break-after: always;"/>
+                     <div class="page">
+                    <style>
+
+                        hr {
+                            border-top: 2px solid gray;
+                        }
+
+                        .bd {
+                            border-right: 1px solid black;
+                        }
+                        .bi {
+                            border-left: 1px solid black;
+                        }
+                    </style>
+
+                    <div class="row justify-content-between">
+                        <div class="col-3 text-left" align="center">
+                            <img class="img-fluid" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height:90px;"/>
+                        </div>
+                        <div class="col-5 text-left" style="border-left:1px solid lightgrey;">
+                            <span style="font-size: 14px; font-weight:bold;" t-field="o.company_id.nombre_comercial"/><br/>
+                            <span style="font-size: 13px;">NIT: <span t-field="o.company_id.vat"/></span><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.street"/><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.city"/>,
+                            <span style="font-size: 13px;" t-field="o.company_id.country_id.name"/>
+                        </div>
+                        <div class="col-4 text-right" align="center">
+                            <img class="img" src="/account_invoice_megaprint/static/src/img/fel.PNG" style="max-height: 45px;"/>
+                            <ul style="list-style-type: none; font-size:12px;">
+                                <li>
+                                    <span t-if="o.type != 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        FACTURA
+                                    </span>
+                                    <span t-if="o.type == 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        NOTA DE CRÉDITO
+                                    </span>
+                                </li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">Serie: </b><span t-field="o.fel_serie"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No.: </b><span t-field="o.fel_no"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No. interno: </b><span t-field="o.name"/></li>
+                                <t t-foreach="o.frase_ids" t-as="frase">
+                                    <li style="font-size:13px;"><b style="font-weight:bold;"><t t-raw="frase.name"/></b></li>
+                                </t>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-12 justify-content-center" style="border: 1px solid black; border-radius: 7px;">
+                                <table width="100%" style="border-collapse: separate; border-spacing: 0 15px;">
+                                    <tr>
+                                        <td style="font-size:18;"><b>Fecha:</b> <span t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:14px;"><b style="font-size:18px;">Nombre:</b> <t t-raw="o.partner_id.name"/></td>
+                                        <td class="text-right" width="50%"><span style="color: white;"/><b style="font-size:18;">NIT:</b> <t t-raw="o.partner_id.vat"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" width="100%"><b style="font-size:18;">Dirección:</b> <t t-raw="o.partner_id.street"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .tableparentdiv::-webkit-scrollbar {
+                        display: none;
+                        }
+
+                        /* Hide scrollbar for IE, Edge and Firefox */
+                        .tableparentdiv {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                        }
+                    </style>
+                    <div class="container" style="border: 1px solid black; border-radius: 7px;">
+                        <div class="row">
+                            <div class="col-12 tableparentdiv" style="height: 640px; padding: 0px; overflow: auto;">
+                                <table width="100%">
+                                    <thead style="background-color: black; color: white;">
+                                        <tr>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">CANTIDAD</th>
+                                            <th width="50%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCRIPCIÓN</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">PRECIO UNITARIO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCUENTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">IMPUESTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="len_lines" t-value="len(o.invoice_line_ids)"/>
+                                        <t t-set="lines" t-value="o.invoice_line_ids"/>
+                                        <t t-set="lineas_totales" t-value="0"/>
+                                        <t t-set="total_fe" t-value="0"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <t t-set="lineas_totales" t-value="lineas_totales + 1"/>
+                                            <t t-if="lineas_totales &gt; 40 and lineas_totales &lt; 61">
+
+                                                    <tr>
+                                                        <td class="text-center bd"><span t-field="line.quantity"/></td>
+                                                        <td class="text-left bd" style="margin-left:15px;"><span t-field="line.name"/></td>
+                                                        <td class="text-right bd"><span t-field="line.currency_id.symbol"/> <span t-field="line.price_unit"/></td>
+                                                        <td class="text-right bd"><span t-field="line.discount"/> </td>
+                                                        <t t-set="taxes" t-value="round(line.price_total - line.price_subtotal, 2)"/>
+                                                        <td class="text-right bd">
+
+
+                                                        </td>
+                                                        <td class="text-right">
+
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="o.journal_id.factura_cambiaria == True">
+                            <div class="row">
+                                <div class="col-12" style="padding:0px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="50%" class="text-center"><strong>No. Abono:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Fecha:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Monto:</strong></th>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="10%" class="text-center"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="o.megaprint_payment_lines" t-as="payment_line">
+                                            <tr>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="50%" class="text-center"><span t-field="payment_line.serial_no"/> </td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.due_date"/></td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.amount"/></td>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="10%" class="text-center"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="55%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                         <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="55%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                    </tr>
+                                    <tr style="height: 50px;">
+                                        <td style="font-size:15px;" colspan="4"><span style="font-weight:bold;">TOTAL EN LETRAS: <span t-esc="o.text_amount"/> </span></td>
+                                        <td style="background-color:black; color:white; font-size:15px;" class="text-right"><b>TOTAL: </b></td>
+                                        <td class="text-center">
+                                                <span t-field="o.amount_total"/>
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="height:100px; border: 1px solid black; border-radius: 7px;">
+                                <span t-field="o.comment"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center" style="background-color:black; color: white;">
+                            <b>CERTIFICADOR</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table width="100%">
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">No. AUTORIZACION: </span> <span style="font-weight:normal;" t-field="o.uuid"/></td>
+                                    <td class="text-left"><span style="font-weight:bold;">MEGAPRINT, S.A.</span> NIT: 50510231</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">FECHA CERTIFICACIÓN</span> <span style="font-weight:normal;" t-field="o.date_invoice"/> </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+                </t>
+                <t t-if="len(o.invoice_line_ids) &gt; 60">
+                    <div style="page-break-after: always;"/>
+                    <div class="page">
+                    <style>
+
+                        hr {
+                            border-top: 2px solid gray;
+                        }
+
+                        .bd {
+                            border-right: 1px solid black;
+                        }
+                        .bi {
+                            border-left: 1px solid black;
+                        }
+                    </style>
+
+                    <div class="row justify-content-between">
+                        <div class="col-3 text-left" align="center">
+                            <img class="img-fluid" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height:90px;"/>
+                        </div>
+                        <div class="col-5 text-left" style="border-left:1px solid lightgrey;">
+                            <span style="font-size: 14px; font-weight:bold;" t-field="o.company_id.nombre_comercial"/><br/>
+                            <span style="font-size: 13px;">NIT: <span t-field="o.company_id.vat"/></span><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.street"/><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.city"/>,
+                            <span style="font-size: 13px;" t-field="o.company_id.country_id.name"/>
+                        </div>
+                        <div class="col-4 text-right" align="center">
+                            <img class="img" src="/account_invoice_megaprint/static/src/img/fel.PNG" style="max-height: 45px;"/>
+                            <ul style="list-style-type: none; font-size:12px;">
+                                <li>
+                                    <span t-if="o.type != 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        FACTURA
+                                    </span>
+                                    <span t-if="o.type == 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        NOTA DE CRÉDITO
+                                    </span>
+                                </li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">Serie: </b><span t-field="o.fel_serie"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No.: </b><span t-field="o.fel_no"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No. interno: </b><span t-field="o.name"/></li>
+                                <t t-foreach="o.frase_ids" t-as="frase">
+                                    <li style="font-size:13px;"><b style="font-weight:bold;"><t t-raw="frase.name"/></b></li>
+                                </t>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <br/>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-12 justify-content-center" style="border: 1px solid black; border-radius: 7px;">
+                                <table width="100%" style="border-collapse: separate; border-spacing: 0 15px;">
+                                    <tr>
+                                        <td style="font-size:18;"><b>Fecha:</b> <span t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:14px;"><b style="font-size:18px;">Nombre:</b> <t t-raw="o.partner_id.name"/></td>
+                                        <td class="text-right" width="50%"><span style="color: white;"/><b style="font-size:18;">NIT:</b> <t t-raw="o.partner_id.vat"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" width="100%"><b style="font-size:18;">Dirección:</b> <t t-raw="o.partner_id.street"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .tableparentdiv::-webkit-scrollbar {
+                        display: none;
+                        }
+
+                        /* Hide scrollbar for IE, Edge and Firefox */
+                        .tableparentdiv {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                        }
+                    </style>
+                    <div class="container" style="border: 1px solid black; border-radius: 7px;">
+                        <div class="row">
+                            <div class="col-12 tableparentdiv" style="height: 640px; padding: 0px; overflow: auto;">
+                                <table width="100%">
+                                    <thead style="background-color: black; color: white;">
+                                        <tr>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">CANTIDAD</th>
+                                            <th width="50%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCRIPCIÓN</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">PRECIO UNITARIO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCUENTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">IMPUESTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="len_lines" t-value="len(o.invoice_line_ids)"/>
+                                        <t t-set="lines" t-value="o.invoice_line_ids"/>
+                                        <t t-set="lineas_totales" t-value="0"/>
+                                        <t t-set="total_fe" t-value="0"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <t t-set="lineas_totales" t-value="lineas_totales + 1"/>
+                                            <t t-if="lineas_totales &gt; 60 and lineas_totales &lt; 81">
+
+                                                    <tr>
+                                                        <td class="text-center bd"><span t-field="line.quantity"/></td>
+                                                        <td class="text-left bd" style="margin-left:15px;"><span t-field="line.name"/></td>
+                                                        <td class="text-right bd"><span t-field="line.currency_id.symbol"/> <span t-field="line.price_unit"/></td>
+                                                        <td class="text-right bd"><span t-field="line.discount"/> </td>
+                                                        <t t-set="taxes" t-value="round(line.price_total - line.price_subtotal, 2)"/>
+                                                        <td class="text-right bd">
+
+
+                                                        </td>
+                                                        <td class="text-right">
+
+                                                        </td>
+                                                    </tr>
+                                                </t>
+
+                                            </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="o.journal_id.factura_cambiaria == True">
+                            <div class="row">
+                                <div class="col-12" style="padding:0px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="50%" class="text-center"><strong>No. Abono:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Fecha:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Monto:</strong></th>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="10%" class="text-center"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="o.megaprint_payment_lines" t-as="payment_line">
+                                            <tr>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="50%" class="text-center"><span t-field="payment_line.serial_no"/> </td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.due_date"/></td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.amount"/></td>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="10%" class="text-center"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="55%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="55%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                    </tr>
+                                    <tr style="height: 50px;">
+                                        <td style="font-size:15px;" colspan="4"><span style="font-weight:bold;">TOTAL EN LETRAS: <span t-esc="o.text_amount"/> </span></td>
+                                        <td style="background-color:black; color:white; font-size:15px;" class="text-right"><b>TOTAL: </b></td>
+                                        <td class="text-center">
+
+                                                <span t-field="o.amount_total"/>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="height:100px; border: 1px solid black; border-radius: 7px;">
+                                <span t-field="o.comment"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center" style="background-color:black; color: white;">
+                            <b>CERTIFICADOR</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table width="100%">
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">No. AUTORIZACION: </span> <span style="font-weight:normal;" t-field="o.uuid"/></td>
+                                    <td class="text-left"><span style="font-weight:bold;">MEGAPRINT, S.A.</span> NIT: 50510231</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">FECHA CERTIFICACIÓN</span> <span style="font-weight:normal;" t-field="o.date_invoice"/> </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+                </t>
+                <t t-if="len(o.invoice_line_ids) &gt; 80">
+                    <div style="page-break-after: always;"/>
+                    <div class="page">
+                    <style>
+
+                        hr {
+                            border-top: 2px solid gray;
+                        }
+
+                        .bd {
+                            border-right: 1px solid black;
+                        }
+                        .bi {
+                            border-left: 1px solid black;
+                        }
+                    </style>
+
+                    <div class="row justify-content-between">
+                        <div class="col-3 text-left" align="center">
+                            <img class="img-fluid" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="max-height:90px;"/>
+                        </div>
+                        <div class="col-5 text-left" style="border-left:1px solid lightgrey;">
+                            <span style="font-size: 14px; font-weight:bold;" t-field="o.company_id.nombre_comercial"/><br/>
+                            <span style="font-size: 13px;">NIT: <span t-field="o.company_id.vat"/></span><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.street"/><br/>
+                            <span style="font-size: 13px;" t-field="o.company_id.city"/>,
+                            <span style="font-size: 13px;" t-field="o.company_id.country_id.name"/>
+                        </div>
+                        <div class="col-4 text-right" align="center">
+                            <img class="img" src="/account_invoice_megaprint/static/src/img/fel.PNG" style="max-height: 45px;"/>
+                            <ul style="list-style-type: none; font-size:12px;">
+                                <li>
+                                    <span t-if="o.type != 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        FACTURA
+                                    </span>
+                                    <span t-if="o.type == 'out_refund'" style="font-size:18px; background-color:black; color: white; padding-left: 10px; padding-right: 10px; border-radius: 7px;">
+                                        NOTA DE CRÉDITO
+                                    </span>
+                                </li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">Serie: </b><span t-field="o.fel_serie"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No.: </b><span t-field="o.fel_no"/></li>
+                                <li style="font-size:13px;"><b style="font-weight:bold;">No. interno: </b><span t-field="o.name"/></li>
+                                <t t-foreach="o.frase_ids" t-as="frase">
+                                    <li style="font-size:13px;"><b style="font-weight:bold;"><t t-raw="frase.name"/></b></li>
+                                </t>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-12 justify-content-center" style="border: 1px solid black; border-radius: 7px;">
+                                <table width="100%" style="border-collapse: separate; border-spacing: 0 15px;">
+                                    <tr>
+                                        <td style="font-size:18;"><b>Fecha:</b> <span t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:14px;"><b style="font-size:18px;">Nombre:</b> <t t-raw="o.partner_id.name"/></td>
+                                        <td class="text-right" width="50%"><span style="color: white;"/><b style="font-size:18;">NIT:</b> <t t-raw="o.partner_id.vat"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" width="100%"><b style="font-size:18;">Dirección:</b> <t t-raw="o.partner_id.street"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .tableparentdiv::-webkit-scrollbar {
+                        display: none;
+                        }
+
+                        /* Hide scrollbar for IE, Edge and Firefox */
+                        .tableparentdiv {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                        }
+                    </style>
+                    <div class="container" style="border: 1px solid black; border-radius: 7px;">
+                        <div class="row">
+                            <div class="col-12 tableparentdiv" style="height: 640px; padding: 0px; overflow: auto;">
+                                <table width="100%">
+                                    <thead style="background-color: black; color: white;">
+                                        <tr>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">CANTIDAD</th>
+                                            <th width="50%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCRIPCIÓN</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">PRECIO UNITARIO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">DESCUENTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">IMPUESTO</th>
+                                            <th width="10%" class="text-center" style="border: 1px solid black; font-size: 14px">TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="len_lines" t-value="len(o.invoice_line_ids)"/>
+                                        <t t-set="lines" t-value="o.invoice_line_ids"/>
+                                        <t t-set="lineas_totales" t-value="0"/>
+                                        <t t-set="total_fe" t-value="0"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <t t-set="lineas_totales" t-value="lineas_totales + 1"/>
+                                            <t t-if="lineas_totales &gt; 80 and lineas_totales &lt; 101">
+
+                                                    <tr>
+                                                        <td class="text-center bd"><span t-field="line.quantity"/></td>
+                                                        <td class="text-left bd" style="margin-left:15px;"><span t-field="line.name"/></td>
+                                                        <td class="text-right bd"><span t-field="line.currency_id.symbol"/> <span t-field="line.price_unit"/></td>
+                                                        <td class="text-right bd"><span t-field="line.discount"/> </td>
+                                                        <t t-set="taxes" t-value="round(line.price_total - line.price_subtotal, 2)"/>
+                                                        <td class="text-right bd">
+
+
+                                                        </td>
+                                                        <td class="text-right">
+
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                 <t t-set="lineas_totales" t-value="lineas_totales * 3"/>
+
+                                            </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <t t-if="o.journal_id.factura_cambiaria == True">
+                            <div class="row">
+                                <div class="col-12" style="padding:0px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="50%" class="text-center"><strong>No. Abono:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Fecha:</strong></th>
+                                                <th width="10%" class="text-center"><strong>Monto:</strong></th>
+                                                <th width="10%" class="text-center"/>
+                                                <th width="10%" class="text-center"/>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="o.megaprint_payment_lines" t-as="payment_line">
+                                            <tr>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="50%" class="text-center"><span t-field="payment_line.serial_no"/> </td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.due_date"/></td>
+                                                <td width="10%" class="text-center"><span t-field="payment_line.amount"/></td>
+                                                <td width="10%" class="text-center"/>
+                                                <td width="10%" class="text-center"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="55%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                        <th width="15%" class="text-center"/>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-12" style="border:1px solid black; border-radius: 7px;">
+                                <table width="100%">
+                                    <tr>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="55%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                        <th width="15%" class="text-center"></th>
+                                    </tr>
+                                    <tr style="height: 50px;">
+                                        <td style="font-size:15px;" colspan="4"><span style="font-weight:bold;">TOTAL EN LETRAS: <span t-esc="o.text_amount"/> </span></td>
+                                        <td style="background-color:black; color:white; font-size:15px;" class="text-right"><b>TOTAL: </b></td>
+                                        <td class="text-center">
+
+                                                <span t-field="o.amount_total"/>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" style="height:100px; border: 1px solid black; border-radius: 7px;">
+                                <span t-field="o.comment"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center" style="background-color:black; color: white;">
+                            <b>CERTIFICADOR</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table width="100%">
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">No. AUTORIZACION: </span> <span style="font-weight:normal;" t-field="o.uuid"/></td>
+                                    <td class="text-left"><span style="font-weight:bold;">MEGAPRINT, S.A.</span> NIT: 50510231</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><span style="font-weight:bold;">FECHA CERTIFICACIÓN</span> <span style="font-weight:normal;" t-field="o.date_invoice"/> </td>
+                                </tr>
+                            </table>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+                </t>
+
+
+
+
+
+
+
+            </t>
+        </template>
+
+        <template id="report_fel_format">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-call="account_invoice_megaprint.report_fel_format_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

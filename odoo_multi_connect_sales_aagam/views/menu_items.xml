@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		 <record id="action_woocommerce_dashboard" model="ir.actions.client">
+         <field name="name">Woocommerce Dashboard</field>
+         <field name="tag">woocommerce_dashboard</field>
+    </record>
+      	<menuitem
+    		id="parent_menu_multi_channel"
+            groups="odoo_multi_connect_sales_aagam.group_multi_channel_user"
+            web_icon="odoo_multi_connect_sales_aagam,static/description/icon.png"
+    		name="Woocommerce Connector"
+        />
+			<menuitem
+				id="menu_multi_channel_configuration"
+				name="Connect"
+				parent="parent_menu_multi_channel"
+				sequence="1"/>
+			<menuitem
+					id="sub_menu_id_multi_channel_dashboard"
+					name="Dashboard"
+					parent="menu_multi_channel_configuration"
+					action="action_woocommerce_dashboard"
+					sequence="2"/>
+			<menuitem
+					id="sub_menu_id_multi_channel"
+					name="Instances"
+					parent="menu_multi_channel_configuration"
+					action="action_woo_commerce_channel_sale"
+					sequence="1"/>
+	        <menuitem
+	        	id="menu_miscellaneous"
+	        	name="Configuration"
+	        	parent="parent_menu_multi_channel"
+	        	sequence="4"/>
+
+        		<menuitem
+				id="menu_id_multi_channel_configuration"
+				name="Configuration"
+				parent="menu_miscellaneous"
+				sequence="1"/>
+				<menuitem
+				id="menu_channel_feeds"
+				name="Feeds"
+				groups="base.group_no_one"
+				parent="parent_menu_multi_channel"
+				sequence="2"/>
+					<menuitem
+			    		id="channel_category_feeds_menu_id"
+			    		name="Category Feeds"
+			    		parent="menu_channel_feeds"
+			    		action="action_category_feed"
+			    		sequence="1"/>
+		    		<menuitem
+			    		id="channel_product_feeds_menu_id"
+			    		name="Product Feeds"
+			    		parent="menu_channel_feeds"
+			    		action="action_product_feed"
+			    		sequence="2"/>
+
+			    	<menuitem
+			    		id="channel_partner_feeds_menu_id"
+			    		name="Customer Feeds"
+			    		parent="menu_channel_feeds"
+			    		action="action_partner_feed"
+			    		sequence="3"/>
+		    		<menuitem
+			    		id="channel_order_feeds_menu_id"
+			    		name="Order Feeds"
+			    		parent="menu_channel_feeds"
+			    		action="action_order_feed"
+			    		sequence="4"/>
+			    	<menuitem
+				    	id="channel_shipping_method_feeds"
+						name="Shipping Feeds"
+						parent="menu_channel_feeds"
+						action="action_shipping_feed"
+						sequence="8"/>
+				<menuitem
+				id="menu_id_channel_mappings"
+				name="Mapping"
+				parent="parent_menu_multi_channel"
+				sequence="3"/>
+
+			    	<menuitem
+			    		id="channel_category_mapping_menu_id"
+			    		name="Category Mapping"
+			    		parent="menu_id_channel_mappings"
+			    		action="woo_commerce_product_category_mapping_action_id"
+			    		sequence="1"/>
+		    		<menuitem
+			    		id="channel_attribute_mapping_menu_id"
+			    		name="Attribute Mapping"
+			    		parent="menu_id_channel_mappings"
+			    		action="woo_commerce_attribute_mapping_action_id"
+			    		sequence="2"/>
+	    			<menuitem
+			    		id="channel_attribute_value_mapping_menu_id"
+			    		name="Attribute Value Mapping"
+			    		parent="menu_id_channel_mappings"
+			    		action="woo_commerce_attribute_value_mapping_action_id"
+			    		sequence="3"/>
+
+			    	<menuitem
+			    		id="channel_template_mapping_menu_id"
+			    		name="Product Template Mapping"
+			    		parent="menu_id_channel_mappings"
+			    		action="product_template_mapping_action_id"
+			    		sequence="4"/>
+			        <menuitem
+			        	id="channel_product_mapping_menu_id"
+			        	name="Product Mapping"
+			        	parent="menu_id_channel_mappings"
+			        	action="product_mapping_action_id"
+			        	sequence="5"/>
+			       	 <menuitem
+			       	 	id="channel_order_mapping_menu_id"
+			       	 	name="Order Mapping"
+			       	 	parent="menu_id_channel_mappings"
+			       	 	action="order_mapping_action_id"
+			       	 	sequence="6"/>
+			       	 <menuitem
+			       	 	id="channel_partner_mapping_menu_id"
+			       	 	name="Partner Mapping"
+			       	 	parent="menu_id_channel_mappings"
+			       	 	action="parnter_mapping_action_id"
+			       	 	sequence="7"/>
+    				<menuitem
+			    		id="channel_account_mapping_menu_id"
+			    		name="Tax Mapping"
+			    		parent="menu_id_channel_mappings"
+			    		action="woo_commerce_account_mapping_action_id"
+			    		sequence="8"/>
+			       	<menuitem
+			       	 	id="channel_account_journal_mapping_menu_id"
+			       	 	name="Payment Method Mapping"
+			       	 	parent="menu_id_channel_mappings"
+			       	 	action="woo_commerce_journal_mapping_action_id"
+			       	 	sequence="9"/>
+		       	 	<menuitem
+			       	 	id="channel_shipping_mapping_menu_id"
+			       	 	name="Shipping Mapping"
+			       	 	parent="menu_id_channel_mappings"
+			       	 	action="channel_shipping_mapping_action_id"
+			       	 	sequence="10"/>
+
+					<menuitem
+						id="sub_menu_id_ebay_pricelist_mapping_id"
+						name="Pricelist Mapping"
+						parent="menu_id_channel_mappings"
+						action="pricelist_mapping_action_id"
+						sequence="11"/>
+
+		        <menuitem
+		        	id="channel_history_sub_menu_id"
+		        	name="Synchronization History"
+		        	parent="menu_miscellaneous"
+		        	action="sync_channel_action_id" />
+				<menuitem
+		        	id="multi_channel_global_configuration"
+		        	name="Global Configuration"
+		        	parent="menu_miscellaneous"
+		        	action="multi_channel_sale_config_id" />
+
+    </data>
+</odoo>

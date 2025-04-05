@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Punto de Venta - Cambiar Pagos</title>
+    <style>
+        .borderless, table.borderless td, table.borderless th {
+            border: 0;
+        }
+        table.borderless td, table.borderless th {
+            padding: 0 0.5em 0 0 !important;
+        }
+        .hidden {
+            display: none;
+        }
+        div.section {
+            margin: 2em;
+        }
+        h1.title, h2.subtitle {
+            text-align: center;
+        }
+        ul.simple {
+            margin-bottom: 1em;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="document" id="pdv-cambiar-pagos">
+        <h1 class="title">Punto de Venta - Cambiar Pagos</h1>
+        <p>Este módulo amplía la funcionalidad del Punto de Venta Odoo para permitir al cajero cambiar los pagos de un pedido PoS.</p>
+        <p><strong>Tabla de Contenido</strong></p>
+        <ul class="simple">
+            <li><a href="#configuracion">Configuración</a></li>
+            <li><a href="#uso">Uso</a></li>
+            <li><a href="#creditos">Créditos</a></li>
+        </ul>
+
+        <div class="section" id="configuracion">
+            <h1><a class="toc-backref" href="#toc-entry-2">Configuración</a></h1>
+            <li>Ir al Punto de Venta.</li>
+            <li>Elija la lista de visualización.</li>
+            <li>Edite su punto de venta y seleccione un valor para el campo "Política de cambio de pago".</li>
+            <p>Hay dos opciones disponibles:</p>
+            <li>'Reembolso y Reventa': Odoo reembolsará el Pedido POS actual para cancelarlo y creará un nuevo Pedido POS con las líneas de pago correctas.</li>
+            <li>'Actualizar pagos': Odoo cambiará las líneas de pago.</li>
+            <img src="pos_config_form.png" alt="" />
+            <p><strong>Nota:</strong> En algunos países, la opción "Actualizar pagos" no está permitida por ley, porque el historial de pedidos no debe modificarse.</p>
+            <p>Para ello, existe una restricción para verificar el valor de este campo. Si está instalado el módulo l10n_fr_certification y si la empresa actual tiene una contabilidad inalterable, no será posible seleccionar el valor 'Actualizar Pagos'.</p>
+        </div>
+
+        <div class="section" id="uso">
+            <h1><a class="toc-backref" href="#toc-entry-3">Uso</a></h1>
+            <li>Ir a un pedido de POS.</li>
+            <li>Haga clic en el botón 'Cambiar pagos'</li>
+            <img src="pos_order_form.png" alt="" />
+            <p>En el asistente emergente, seleccione los pagos reales que se han utilizado para pagar el pedido.</p>
+            <img src="pos_payment_change_wizard_form.png" alt="" />
+            <li>Luego haga clic en el botón 'Cambiar pagos'</li>
+            <p><strong>Nota:</strong> Si se selecciona la opción "Reembolso y reventa", al cambiar los pagos se mostrarán los tres pedidos de POS: el original, el de reembolso y el nuevo.</p>
+            <img src="pos_order_tree.png" alt="" />
+        </div>
+
+        <div class="section" id="Creditos">
+          <h1><a class="toc-backref" href="#toc-entry-4">Creditos</a></h1>
+          <a href="https://github.com/ErickBPO" target="_blank">
+              <img src="https://github.com/ErickBPO.png" alt="Imagen de perfil" style="border-radius: 50%; width: 100px; height: 100px;" />
+      </div>
+    </div>
+</body>
+</html>

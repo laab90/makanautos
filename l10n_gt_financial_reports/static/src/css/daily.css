@@ -1,0 +1,70 @@
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+  /*background: red;*/
+}
+
+[class*="col-"] {
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+table {
+    width: 100%;
+}
+
+table th {
+    text-align: center;
+}
+
+table th:nth-child(n+1):nth-child(-n+2) {
+    width: 25%;
+}
+
+.title p {
+    margin: 0px;
+    padding: 0px;
+}
+
+table th:nth-child(3) {
+    width: 15%;
+}
+
+tfoot tr {
+    border-top: 1px solid black;
+}
+
+.head_table, table th {
+    background: #EDEDED;
+}
+
+tbody tr td:nth-child(n+4):nth-child(-n+5) {
+    text-align: right;
+    width: 10%;
+}
+
+tfoot td {
+    text-align: right;
+}
+
+.move_cont {
+    page-break-inside: avoid;
+}
+
+.line_table {
+    border-bottom: 1px dashed black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    padding-right: 0px;
+}
+
+.line_table .col-12 {
+    padding-right: 0px;
+}
+/*
+.page td, .page .row {
+    border: 1px solid black !important;
+}
+*/

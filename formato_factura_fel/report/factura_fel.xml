@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="factura_fel_report_base">
+            <div class="row mt32 mb32">
+                <div class="col-auto col-3 mw-100 mb-2" style="">
+                    <div>
+                        <center>
+                            <img src="logo.png" width="205" height="175"/>
+                        </center>
+                    </div>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2"
+                     style="">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div>
+                        <strong>
+                            <p style="text-align: center; font-size:14px" t-field="o.company_id.street">
+                            </p>
+                        </strong>
+                        <strong>
+                            <p style="text-align: center; font-size:14px; margin-top: -20px;">
+                                <span t-field="o.company_id.city"/>,
+                                <span t-field="o.company_id.country_id.name"/>
+                            </p>
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2"
+                     style="">
+                    <br/>
+                    <div>
+                        <table style="font-size: 14px; border: 1px solid; text-align: center; width: 100%">
+                            <tr>
+                                <td style="border-top: solid 1px; border-right: solid 1px;" colspan="4">
+                                    Régimen FEL
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="font-weight: bold; border-right: solid 1px;">Documento
+                                    Tributario Electrónico
+                                </td>
+                            </tr>
+                          <tr>
+    <td colspan="4" style="font-weight: bold; border-right: solid 1px;">
+        <span t-if="o.move_type == 'out_invoice'">FACTURA</span>
+        <span t-if="o.move_type == 'out_refund'">NOTA DE CRÉDITO</span>
+       
+    </td>
+</tr>
+                            <tr>
+                                <td style="width: 50%; border-top: solid 1px; border-right: solid 1px; font-weight: bold">
+                                    Serie
+                                </td>
+                                <td style="width: 50%; border-top: solid 1px; border-right: solid 1px; font-weight: bold">
+                                    No. de DTE
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; border-bottom: solid 1px; border-right: solid 1px;">
+                                    <span t-field="o.serie_fel"/>
+                                </td>
+                                <td style="width: 50%; border-bottom: solid 1px; border-right: solid 1px;">
+                                    <span t-field="o.numero_fel"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="border-right: solid 1px; font-weight: bold">
+                                    Fecha de Emisión:
+                                    <span t-field="o.invoice_date"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt32 mb32">
+                <div class="col-4">
+                    <div>
+                        <strong>
+                            <p style="text-align: center; font-size:14px">
+                                <span t-esc="o.company_id.display_name.split(',')[0]"/>
+                            </p>
+                        </strong>
+                        <strong>
+                            <p style="text-align: center; font-size:14px; margin-top: -20px;">
+                                <span t-esc="'{}-{}'.format(o.company_id.vat[:-1], o.company_id.vat[-1:])"/>
+                            </p>
+                        </strong>
+                    </div>
+                </div>
+                <div class=" col-4">
+                    <br/>
+                    <div>
+                        <strong>
+                            <p style="text-align: center; font-size:14px">
+                                SUJETO A PAGOS TRIMESTRALES
+                            </p>
+                        </strong>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <br/>
+                    <div>
+                        <table>
+                            <tr>
+                                <td style="width: 100px">No. interno:</td>
+                                <td>
+                                    <span t-field="o.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"
+                 style="border-top: solid 1px; border-left: solid 1px; border-right: solid 1px;">
+                <table>
+                    <tr>
+                        <td style="font-weight: bold; width: 155px; padding-right: 5px;">‎ ‎ Nombre del
+                            Cliente:‎
+                        </td>
+                        <td>
+                            <span t-field="o.commercial_partner_id.name"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row"
+                 style="border-left: solid 1px; border-right: solid 1px;">
+                <table>
+                    <tr>
+                        <td style="font-weight: bold; width: 85px; padding-right: 5px;">‎ ‎ Dirección:‎</td>
+                        <td style="width: 800px;">
+                            <span t-field="o.partner_shipping_id.street"/>
+                            <span t-field="o.partner_shipping_id.street2"/>
+                            <span t-field="o.partner_shipping_id.city"/>
+                            <span t-field="o.partner_shipping_id.country_id"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row" style="border-left: solid 1px; border-right: solid 1px;">
+                <table>
+                    <tr>
+                        <td style="font-weight: bold; width: 50px">‎ ‎ NIT:‎</td>
+                        <td style="width: 250px">
+                            <span t-field="o.commercial_partner_id.vat"/>
+                        </td>
+                        <td style="font-weight: bold; width: 80px">Teléfono:</td>
+                        <td style="width: 200px">
+                            <span t-field="o.partner_shipping_id.phone"/>
+                        </td>
+                        <td style="font-weight: bold; width: 150px">Condición de pago:</td>
+                        <td>
+                            <span t-field="o.invoice_payment_term_id"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="my_table" class="row" style="">
+                <table style="width: 100%; page-break-inside:avoid">
+                    <thead>
+                        <tr style="text-align: center; border: solid 1px;">
+                            <th style="width: 8%; font-size:12px; border-right: solid 1px;">
+                                No.
+                            </th>
+                            <th style="width: 12%; font-size:12px;   border-right: solid 1px;">
+                                CANTIDAD
+                            </th>
+                            <th style="width: 45%; font-size:12px;  border-right: solid 1px;">
+                                DESCRIPCIÓN
+                            </th>
+                            <th style="width: 12%; font-size:12px;   border-right: solid 1px;">
+                                P. UNITARIO
+                            </th>
+                            <th style="width: 12%; font-size:12px;   border-right: solid 1px;">
+                                DESCUENTO
+                            </th>
+                            <th style="width: 11%; font-size:12px;  border-bottom: solid 1px;">VALOR TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-left: solid 1px; border-right: solid 1px;">
+                        <t t-set="line_number" t-value="1"/>
+                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                            <tr style="text-align: center">
+                                <td class="text-center"
+                                    style="font-size:10px; border-right: 1px solid black;">
+                                    <span t-esc="line_number"/>
+                                </td>
+                                <td class="text-right"
+                                    style="font-size:10px; border-right: 1px solid black; padding-right: 10px;">
+                                    <span t-field="line.quantity"/>
+                                </td>
+                                <td class="text-justify"
+                                    style="font-size:9px; padding-left:5px; border-right: 1px solid black;">
+                                    <span t-field="line.product_id.name"/>
+                                </td>
+                                <td class="text-right"
+                                    style="font-size:10px; border-right: 1px solid black; padding-right: 10px;">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-right"
+                                    style="font-size:10px; border-right: 1px solid black; padding-right: 10px;">
+                                    <span t-field="line.discount"/>
+                                </td>
+                                <td class="text-right" style="font-size:10px; padding-right: 10px;">
+                                    <span t-field="line.price_total"/>
+                                </td>
+                            </tr>
+                            <t t-set="line_number" t-value="line_number + 1"/>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <table style="width: 100%; border: 1px solid black; ">
+                    <tr>
+                        <td style="width: 79%; font-size: 12px;">
+                            <strong>TOTAL EN LETRAS:</strong>
+                            <span t-field="o.text_amount"/>
+                        </td>
+                        <td class="text-right"
+                            style="border-left: solid 1px;text-align: center; width: 25%; font-size: 12px; padding-right: 10px;">
+                            <strong>
+                                TOTAL&#160;&#160;
+                            </strong>
+                            <span t-field="o.amount_total"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <table style="width: 100%; border-right: 1px solid black; border-bottom: 1px solid black;
+                         border-left: 1px solid black; font-size: 10px; color: #727272;">
+                    <tr>
+                        <td>Número de Autorizacion:</td>
+                        <td>
+                            <span t-field="o.firma_fel"/>
+                        </td>
+                        <td>Datos del Certificador:</td>
+                        <td>G4S Documenta, Sociedad Anonima</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha y Hora de Certificación:</td>
+                        <td>
+                            <span t-field="o.fel_date"/>
+                        </td>
+                        <td>NIT:</td>
+                        <td>6001020-7</td>
+                    </tr>
+                </table>
+            </div>
+<span t-field="o.narration"/>
+            
+
+            <div class="footer o_standard_footer o_company_1_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <div>
+                            <span>Page</span>
+                            <span class="page"/>
+                            of
+                            <span class="topage"/>
+                            <p>
+                                <span t-field="o.company_id.phone"/>
+                                -
+                                <span t-field="o.company_id.email"/>
+                            </p>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+        <!-- Report template -->
+        <template id="factura_fel_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <t t-call="formato_factura_fel.factura_fel_report_base"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

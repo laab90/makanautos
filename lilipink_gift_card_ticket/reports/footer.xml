@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <template id="custom_footer">
+            <xpath expre="//div[@class = 'footer']" position="replace">
+                <div class="footer">
+                    <center>LILI PINK</center>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

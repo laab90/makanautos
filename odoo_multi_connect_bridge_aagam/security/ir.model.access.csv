@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+access_woc_configure,woc.product.product,model_product_product,,1,0,0,0
+access_woc_configure_template,woc.product.template,model_product_template,,1,0,0,0
+
+
+access_import_or_update_product,access_import_or_update_product,model_import_or_update_product,base.group_user,1,1,1,1
+access_import_or_update_order,access_import_or_update_order,model_import_or_update_order,base.group_user,1,1,1,1
+access_import_or_update_res_partner,access_import_or_update_res_partner,model_import_or_update_res_partner,base.group_user,1,1,1,1
+access_import_or_update_category,access_import_or_update_category,model_import_or_update_category,base.group_user,1,1,1,1
+access_export_or_update_category,access_export_or_update_category,model_export_or_update_category,base.group_user,1,1,1,1
+access_export_or_update_product,access_export_or_update_product,model_export_or_update_product,base.group_user,1,1,1,1
+

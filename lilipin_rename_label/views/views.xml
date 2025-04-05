@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- RENAME LABEL TOTAL FIX DISCOUNT-->
+        <record id="lilipin_rename_label_change_totalfixdiscount_pivot" model="ir.ui.view">
+            <field name="name">lilipin.rename.label.change.totalfixdiscount.pivot</field>
+            <field name="model">report.pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_total']" position="after">
+                    <field name="total_fix_discount"/>
+                </xpath>
+                <xpath expr="//field[@name='total_fix_discount']" position="attributes">
+                    <attribute name="string">Total Descuentos Fijos</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

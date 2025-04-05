@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="category_group_hn" model="ir.module.category">
+        <field name="name">HONDURAS</field>
+        <field name="description">Campos personalizados HONDURAS</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record id="group_admin_customs" model="res.groups">
+        <field name="name">Campos personalizados HN</field>
+        <field name="category_id" ref="category_group_hn"/>
+        <field name="comment">Campo personalizados HONDURAS</field>
+    </record>
+
+    <record id="category_group_srl" model="ir.module.category">
+        <field name="name">Rep. Dominicana</field>
+        <field name="description">Campos personalizados RD</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record id="group_admin_customs_rd" model="res.groups">
+        <field name="name">Campos personalizados RD</field>
+        <field name="category_id" ref="category_group_srl"/>
+        <field name="comment">Campo personalizados HONDURAS</field>
+    </record>
+
+    <record id="category_group_sv" model="ir.module.category">
+        <field name="name">El Salvador</field>
+        <field name="description">Campos personalizados SV</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record id="group_admin_customs_sv" model="res.groups">
+        <field name="name">Campos personalizados SV</field>
+        <field name="category_id" ref="category_group_sv"/>
+        <field name="comment">Campo personalizados El Salvador</field>
+    </record>
+</odoo>

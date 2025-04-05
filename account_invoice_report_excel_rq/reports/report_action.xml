@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="sale_rq_xlsx"
+        model="invoice.sale.wizard.rq"
+        string="Venta to XLSX"
+        report_type="xlsx"
+        name="account_invoice_report_excel_rq.sale_report"
+        file="invoice_sale_report"
+    />
+
+    <report
+        id="purchase_rq_xlsx"
+        model="invoice.purchase.wizard.rq"
+        string="Purchase to XLSX"
+        report_type="xlsx"
+        name="account_invoice_report_excel_rq.purchase_report"
+        file="invoice_purchase_report"
+    />
+
+</odoo>

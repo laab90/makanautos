@@ -1,0 +1,33 @@
+{
+    'name': 'Makan Extensión para Campos',
+    'version': '1.0',
+    'summary': 'Añadir campos del Formato de Makan Autos.',
+    'description': 'Este módulo agrega nuevos campos como: Marca, Chasis,Modelo,Kilometraje a la ficha de productos, también se añaden campos al Módulo de Reparación, Se incluye un Reporte de Reparación Personalizado también. Desarrollado por Elder Giron',
+
+    'author': 'Elder Giron',
+    'depends': ['base', 'product', 'repair','account', 'purchase','stock'],
+    'data': [
+        'views/product_template.xml',
+        'views/repair_order.xml',
+        'views/repair_line.xml',
+        'views/sale_order_view.xml',
+        'views/stock_picking.xml',
+        'views/repair_order_tree.xml',
+        'views/stock_quant.xml',
+        'views/account_move.xml',
+
+        'report/report_repair_order.xml',
+        'report/report_repair_order_duplicado.xml',
+        'report/reporte_carwash.xml',
+        'report/report_contrasenacliente.xml',
+        'report/reporte_procesopruebas.xml',
+        'report/qwebtemplate.xml',
+        'report/qwebtaller.xml',
+        'report/registroreporte.xml',
+        'report/qwebtemplatemanoobra.xml',
+        'report/repair_line_wizard_action.xml',
+        'security/ir.model.access.csv',
+     ],
+    'installable': True,
+    'auto_install': False,
+}

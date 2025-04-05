@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_journal_digifact_form" model="ir.ui.view">
+        <field name="name">account.journal.digifact.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="before">
+                <field name="is_fel"/>
+                <field name="codigo_est" attrs="{'invisible': [('is_fel', '=', False)], 'required': [('is_fel', '=', True)]}"/>
+                 <field name="factura_cambiaria" attrs="{'readonly': [('is_peq', '=', True)]}"/>
+                 <field name="is_peq" attrs="{'readonly': [('factura_cambiaria', '=', True)]}"/>
+                 <field name="use_street"/>
+                 <field name="active_contingencia" attrs="{'invisible': [('is_fel', '=', False)]}"/>
+            </field>
+            <notebook position="inside">
+                <page name="page_establecimiento_street" string="Direccion de establecimiento" attrs="{'invisible': [('use_street', '=', False)]}">
+                    <group>
+                        <group>
+                            <field name="company_name_display"  attrs="{'required': [('use_street', '=', True)]}"/>
+                            <field name="establecimiento_street" attrs="{'required': [('use_street', '=', True)]}"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

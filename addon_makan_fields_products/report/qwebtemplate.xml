@@ -1,0 +1,41 @@
+<odoo>
+    <template id="report_cotizaciones_template">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+                    <!-- Mostrar el título con la primera cotización de repair_line_data -->
+                    <h2>Reporte de Cotizacion - N. Cotizacion: <t t-esc="repair_line_data[0]['cotizacion']"/></h2>
+                    
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>N. Cotizacion</th>
+                                <th>Producto</th>
+                                <th>Precio Temporal</th>
+                                <th>Estatus Pieza</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iterar sobre repair_line_data para mostrar los datos en una tabla -->
+                            <t t-foreach="repair_line_data" t-as="line">
+                                <tr>
+                                    <td><t t-esc="line['cotizacion']"/></td>
+                                    <td><t t-esc="line['name']"/></td>
+                                    <td><t t-esc="line['precio_temporal'] or 'Sin Precio'"/></td>
+                                    <td>
+                                        <!-- Mostrar texto según el valor de statuspiezas -->
+                                       <t t-if="line['statuspiezas'] == '1'">En Cotizacion</t>
+                                        <t t-if="line['statuspiezas'] == '2'">Aprobado</t>
+                                        <t t-if="line['statuspiezas'] == '3'">Rechazado por Cliente</t>
+                                        <t t-if="line['statuspiezas'] == '4'">Cancelado</t>
+                                        <t t-if="not line['statuspiezas']">Sin Estado</t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </t>
+    </template>
+</odoo>

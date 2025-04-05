@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="daily_general_ledger_tmp">
+            <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="35"/>
+            <t t-set="data_report_header_spacing" t-value="33"/>
+            <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="header">
+                <link rel="stylesheet" href="/l10n_gt_financial_reports/static/src/css/common.css"/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                            <b><span t-esc="res_company.name"/></b>
+                        </div>
+                        <div class="col-2 offset-2 text-right">
+                            <t t-set="od" t-value="folio"/>
+                            <ul class="list-inline">
+									<b>Folio: <t t-call="l10n_gt_financial_reports.counter_folio"></t></b>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                               <b>LIBRO MAYOR</b>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                        <t t-if="date_fro or date_to">
+                                <b>Periodo: 
+                                <t t-if="date_from">del <span t-esc="date_from"/></t> 
+                                <t t-if="date_to">al <span t-esc="date_to"/></t></b>
+                        </t>
+                        </div>
+                        <div class="col-1 offset-3 text-right">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><b>NIT:  <span t-esc="res_company.vat"/></b>
+                        </div>
+                        <div class="col-5 offset-3 text-right">
+                            <b>(CIFRAS EXPRESADAS EN QUETZALES)</b>
+                        </div>
+                    </div>
+
+                    <table>
+                    <thead>
+                <tr class="headers_line">
+                <th>
+                    <!--Nombre de las cuentas y grupos-->
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Saldo Inicial
+                </th>
+                <th>
+                    Débito
+                </th>
+                <th>
+                    Crédito
+                </th>
+                <th>
+                    Saldo Final
+                </th>
+            </tr>
+        </thead>
+                </table>
+                </div>
+                        <div class="page">
+                        <link rel="stylesheet" href="/l10n_gt_financial_reports/static/src/css/common.css"/>
+                            <table>
+                                
+                                <tbody>
+                                    <t t-foreach="lines" t-as="line">
+                                        <!--Como ahora el template es compartido con el libro consolidado y el get_lines de dicho modelo retorna line['id'] como entero-->
+                                        <!--para las cuentas es que mejor defino una variable aqui para no tener que modificar la funcion alla-->
+                                        <t t-set="str_line_id" t-value="str(line['id'])"/>
+                                        <t t-set="name_class"
+                                           t-value="'with_bold' if (line['level'] == 1 or 'account_' in str_line_id) else 'non_bold'"/>
+                                        <t t-set="level_class" t-value="'level_' + str(line['level'])"/>
+                                        <t t-set="type_class" t-value="'group' if 'group' in str_line_id else ''"/>
+                                        <t t-set="type_class"
+                                           t-value="'account' if 'account' in str_line_id or isinstance(line['id'], int) else type_class"/>
+                                        <t t-set="type_class"
+                                           t-value="'move_' if 'move_' in str_line_id else type_class"/>
+                                        <t t-set="type_class"
+                                           t-value="'total' if 'total' in str_line_id else type_class"/>
+
+                                        <tr t-att-class="type_class">
+                                            <t t-if="any(substring in str_line_id for substring in ['section-', '__group_', 'total_', 'move_'])">
+                                                <td t-att-class="level_class">
+                                                    <t t-if="'__group_' in line['id']">
+                                                        Total Mayor
+                                                    </t>
+                                                    <t t-if="'move_' in line['id']">
+                                                        Movimiento del dia
+                                                    </t>
+                                                    <t t-if="'section-' in line['id']">
+                                                        
+                                                        <span t-att-class="name_class" t-esc="line['name']"/>
+                                                    </t>
+                                                    <t t-if="'total_' in line['id']">
+                                                        
+                                                        <span t-att-class="name_class" t-esc="line['name']"/>
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <t t-if="'move_' in line['id']">
+                                                        <span class="date_class" t-esc="line['date']"/>
+                                                    </t>
+                                                    <!--Fecha-->
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['vals_cols'][0]"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['vals_cols'][1]"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['vals_cols'][2]"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['vals_cols'][3]"
+                                                          t-options="{'widget': 'float', 'precision': 2}"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td t-att-class="level_class">
+                                                    <!--Nombre de las cuentas y grupos-->
+                                                    <span t-att-class="name_class" t-esc="line['name']"/>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <t t-call="l10n_gt_financial_reports.footer_tmp"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

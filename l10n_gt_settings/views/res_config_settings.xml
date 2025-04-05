@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_root_account_gt" parent="base.menu_administration" name="Localización" sequence="5"/>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.gt.view.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Ajustes" class="oe_form_configuration o_base_settings" js_class="base_settings">
+                    <div class="o_control_panel">
+                        <div class="o_panel">
+                            <div class="title h2 mb0 mt4 text-muted d-none d-md-block">Ajustes</div>
+                            <div class="o_setting_search">
+                                <input type="text" class="searchInput" placeholder="Buscar..."/>
+                                <span class="searchIcon"><i class="fa fa-search" role="img" aria-label="Search" title="Search"/></span>
+                            </div>
+                        </div>
+                        <header>
+                            <button string="Guardar" type="object" name="execute" class="oe_highlight" />
+                            <button string="Descartar" type="object" name="cancel" special="cancel" />
+                            <field name="company_id" invisible="1" on_change="1" can_create="true" can_write="true" modifiers="{'required':true,'invisible':true}"/>
+                        </header>
+                    </div>
+                    <div class="o_setting_container">
+                        <div class="settings_tab"/>
+                        <div class="settings">
+                            <div class="notFound o_hidden">No se encontraron registros</div>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="gt_localization_menu" parent="l10n_gt_settings.menu_root_account_gt" name="Guatemala" sequence="1"/>
+        
+
+    </data>
+</odoo>

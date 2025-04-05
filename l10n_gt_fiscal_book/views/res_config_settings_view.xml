@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!--rec.config.settings para localizacion Gutemalteca Libro Ventas y Compras-->
+        <record id="res_config_fiscal_book_gt" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.fiscal.book.gt</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="l10n_gt_settings_account.res_config_settings_view_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//div[@data-key='account']" position="inside">
+                        <h2>Libro de Ventas del IVA</h2>
+                        <div class="row mt16 o_settings_container" id="fiscal_sale_config">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="gt_sale_journal_tr_ids"/>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                            aria-label="Values set here are company-specific." role="img"/>
+                                    <div class="text-muted">
+                                        Diarios de facturacion de ventas incluidos en el reporte de ventas del IVA.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="gt_sale_journal_tr_ids" domain="[('type', '=', 'sale'), ('company_id', '=', company_id)]" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Impuestos Afectos Libro de Ventas</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."
+                                            aria-label="Values set here are company-specific." role="img"/>
+                                    <div class="text-muted">
+                                        Define los impuestos afectos al libro de ventas del IVA
+                                    </div>
+                                    <div class="content-group" id="sale_taxes">
+                                        <div class="row">
+                                            <label for="gt_iva_sale_tax_tr_ids" string="IVA Ventas"
+                                                            class="col-lg-3 o_light_label"/>
+                                            <field name="gt_iva_sale_tax_tr_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id), ('type_tax_use', '=', 'sale'), ('active', '=', True)]"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="gt_other_sale_tax_tr_ids" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_other_sale_tax_tr_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('id', 'not in', gt_iva_sale_tax_tr_ids), ('company_id', '=', company_id), ('type_tax_use', '=', 'sale'), ('active', '=', True)]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Libro de Compras del IVA</h2>
+                        <div class="row mt16 o_settings_container" id="fiscal_purchase_config">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="gt_purchase_journal_tr_ids"/>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." role="img"/>
+                                    <div class="text-muted">
+                                        Diarios de facturacion de ventas incluidos en el reporte de compras del IVA.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="gt_purchase_journal_tr_ids" domain="[('type', '=', 'purchase'), ('company_id', '=', company_id)]" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Tipo de Transacciones </span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." role="img"/>
+                                    <div class="text-muted">
+                                        Tipo de Transacciones para reporte de compras
+                                    </div>
+                                     <div class="content-group" id="transaction_types">
+                                        <div class="row">
+                                            <label for="gt_product_trans_tr_id" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_product_trans_tr_id" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="gt_service_trans_tr_id" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_service_trans_tr_id" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="gt_import_trans_tr_id" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_import_trans_tr_id" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+                                        </div>
+                                         <div class="row">
+                                            <label for="gt_combustible_trans_tr_id" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_combustible_trans_tr_id" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+                                        </div>
+                                         <div class="row">
+                                            <label for="gt_pqc_trans_tr_id" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_pqc_trans_tr_id" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id)]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">                                    
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Impuestos Afectos Libro de Compras</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." role="img"/>
+                                    <div class="text-muted">
+                                        Define los impuestos afectos al libro de compras del IVA
+                                    </div>
+                                    <div class="content-group" id="sale_taxes">
+                                        <div class="row">
+                                            <label for="gt_iva_purchase_tax_tr_ids" string="IVA Compras" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_iva_purchase_tax_tr_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('company_id', '=', company_id), ('type_tax_use', '=', 'purchase'), ('active', '=', True)]"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="gt_idp_tax_tr_ids" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_idp_tax_tr_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('id', 'not in', gt_iva_purchase_tax_tr_ids), ('company_id', '=', company_id), ('type_tax_use', '=', 'purchase'), ('active', '=', True)]"/>
+                                        </div>
+                                        <div class="row">
+                                            <label for="gt_other_purchase_tax_tr_ids" class="col-lg-3 o_light_label"/>
+                                            <field name="gt_other_purchase_tax_tr_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}" domain="[('id', 'not in', gt_iva_purchase_tax_tr_ids), ('company_id', '=', company_id), ('type_tax_use', '=', 'purchase'), ('active', '=', True)]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </xpath>
+                </field>
+        </record>
+
+    </data>
+</odoo>

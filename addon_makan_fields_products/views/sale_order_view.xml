@@ -1,0 +1,50 @@
+<odoo>
+
+     <!-- Vista Form agregar campo -->
+    <record id="view_order_form_inherited" model="ir.ui.view">
+        <field name="name">sale.order.form.inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="numorden" string="Número de Orden"/>
+                <field name="Ingresadosodr" string="Ingresados a ODR"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+              
+              
+                <field name="algunosIngresadosodr" string="Algunos Ingresados a ODR"/>
+                <field name="noIngresadosodr" string="No Ingresados a ODR"/>
+            </xpath>
+        </field>
+    </record>
+
+ <!-- Vista Lista -->
+ <record id="view_order_tree_inherited" model="ir.ui.view">
+    <field name="name">sale.order.tree.inherited</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='create_date']" position="after">
+            <field name="numorden" string="Número de Orden"/>
+            <field name="Ingresadosodr" string="Ingresados a ODR"/>
+            <field name="algunosIngresadosodr" string="Algunos Ingresados a ODR"/>
+            <field name="noIngresadosodr" string="No Ingresados a ODR"/>
+        </xpath>
+    </field>
+</record>
+    
+    <!-- Vista de búsqueda -->
+    <record id="view_order_search_inherited" model="ir.ui.view">
+        <field name="name">sale.order.search.inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="numorden" string="Número de Orden"/>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

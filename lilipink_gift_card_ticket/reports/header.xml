@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="custom_header">
+            <xpath expre="//div[@class = 'header']" position="replace">
+                <div class="header">
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

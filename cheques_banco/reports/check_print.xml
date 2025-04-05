@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+  <template id="internal_layout_lax_check">
+  <!-- Multicompany -->
+    <t t-if="o and 'company_id' in o">
+      <t t-set="company" t-value="o.company_id"/>
+    </t>
+    <t t-if="not o or not 'company_id' in o">
+      <t t-set="company" t-value="res_company"/>
+    </t>
+    <div class="header"></div>
+    <div class="article">
+      <t t-raw="0" />
+    </div>
+    <div class="footer"></div>
+  </template>
+    
+  <template id="report_cheques_banco">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <div class="page">
+          <t t-call="cheques_banco.internal_layout_lax_check">
+          <!-- check design -->
+
+
+<t t-if="(o.state != 'draft') or o.state != 'cancel'">
+     
+      <t t-if="o.payment_method_code != 'manual'">
+
+
+
+   <style>
+    @import url('https://fonts.googleapis.com/css?family=Monda');
+    thead {color:black;}
+    tbody {color:black;}
+    tfoot {color:black;}
+    thead, tbody, tfoot, th, td, span {border: none; font-size:15px} 
+    td {text-transform: uppercase; padding: 3px}
+    tr, table, div, span {font-size: 16px; font-family: 'Monda', sans-serif;}
+    th{border-bottom: 1px solid black; padding: 5px; text-align: center; font-weight: bold}
+    div.contenedor{display: flex;  justify-content: space-between; width:100%; height:100px}
+    div.contenido{float: left; margin:15px; height:80px; width:20%; border-top: 1px solid black; text-align:center}
+  </style>
+  
+  <table>
+    <tbody>
+      <tr><!--fecha y monto-->
+        <td width="15"/>
+        <td width="100px"/>
+        <td width="555" height="15"><span> Guatemala,</span> <span t-field="o.date" t-options="{&quot;format&quot;: &quot;dd MMMM yyy&quot;}"/></td>
+        <td width="100" height="15">*<span t-esc="'{:20,.2f}'.format(o.amount)" t-options="{'widget':'False'}"/>*</td><!--monto-->
+      </tr>
+      <tr><!--Beneficiario/proveedor-->
+        <td width="15"/>
+        <td width="15"/>
+        <td colspan="2" width="450" height="31px"><span t-if="o.activa_benef == False"><span t-field="o.partner_id.name"/></span> <span t-if="o.activa_benef == True"><span t-field="o.beneficiario"/></span></td>
+        <td align="right"/>
+      </tr>
+      <tr><!--monto en letras-->
+        <td width="15"/>
+        <td width="15"/>
+        <td colspan="2" style="width:450; height:29px"><span t-esc="o.get_amount_in_word()"/></td>
+        <td/>
+      </tr>
+    </tbody>
+  </table>
+  <br/><br/>
+  <!--p><span t-field="o.type_checkp"/></p-->
+  <!--descripción del cheque-->
+  <br/><br/>
+  <!--table style="margin: 90px 0px 35px 0px">   
+      <tr>
+        <td colspan="2" width="600px">Referencia: <span t-esc="o.name"/>, <span t-esc="o.ref"/></td>
+      </tr>
+      <tr>
+        <td colspan="2" width="600px"><span t-if="o.check_number">Proveedor: <span t-if="o.activa_benef == False"><span t-field="o.partner_id.name"/></span> <span t-if="o.activa_benef == True"><span t-field="o.beneficiario"/></span></span></td>
+      </tr>
+      <tr>
+        <td width="350px"><span t-if="o.date">Fecha: <span t-esc="o.date"/></span></td>
+        <td width="350px"><span t-if="o.check_number">Cheque #. <span t-esc="o.check_number"/></span></td>
+      </tr>
+  </table--> 
+<!-- cuerpo del asiento contable-->
+  <!--table style="margin: 0px 0px 0px 0px">
+    <thead>
+        <th width="115px">No. CUENTA</th>
+        <th width="400px">DETALLE</th>
+        <th width="125px">DEBE</th>
+        <th width="125px">HABER</th>
+    </thead>
+    <tr t-foreach="o.move_id.line_ids" t-as="l">
+      <td width="115px" height="35px"> <span t-field="l.account_id.code"/></td>
+      <td width="435px" ><span t-field="l.account_id.name"/></td>
+      <td width="125px" class="text-right"> <span t-field="l.debit"/></td>
+      <td width="125px" class="text-right"> <span t-field="l.credit"/></td>
+    </tr>
+    <tr>
+      <td/>   
+      <td><br/><br/><span>*SUMAS IGUALES*</span></td>  
+      <td class="text-right"><br/><br/><span t-field="o.amount"/></td>
+      <td class="text-right"><br/><br/><span t-field="o.amount"/></td>
+    </tr>
+    <tr>     
+      <td/>
+      <td colspan="2">Monto en letras: <span t-esc="o.get_amount_in_word()"/></td>  
+      <td/>
+    </tr>
+  </table-->
+
+
+
+<!--Fin del cheque-->
+
+
+<!--Autorizacion-->
+<br/><br/><br/>
+
+  <!--div class="contenedor">
+      <div class="contenido">
+        Hecho por
+      </div>
+      <div class="contenido">
+        Revisado por
+      </div>
+      <div class="contenido">
+        Autorizado por
+      </div>
+      <div class="contenido">
+        Recibido por
+      </div>
+  </div-->
+<!--fin autorizacion-->
+
+      </t><!--fin del if-->  
+          </t><!--fin del if-->   
+
+                
+          </t> <!--fin del t-call-->  
+        </div>  <!--fin del div page-->       
+      </t>
+    </t>
+  </template>
+</odoo>                     

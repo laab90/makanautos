@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="l10n_gt_fel_g4s_view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Extra">
+                    <group>
+                        <group name="extra" string="Extra">
+                            <field name="direccion" attrs="{'invisible': [('type', 'not in', ['sale', 'purchase'])]}"/>
+                            <field name="codigo_establecimiento" attrs="{'invisible': [('type', 'not in', ['sale', 'purchase'])]}"/>
+                        </group>
+                        <group string="FEL">
+                            <field name="generar_fel"/>
+                            <field name="active_contingencia"/>
+                            <field name="tipo_documento_fel"/>
+                            <field name="error_en_historial_fel"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+    
+        </field>
+    </record>
+
+</odoo>

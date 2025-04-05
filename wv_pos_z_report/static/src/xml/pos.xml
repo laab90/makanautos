@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    
+    <t t-name="WVPosSessionReportButton" owl="1">
+        <span class="control-button js_create_so">
+            <i class="fa fa-tag"></i>
+            <span>Print Z Report</span>
+        </span>
+    </t>
+
+    <t t-name="SaleOrderBillScreenWidget" owl="1">
+        <div class="receipt-screen screen">
+            <div class="screen-content">
+                <div class="top-content">
+                    <span class="button back" t-on-click="confirm">
+                        <i class="fa fa-angle-double-left"></i>
+                        <span> </span>
+                        <span>Back</span>
+                    </span>
+                    <div class="top-content-center">
+                        <h1>Report Printing</h1>
+                    </div>
+                    <span class="button next highlight" t-on-click="confirm">
+                        <span>Ok</span>
+                        <span> </span>
+                        <i class="fa fa-angle-double-right"></i>
+                    </span>
+                </div>
+                <div class="centered-content">
+                    <div class="button print" t-on-click="printReceipt">
+                        <i class="fa fa-print"></i>
+                        <span> </span>
+                        <span>Print</span>
+                    </div>
+                    <div class="pos-receipt-container">
+                        <!-- <WvSaleDetailsReport order="currentOrder" isBill="true"/> -->
+                        <t t-raw="report"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="WvSaleDetailsReport" owl="1">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <t t-if='pos.company_logo_base64'>
+                <img t-att-src='pos.company_logo_base64' />
+                <br/>
+            </t>
+            <t t-if='!pos.company_logo_base64'>
+                <h1><t t-esc='company.name' /></h1>
+                <br/>
+            </t>
+            <div font='b'>
+                <t t-if='pos.company.contact_address'>
+                    <div><t t-esc='pos.company.contact_address' /></div>
+                </t>
+                <t t-if='pos.company.phone'>
+                    <div>Tel:<t t-esc='pos.company.phone' /></div>
+                </t>
+                <t t-if='pos.company.vat'>
+                    <div>VAT:<t t-esc='pos.company.vat' /></div>
+                </t>
+                <t t-if='pos.company.email'>
+                    <div><t t-esc='pos.company.email' /></div>
+                </t>
+                <t t-if='pos.company.website'>
+                    <div><t t-esc='pos.company.website' /></div>
+                </t>
+            </div>
+            <br /><br />
+            <!-- Orderlines -->
+            <line><left>Opened Date</left><right><t t-esc='session_start' /></right></line>
+            <line><left>Closing Date</left><right><t t-esc='session_end' /></right></line>
+            <line><left>Opening Balance</left><right><t t-esc='opening_balance' /></right></line>
+            <line><left>Total without Tax</left><right><t t-esc='total_without_tax' /></right></line>
+            <line><left>Total with Tax</left><right><t t-esc='total_with_tax' /></right></line>
+            <line><left>Total Tax</left><right><t t-esc='total_tax' /></right></line>
+            <line><left>Discount</left><right><t t-esc='total_discount' /></right></line>
+            <line><left>Return Amount</left><right><t t-esc='return_amount' /></right></line>
+
+            <div class='orderlines' line-ratio='0.6'>
+                <t t-foreach='categs' t-as='line'>
+                    <line>
+                        <left><t t-esc='line.categ_name' /></left>
+                        <right>
+                            <t t-esc='pos.format_currency_no_symbol(line.quantity)' />
+                        </right>
+                        <right>
+                            <t t-esc='pos.format_currency_no_symbol(line.amount)' />
+                        </right>
+                    </line>
+                </t>
+            </div>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+
+            <line>
+                <left>Payments:</left>
+            </line>
+            <line t-foreach='payments' t-as='payment'>
+                <left><t t-esc='payment[0]' /></left>
+                <right>
+                    <t t-esc='pos.format_currency_no_symbol(payment[1])'/>
+                </right>
+            </line>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+
+            <line>
+                <left>Taxes:</left>
+            </line>
+            <line t-foreach='taxes' t-as='taxe'>
+                <left><t t-esc='taxe.name' /></left>
+                <right>
+                    <t t-esc='pos.format_currency_no_symbol(taxe.total)'/>
+                </right>
+            </line>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+
+            <line>
+                <left>Total:</left>
+                <right>
+                    <t t-esc='pos.format_currency_no_symbol(total_paid)'/>
+                </right>
+            </line>
+
+            <br/>
+            <div font='b'>
+                <div><t t-esc='date' /></div>
+            </div>
+
+        </receipt>
+    </t>
+    <t t-name="XMLSaleDetailsReport" owl="1">
+        <div class="pos-sale-ticket">
+            <div  class="pos-center-align">
+                <t t-if='pos.company_logo_base64'>
+                    <img class="pos-logo" t-att-src='pos.company_logo_base64' />
+                    <br/>
+                </t>
+                <t t-if='!pos.company_logo_base64'>
+                    <h1><t t-esc='pos.company.name' /></h1>
+                    <br/>
+                </t>
+            
+            <div font='b'>
+                <t t-if='pos.company.contact_address'>
+                    <div><t t-esc='pos.company.contact_address' /></div>
+                </t>
+                <t t-if='pos.company.phone'>
+                    <div>Tel:<t t-esc='pos.company.phone' /></div>
+                </t>
+                <t t-if='pos.company.vat'>
+                    <div>VAT:<t t-esc='pos.company.vat' /></div>
+                </t>
+                <t t-if='pos.company.email'>
+                    <div><t t-esc='pos.company.email' /></div>
+                </t>
+                <t t-if='pos.company.website'>
+                    <div><t t-esc='pos.company.website' /></div>
+                </t>
+            </div>
+            </div>
+            <br/>
+            <b>
+                <table>
+                    <tr>
+                        <td>Opened Date:</td>
+                        <td class="pos-right-align"><t t-esc='session_start'/></td>
+                    </tr>
+                    <tr>
+                        <td>Closing Date:</td>
+                        <td class="pos-right-align"><t t-esc='session_end'/></td>
+                    </tr>
+                    <tr>
+                        <td>Opening Balance:</td>
+                        <td class="pos-right-align"><t t-esc='opening_balance'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total without Tax:</td>
+                        <td class="pos-right-align"><t t-esc='total_without_tax'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total with Tax:</td>
+                        <td class="pos-right-align"><t t-esc='total_with_tax'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total Tax:</td>
+                        <td class="pos-right-align"><t t-esc='total_tax'/></td>
+                    </tr>
+                    <tr>
+                        <td>Discount:</td>
+                        <td class="pos-right-align"><t t-esc='total_discount'/></td>
+                    </tr>
+                    <tr>
+                        <td>Return Amount:</td>
+                        <td class="pos-right-align"><t t-esc='return_amount'/></td>
+                    </tr>
+                </table>
+            </b>
+            <br/>
+            <table class='receipt-orderlines' width="100%">
+                <colgroup>
+                    <col width='50%' />
+                    <col width='25%' />
+                    <col width='25%' />
+                </colgroup>
+                <tr t-foreach='categs' t-as='line'>
+                    <td>
+                        <t t-esc='line.categ_name' />
+                    </td>
+                    <td class="pos-right-align">
+                        <value value-decimals='2' value-autoint='on'>
+                            <t t-esc='pos.format_currency_no_symbol(line.quantity)' />
+                        </value>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc='pos.format_currency_no_symbol(line.amount)' />
+                    </td>
+                </tr>
+            </table>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+
+            <line>
+                <left>Payments:</left>
+            </line>
+            <table class='receipt-orderlines' width="100%">
+                <colgroup>
+                    <col width='50%' />
+                    <col width='50%' />
+                </colgroup>
+                <tr t-foreach='payments' t-as='payment'>
+                    <td><t t-esc='payment[0]' /></td>
+                    <td class="pos-right-align">
+                        <t t-esc='pos.format_currency_no_symbol(payment[1])'/>
+                    </td>
+                </tr>
+            </table>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+
+            <line>
+                <left>Taxes:</left>
+            </line>
+            <table class='receipt-orderlines' width="100%">
+                <colgroup>
+                    <col width='50%' />
+                    <col width='50%' />
+                </colgroup>
+                <tr t-foreach='taxes' t-as='taxe'>
+                    <td><t t-esc='taxe.name' /></td>
+                    <td class="pos-right-align">
+                        <t t-esc='pos.format_currency_no_symbol(taxe.total)'/>
+                    </td>
+                </tr>
+            </table>
+
+            <br/>
+            <line><left>------------------------</left></line>
+            <br/>
+            <table width="100%">
+                <tr class="emph">
+                    <td>Total:</td>
+                    <td class="pos-right-align"><t t-esc='pos.format_currency_no_symbol(total_paid)'/></td>
+                </tr>
+            </table>
+            <br/>
+            <div font='b'>
+                <div><t t-esc='date' /></div>
+            </div>
+
+        </div>
+    </t>
+</templates>

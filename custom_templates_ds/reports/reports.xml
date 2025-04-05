@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <report
+            id="account_invoice_srl"
+            model="account.move"
+            string="Factura SRL"
+            report_type="qweb-pdf"
+            name="custom_templates_ds.report_invoice_srl"
+            file="custom_templates_ds.report_invoice_srl"
+            print_report_name="(object._get_report_base_filename())"
+            groups="custom_templates_ds.group_admin_customs_rd"
+        />
+        <report
+            id="account_invoice_hn"
+            model="account.move"
+            string="Factura HN"
+            report_type="qweb-pdf"
+            name="custom_templates_ds.report_invoice_hn"
+            file="custom_templates_ds.report_invoice_hn"
+            print_report_name="(object._get_report_base_filename())"
+            groups="custom_templates_ds.group_admin_customs"
+        />
+
+        <report
+            id="account_comprobante_sv"
+            model="account.move"
+            string="Comprobante credito fiscal"
+            report_type="qweb-pdf"
+            name="custom_templates_ds.report_comprobante_sv"
+            file="custom_templates_ds.report_comprobante_sv"
+            print_report_name="(object._get_report_base_filename())"
+            groups="custom_templates_ds.group_admin_customs_sv"
+        />
+
+        <report
+            id="account_exportacion_sv"
+            model="account.move"
+            string="Factura de exportacion"
+            report_type="qweb-pdf"
+            name="custom_templates_ds.report_exportacion_sv"
+            file="custom_templates_ds.report_exportacion_sv"
+            print_report_name="(object._get_report_base_filename())"
+            groups="custom_templates_ds.group_admin_customs_sv"
+        />
+
+        <report
+            id="account_facturacion_sv"
+            model="account.move"
+            string="Factura DS"
+            report_type="qweb-pdf"
+            name="custom_templates_ds.report_factura_sv"
+            file="custom_templates_ds.report_factura_sv"
+            print_report_name="(object._get_report_base_filename())"
+            groups="custom_templates_ds.group_admin_customs_sv"
+        />
+
+        <record id="account_comprobante_sv_format" model="report.paperformat">
+            <field name="name">Comprobante credito fiscal PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">64</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('account_comprobante_sv'))]"/>
+        </record>
+    
+        <record id="account_exportacion_sv_format" model="report.paperformat">
+            <field name="name">Factura de exportacion PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">24</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('account_exportacion_sv'))]"/>
+        </record>
+
+        <record id="account_factura_sv_format" model="report.paperformat">
+            <field name="name">Factura PDF</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">64</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('account_facturacion_sv'))]"/>
+        </record>
+    </data>
+</odoo>

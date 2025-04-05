@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+       <record model="ir.ui.view" id="pos_order_form_inherit">
+            <field name="name">pos.order.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_group']" position="after">
+                    <field name="fel_serie" invisible="1"/>
+                    <field name="fel_number" invisible="1"/>
+                    <field name="fel_date" invisible="1"/>
+                    <field name="fel_uuid" invisible="1"/>
+                    <field name="customer_vat" invisible="1"/>
+                    <field name="customer_name" invisible="1"/>
+                    <field name="customer_street" invisible="1"/>
+                    <field name="company_name" invisible="1"/>
+                    <field name="company_branch_name" invisible="1"/>
+                    <field name="company_address" invisible="1"/>
+                    <field name="active_contingencia" invisible="1"/>
+                    <field name="no_acceso" invisible="1"/>
+                    <field name="is_fel" invisible="1"/>
+                    <field name="fel_type" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

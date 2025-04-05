@@ -1,0 +1,10 @@
+<!-- views/pos_codigo_puntos_assets.xml -->
+<odoo>
+    <data>
+        <template id="assets_qweb_inherit" inherit_id="web.assets_qweb">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/pos_codigo_puntos/static/src/js/pos_codigo_puntos_button.js"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_repair_order_line_taller_user,access_repair_order_line_taller_user,model_repair_order_line_taller,base.group_user,1,1,1,1
+access_repair_line_wizard_user,access_repair_line_wizard_user,model_repair_line_wizard,base.group_user,1,1,1,1
+access_repair_line_wizard,access_repair_line_wizard,model_repair_line_wizard,base.group_user,1,1,1,1
+access_repair_line_wizard_nuevo_user,access_repair_line_wizard_nuevo_user,model_repair_line_wizard_nuevo,base.group_user,1,1,1,1
+access_repair_test_user,access_repair_test_user,model_repair_test,base.group_user,1,1,1,1
+access_repair_order_table1_taller_user,access_repair_order_table1_taller_user,model_repair_order_table1_taller,base.group_user,1,1,1,1
+access_repair_order_table2_taller_user,access_repair_order_table2_taller_user,model_repair_order_table2_taller,base.group_user,1,1,1,1
+access_wash_test,access.wash.test,model_wash_test,,1,1,1,1

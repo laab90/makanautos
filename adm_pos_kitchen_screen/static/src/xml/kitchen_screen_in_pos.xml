@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+	<t t-name="KitchenScreenButton" owl="1">
+        <span t-if="hasTable" class="order-button floor-button">
+            <i class="fa fa-angle-double-left" role="img" aria-label="Back to floor" title="Back to floor" />
+            
+        </span>
+        <span t-else=""></span>
+    </t>
+
+	<t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('status-buttons')]" position="inside">
+            <KitchenScreenButton />
+        </xpath>
+    </t>
+	
+
+
+</templates>

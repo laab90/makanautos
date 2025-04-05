@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id='inherited_multi_channel_sale_woocommerce' model="ir.ui.view">
+			<field name='name'>woo.comm.channel.sale.woocommerce</field>
+			<field name='model'>woo.comm.channel.sale</field>
+			<field name="inherit_id" ref="odoo_multi_connect_sales_aagam.woo_commerce_channel_sale_form_view" />
+			<field name='arch' type='xml'>
+				<xpath expr="//field[@name='api_record_limit']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+
+				<xpath expr="//group[@name='import_buttons']" position='inside'>
+					<div style="display:flex;">
+					<div style="flex: 50%;">
+					<ul>
+						<h2 style="color: #67334E">Import/Export from WooCommerce</h2>
+						<li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							 <div modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name="odoo_multi_connect_bridge_aagam.action_customer_import_or_update_operation_form_view"
+	                    type="action" class=" oe_kanban_action oe_kanban_action_button"  ><i class="fa fa-user" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">Import/Update Customer</span></button>
+							</div>
+						</li>
+						<li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div class="product" modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name="odoo_multi_connect_bridge_aagam.action_category_import_or_update_operation_form_view"
+	                    type="action" class=" oe_kanban_action oe_kanban_action_button" ><i class="fa fa-sitemap" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i>
+	                    <span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">Import/Update Categories</span></button>
+							</div>
+				        </li>
+					    <li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div class="product" modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name="odoo_multi_connect_bridge_aagam.action_import_or_update_operation_form_view" type="action" class=" oe_kanban_action oe_kanban_action_button" ><i class="fa fa-sitemap" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">import/Update Products</span></button>
+							</div>
+					    </li>
+		                 <li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div class="product" modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name= "odoo_multi_connect_bridge_aagam.action_order_import_or_update_operation_form_view"
+	                    type="action" class=" oe_kanban_action oe_kanban_action_button" ><i class="fa fa-shopping-cart" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">import/Update Orders</span></button>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div style="flex: 50%;">	
+					<ul>
+						<h2 style="color: #67334E">Export to WooCommerce</h2>
+						<li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name="export_woo_comm_attributes_vals"
+		                    type="object" class=" oe_kanban_action oe_kanban_action_button"><i class="fa fa-pause" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">Export Attribute and Values</span></button>
+							</div>
+						</li>
+						<li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;" name="odoo_multi_connect_bridge_aagam.action_export_product_update_form_view"
+		                    type="action" class=" oe_kanban_action oe_kanban_action_button"  ><i class="fa fa-download" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">Export/Update Product</span></button>
+							</div>
+						</li>
+						<li modifiers="{}" style="list-style: none;padding: 10px 0;">
+							<div modifiers="{}" style="background-color: #2196F3;padding-top: 5px;border-radius: 6px;">
+							<button style="background-color: white;width: 100%;padding: 22px 0;border-radius: 0 0 5px 5px;border: none;display: flex;box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;"   name="odoo_multi_connect_bridge_aagam.action_export_category_update_category_form_view"
+		                    type="action" class=" oe_kanban_action oe_kanban_action_button" ><i class="fa fa-cubes" style="font-size: 30px;color: #2196F3;padding-left: 40px;"></i><span style="color: black !important; font-size: 18px;padding-left: 36px;align-self: center;">Export/Update Categories</span></button>
+							</div>
+			            </li>
+					</ul>
+				   </div>
+				</div>
+				</xpath>
+				<group name='credentials'  position="inside">
+					<group col='1' attrs="{'invisible':[('channel','!=','woocommerce')]}" >
+							<field name='url' style="width:400px" attrs="{'required':[('channel','=','woocommerce')],'readonly': [('state','=','validate')]}"/>
+							<field name='consumer_key' password='True' style="width:500px" attrs="{'required':[('channel','=','woocommerce')], 'readonly': [('state','=','validate')]}" />
+							<field name='secret_key' password='True' style="width:500px" attrs="{'required':[('channel','=','woocommerce')], 'readonly': [('state','=','validate')]}" />
+					</group>
+				</group>
+				<xpath expr="//group[@name='advanced_configuration']" position="after">
+					<group attrs="{'invisible':[('channel','!=','woocommerce')]}" col='1'>
+						<div>
+							<group string="Cron Settings">
+									<group>
+										<field name="woocommerce_feed_cron"/>
+									</group>
+									<span/>
+									<group string="Import Cron">
+										<field name="woocommerce_is_import" string="Import Order Cron"/>
+									</group>
+									<group string="Cron Interval Settings">
+										<field name="woocommerce_interval_type" style="width:100px"/>
+										<field name="woocommerce_intervals"/>
+									</group>
+							</group>
+						</div>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+
+	</data>
+</odoo>

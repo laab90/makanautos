@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="woo_commerce_attribute_mapping_form_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.mapping.form</field>
+            <field name="model">woo.comm.attribute.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                                
+                            </group>
+                            <group>
+                                <field name='operation'/>
+                                <field name="need_sync"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="product_attribute_id"/>
+                                <field name="attribute_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="woo_comm_attribute_name"/>
+                                <field name="woo_comm_attribute_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_mapping_tree_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.mapping.tree</field>
+            <field name="model">woo.comm.attribute.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Attribute Mapping" decoration-danger="need_sync=='yes'">
+                    <field name="channel_id"/>
+                    <field name="woo_comm_attribute_id"/>
+                    <field name="attribute_id"/>
+                    <field name="name"/>
+                    <field name="product_attribute_id"/>
+                    <field name='operation'/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="need_sync"/>
+                </tree>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_mapping_search_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.mapping.search</field>
+            <field name="model">woo.comm.attribute.mapping</field>
+            <field name="arch" type="xml">
+                <search string="Attribute Mapping" >
+                    <group expand="0" string="Group By...">
+                      <field name="product_attribute_id"
+                          filter_domain="['|',('product_attribute_id','ilike',self),('woo_comm_attribute_name','ilike',self)]"/>
+                        <field name="woo_comm_attribute_id"/>
+                        <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                        <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                        <filter string="Need Update" name='need_sync' domain="[]" context="{'group_by':'need_sync'}"/>
+                        <group string='Filters'>
+                            <filter icon="terp-check" name="store_selection" string="Channel" domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                            <filter icon="terp-check" name="channel_id" string="Instance" domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                        </group>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Attribute Mapping</field>
+            <field name="res_model">woo.comm.attribute.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+            <field name="view_id" ref="woo_commerce_attribute_mapping_tree_view"/>
+        </record>
+
+        <record id="woo_commerce_attribute_value_mapping_search_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.value.mapping.search</field>
+            <field name="model">woo.comm.attribute.value.mapping</field>
+            <field name="arch" type="xml">
+                <search string="Attribute Value Mapping">
+                    <group expand="0" string="Group By...">
+                      <field name="product_attribute_value_id"
+                          filter_domain="['|',('product_attribute_value_id','ilike',self),('woo_comm_attribute_value_name','ilike',self)]"/>
+                      <field name="woo_comm_attribute_value_id"/>
+
+                        <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                        <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                        <filter string="Need Update" name='need_sync' domain="[]" context="{'group_by':'need_sync'}"/>
+                        <group string='Filters'>
+                            <filter icon="terp-check" name="store_selection" string="Channel" domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                            <filter icon="terp-check" name="channel_id" string="Instance" domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                        </group>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_value_mapping_form_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.value.mapping.form</field>
+            <field name="model">woo.comm.attribute.value.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                            </group>
+                            <group>
+                                <field name='operation'/>
+                                <field name="need_sync"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="product_attribute_value_id"/>
+                            </group>
+                            <group>
+                                <field name="woo_comm_attribute_value_name"/>
+                                <field name="woo_comm_attribute_value_id"/>
+                                <field name="attribute_value_id" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_value_mapping_tree_view" model="ir.ui.view">
+            <field name="name">woo.comm.attribute.value.mapping.tree</field>
+            <field name="model">woo.comm.attribute.value.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Attribute Value Mapping" decoration-danger="need_sync=='yes'">
+                    <field name="channel_id"/>
+                    <field name="woo_comm_attribute_value_id"/>
+                    <field name="attribute_value_id"/>
+                    <field name="name"/>
+                    <field name="product_attribute_value_id"/>
+                    <field name='operation'/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="need_sync"/>
+                </tree>
+            </field>
+        </record>
+        <record id="woo_commerce_attribute_value_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Attribute Value Mapping</field>
+            <field name="res_model">woo.comm.attribute.value.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+            <field name="view_id" ref="woo_commerce_attribute_value_mapping_tree_view"/>
+        </record>
+    </data>
+</odoo>

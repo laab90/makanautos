@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template
+          id="odoo_multi_connect_sales_aagam.assets_backend" 
+          name="odoo_multi_connect_sales_aagam popup" 
+          inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/odoo_multi_connect_sales_aagam/static/src/js/odoo_multi_connect_sales_aagam.js"></script>
+                <script type="text/javascript" src="/odoo_multi_connect_sales_aagam/static/src/js/woocommerce_dashboard.js"></script>
+            </xpath>
+    </template>
+
+</odoo>

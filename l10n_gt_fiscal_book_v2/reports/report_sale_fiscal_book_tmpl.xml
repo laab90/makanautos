@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_sale_fiscal_book_document">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <link href="/l10n_gt_fiscal_book_v2/static/src/css/style.css" rel="stylesheet"/>
+                    <t t-call="l10n_gt_fiscal_book_v2.fiscal_book_header_layout"/>
+                    <table class="table-values">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th class="th-header" colspan="2">BASE GRAVADA</th>
+                                <th class="th-header" colspan="2">BASE EXENTA</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="th-header">Fecha</th>
+                                <th class="th-header">Tipo</th>
+                                <th class="th-header">Serie</th>
+                                <th class="th-header">Número</th>
+                                <th class="th-header">TRAN</th>
+                                <th class="th-header">NIT</th>
+                                <th class="th-header">Nombre</th>
+                                <th class="th-header">Bienes</th>
+                                <th class="th-header">Servicios</th>
+                                <th class="th-header">Bienes</th>
+                                <th class="th-header">Servicios</th>
+                                <th class="th-header">IVA</th>
+                                <th class="th-header">Total</th>
+                            </tr>
+                        </thead>
+                        <t t-set="sum_bien_gravado" t-value="0.0"/>
+                        <t t-set="sum_bien_exento" t-value="0.0"/>
+                        <t t-set="sum_serv_gravado" t-value="0.0"/>
+                        <t t-set="sum_serv_exento" t-value="0.0"/>
+                        <t t-set="sum_iva" t-value="0.0"/>
+                        <t t-set="sum_total" t-value="0.0"/>
+                        <tbody>
+                            <t t-foreach="values" t-as="val">
+                                <tr>
+                                    <td class="td-date">
+                                        <span t-esc="val.get('invoice_date', False)"/>
+                                    </td>
+                                    <td class="td-type">
+                                        <span t-esc="val.get('type', False)"/>
+                                    </td>
+                                    <td class="td-serie">
+                                        <span t-esc="val.get('serie', False)"/>
+                                    </td>
+                                    <td class="td-number">
+                                        <span t-esc="val.get('number', False)"/>
+                                    </td>
+                                    <td class="td-tran">
+                                        <span t-esc="val.get('trans', False)"/>
+                                    </td>
+                                    <td class="td-nit">
+                                        <span t-esc="val.get('customer_vat', False)"/>
+                                    </td>
+                                    <td class="td-customer">
+                                        <span t-esc="val.get('customer', False)"/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_bienes_grabables', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_servicios_grabables', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_bienes_exentos', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_servicios_exentos', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_iva', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-amount">
+                                        <span t-esc="val.get('amount_total', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+                                <t t-set="sum_bien_gravado" t-value="sum_bien_gravado + val.get('amount_bienes_grabables', 0.0)"/>
+                                <t t-set="sum_serv_gravado" t-value="sum_serv_gravado + val.get('amount_servicios_grabables', 0.0)"/>
+                                <t t-set="sum_bien_exento" t-value="sum_bien_exento + val.get('amount_bienes_exentos', 0.0)"/>
+                                <t t-set="sum_serv_exento" t-value="sum_serv_exento + val.get('amount_servicios_exentos', 0.0)"/>
+                                <t t-set="sum_iva" t-value="sum_iva + val.get('amount_iva', 0.0)"/>
+                                <t t-set="sum_total" t-value="sum_total + val.get('amount_total', 0.0)"/>
+                            </t>
+                            <tr>
+                                <td class="td-total" colspan="7"><strong>*TOTALES*</strong></td>
+                                <td class="td-sum">
+                                    <strong>
+                                    <span t-esc="sum_bien_gravado" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                                <td class="td-sum">
+                                    <strong>
+                                        <span t-esc="sum_serv_gravado" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                                <td class="td-sum">
+                                    <strong>
+                                        <span t-esc="sum_bien_exento" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                                <td class="td-sum">
+                                    <strong>
+                                        <span t-esc="sum_serv_exento" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                                <td class="td-sum">
+                                    <strong>
+                                        <span t-esc="sum_iva" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                                <td class="td-sum">
+                                    <strong>
+                                        <span t-esc="sum_total" t-options='{"widget": "float", "precision": 2}'/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

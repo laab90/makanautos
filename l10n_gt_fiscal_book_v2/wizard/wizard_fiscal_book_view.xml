@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_root_fiscal_report_gt" name="Libros de Ventas/Compras" parent="account.menu_finance_reports" sequence="1" groups="l10n_gt_settings_account.group_fiscal_book_gt_manager"/>
+
+    <record id="wizard_fiscal_reports_gt_form" model="ir.ui.view">
+        <field name="name">wizard.fiscal.book.form</field>
+        <field name="model">wizard.fiscal.book</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Seleccione diario y periodos">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="company_id" readonly="1" options="{'no_create_edit': True}" groups="base.group_multi_company"/>
+                            <field name="type_report" widget="radio"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                            <field name="type_book" widget="radio" readonly="1"/>
+                            <field name="tax_id" invisible="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="base_id" invisible="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </group>
+                        <group>
+                            
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Diarios">
+                                <field name="journal_ids" nolabel="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <footer>
+                    <!--PDF Buttons-->
+					<button name="print_report_sale" string="Generar" attrs="{'invisible': ['|', ('type_book','=','purchase'), ('type_report', '=', 'xls')]}" type="object" class="btn-primary"/>
+                    <button name="print_report_purchase" string="Generar" attrs="{'invisible': ['|', ('type_book','=','sale'), ('type_report', '=', 'xls')]}" type="object" class="btn-primary"/>
+                    <!--Excel Buttons-->
+                    <button name="print_sale_excel" string="Excel" attrs="{'invisible': ['|', ('type_book','=','purchase'), ('type_report', '=', 'pdf')]}" type="object" class="btn-primary"/>
+                    <button name="print_purchase_excel" string="Excel" attrs="{'invisible': ['|', ('type_book','=','sale'), ('type_report', '=', 'pdf')]}" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_fiscal_report_gt" model="ir.actions.act_window">
+        <field name="name">Libro de Ventas</field>
+        <field name="res_model">wizard.fiscal.book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_fiscal_reports_gt_form"/>
+        <field name="context">{'default_type_book': 'sale', 'default_type_report': 'pdf'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_sale_fiscal_report_gt" id="menu_wizard_sale_fiscal_report" parent="l10n_gt_fiscal_book_v2.menu_root_fiscal_report_gt"/>
+    
+    <record id="action_purchase_fiscal_report_gt" model="ir.actions.act_window">
+        <field name="name">Libro de Compras</field>
+        <field name="res_model">wizard.fiscal.book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_fiscal_reports_gt_form"/>
+        <field name="context">{'default_type_book': 'purchase', 'default_type_report': 'pdf'}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_purchase_fiscal_report_gt" id="menu_wizard_purchase_fiscal_report" parent="l10n_gt_fiscal_book_v2.menu_root_fiscal_report_gt"/>
+
+</odoo>

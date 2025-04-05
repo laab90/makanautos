@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_l10n_gt_fel_g4s" model="ir.ui.view">
+        <field name="name">res.company.form.fel_gt</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <notebook position="inside">
+                    <page string="FEL(GT)">
+                        <group>
+                            <group string="Informacion FEL">
+                                <field name="afiliacion_iva_fel"/>
+                                <field name="frase_ids" widget="many2many_tags"/>
+                                <field name="fel_currency_id"/>
+                            </group>
+                            <group string="Conexión G4S">
+                                <field name="requestor_fel"/>
+                                <field name="usuario_fel"/>
+                                <field name="pruebas_fel"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </data>
+        </field>
+    </record>
+
+</odoo>

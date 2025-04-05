@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="PosScreen">
+        <t t-jquery="div.button-list" t-operation="append">
+            <div class="control-button">
+                <button t-on-click="onClick">Canje de Puntos</button>
+            </div>
+        </t>
+    </t>
+</templates>

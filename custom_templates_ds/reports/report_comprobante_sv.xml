@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="external_layout_sv">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <t t-raw="0"/>
+            <div class="article">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer">
+            </div>
+        </template>
+
+        <template id="report_comprobande_document_sv">
+            <t t-name="custom_templates_ds.report_comprobande_document_sv">
+                <t t-call="custom_templates_ds.external_layout_sv">
+                    <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                    <div class="page" style="padding-top:19px">
+                        <table style="height: 105.83px;" width="718">
+                            <tbody>
+                                <tr style="height:45%">
+                                    <!--<td style="width: 50px;height:50%;"/>-->
+                                    <td style="width: 409px;height:45%;vertical-align: bottom;font-size: 80%;padding-left: 60px;"
+                                        colspan="2">
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                    <td style="width: 50px;height:45%;"/>
+                                    <td style="width: 209px;height:45%;text-align: center;vertical-align: bottom;font-size: 80%;padding-left: 30px;">
+                                        <span t-esc="o.invoice_date.strftime('%d/%m/%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:10%;">
+                                    <!--<td style="width: 50px;height:10%;"/>-->
+                                    <td style="width: 409px;height:10%;vertical-align: bottom;font-size: 80%;padding-left: 60px;"
+                                        colspan="2">
+                                        <span t-esc="o.partner_id.street"/>
+                                    </td>
+                                    <td style="width: 50px;height:10%;"/>
+                                    <td style="width: 209px;height:10%;text-align: center;vertical-align: center;font-size: 80%;padding-left: 70px;">
+                                        <span t-field="o.partner_id.city"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:15%;">
+                                    <!--<td style="width: 50px; height: 14px;"></td>-->
+                                    <td style="width: 459px;height:15%;vertical-align: bottom;font-size: 80%;"
+                                        colspan="2">
+                                        <span t-esc="'{} {}'.format(o.partner_id.street, o.partner_id.street2 if o.partner_id.street2 else '')"/>
+                                    </td>
+                                    <td style="width: 50px;height:15%;"/>
+                                    <td style="width: 209px;height:15%;text-align:center;vertical-align: top;font-size: 80%;">
+                                        <span t-field="o.partner_id.state_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:15%">
+                                    <td style="width: 150px; height:15%;text-align:right;vertical-align: bottom;font-size: 80%;;padding-top:10px">
+                                        <span t-field="o.partner_id.registro_number"/>
+                                    </td>
+                                    <td style="width: 359px;height:15%;text-align:center;vertical-align: bottom;font-size: 80%;">
+                                        <span t-field="o.partner_id.giro_number"/>
+                                    </td>
+                                    <td style="width: 50px;height:15%;"/>
+                                    <td style="width: 209px;height:15%;text-align:center;vertical-align: bottom;font-size: 80%;padding-left: 10px;">
+                                        <span t-field="o.partner_id.vat"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:15%;">
+                                    <td style="width: 150px; height:15%;text-align:right;vertical-align: bottom;font-size: 80%;"/>
+                                    <td style="width: 359px;height:15%;text-align:center;vertical-align: bottom;font-size: 80%;"/>
+                                    <td style="width: 50px;height:15%;"/>
+                                    <td style="width: 209px;height:15%;text-align:center;vertical-align: bottom;font-size: 80%;padding-left: 85px;">
+                                        <span t-if="o.invoice_payment_term_id"
+                                              t-field="o.invoice_payment_term_id.name"/>
+                                        <span t-if="o.invoice_date_due" t-field="o.invoice_date_due"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table style="height: 105.83px;">
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <t t-if="line.display_type == 'line_section'">
+                                    <tr>
+                                        <td style="width: 70px;"/>
+                                        <td style="width: 428px;">
+                                            <strong>
+                                                <span t-field="line.name"/>
+                                            </strong>
+                                        </td>
+                                        <td style="width: 70px;"/>
+                                        <td style="width: 70px;"/>
+                                        <td style="width: 70px;"/>
+                                        <td style="width: 70px;"/>
+                                    </tr>
+                                </t>
+                                <t t-if="line.display_type != 'line_section'">
+                                    <tr>
+                                        <td style="width: 70px;text-align:left;font-size: 80%;">
+                                            <span t-field="line.quantity"/>
+                                        </td>
+                                        <td style="width: 428px;font-size: 80%;padding-top:20px">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td style="width: 70px;text-align:right;font-size: 80%;padding-top:20px">
+                                            <span t-field="line.price_unit_without_taxes"/>
+                                        </td>
+                                        <td style="width: 85px;"/>
+                                        <td style="width: 85px;"/>
+                                        <td style="width: 85px;text-align:right;font-size: 80%;padding-top:20px">
+                                            <span t-field="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </table>
+                        <div class="footer" style="padding-top:10px; line-height:24px">
+                            <table width="100%" class="footer">
+                                <tr style="height:20%;">
+                                    <td style="width: 568px;height:23%;"/>
+                                    <td style="width: 170px;height:23%;"/>
+                                    <td style="width: 85px;height:23%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:35%;">
+                                    <td style="width: 568px;text-align:center;font-size: 100%;vertical-align: bottom;">
+                                        <strong>
+                                            <span t-field="o.text_amount"/>
+                                        </strong>
+                                    </td>
+                                    <td style="width: 170px;;height:35%;"/>
+                                    <td style="width: 85px;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span t-field="o.iva_13"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:23%;">
+                                    <td style="width: 568px;height:23%;"/>
+                                    <td style="width: 170px;height:23%;"/>
+                                    <t t-set="subtotalivaunt" t-value="o.iva_13 + o.amount_untaxed"/>
+                                    <td style="width: 85px;height:23%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span>$
+                                            <t t-esc="subtotalivaunt"
+                                               t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="height:25%;">
+                                    <td style="width: 568px;height:25%;"/>
+                                    <td style="width: 170px;height:25%;"/>
+                                    <td style="width: 85px;height:25%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span t-field="o.amount_iva_percibido"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:25%;">
+                                    <td style="width: 568px;height:25%;"/>
+                                    <td style="width: 170px;height:25%;"/>
+                                    <t t-set="ivaretenido" t-value="0"/>
+                                    <t t-if="o.amount_iva_retenido != 0">
+                                        <t t-set="ivaretenido" t-value="o.amount_iva_retenido * -1"/>
+                                    </t>
+
+                                    <td style="width: 85px;height:25%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span>$
+                                            <t t-esc="ivaretenido"
+                                               t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="height:45%;">
+                                    <td style="width: 568px;height:45%;"/>
+                                    <td style="width: 170px;height:45%;"/>
+                                    <td style="width: 85px;height:45%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span t-field="o.amount_cesc"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:25%;">
+                                    <td style="width: 568px;height:25%;"/>
+                                    <td style="width: 170px;height:25%;"/>
+                                    <td style="width: 85px;height:25%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        $ 0.00
+                                    </td>
+                                </tr>
+                                <tr style="height:25%;">
+                                    <td style="width: 568px;height:25%;"/>
+                                    <td style="width: 170px;height:25%;"/>
+                                    <td style="width: 85px;height:25%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        $ 0.00
+                                    </td>
+                                </tr>
+                                <tr style="height:25%;">
+                                    <td style="width: 568px;height:25%;"/>
+                                    <td style="width: 170px;height:25%;"/>
+                                    <td style="width: 85px;height:25%;text-align:right;font-size: 80%;vertical-align: bottom;">
+                                        <span t-field="o.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <style type="text/css">
+                            .footer {
+                            position: fixed;
+                            bottom: 20%;
+                            width: 100%;
+                            }
+                        </style>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_comprobante_sv">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                       t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="custom_templates_ds.report_comprobande_document_sv" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

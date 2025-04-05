@@ -1,0 +1,558 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Extender la vista del formulario de la orden de reparación -->
+        <record id="view_repair_order_form_inherit" model="ir.ui.view">
+            <field name="name">repair.order.form.inherit</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+
+
+                   <!--  Renombrar Pestaña PESTAÑA 1 -->
+                   <xpath expr="//notebook/page[@name='parts']" position="before">
+                    <page string="Nota de Recepción" name="quotation">
+                       <field name="quotation_notes"/>
+                    </page>
+                </xpath>
+
+
+                 <!--  Crear nueva Pagina PESTAÑA 2 -->
+                 <xpath expr="//notebook/page[@name='quotation']" position="after">
+                    <page string="Firma" name="firma">
+                        <group>
+                            
+                            <field name="firma_cliente" widget="signature"/>
+                        </group>
+                        <group>
+                            
+                            <field name="firma_autorizado" widget="signature"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            <xpath expr="//notebook/page[@name='firma']" position="after">
+    <page string="Cotizaciones" name="taller_notes">
+     <group>
+        <field name="location_id"/>
+         <!-- <label string="Notas de Diagnostico" for="order_line_ids_taller1" style="font-weight: bold; font-size: 14px; margin-top: 20px;"/> -->
+        <field name="internal_notes" widget="html" string = "Notas"/>
+          </group>
+        <label string="Taller Diagnosticos" for="order_line_ids_taller1" style="font-weight: bold; font-size: 14px; margin-top: 20px;"/>
+
+          <!-- Vista de árbol para el campo One2many - repair.order.table1.taller (order_line_ids_taller1) -->
+        <field name="order_line_ids_taller1" widget="one2many_list">
+            <tree editable="bottom">
+                <control>
+                    <!-- Botón para agregar una nueva línea de producto -->
+                    <create string="Agregar línea" name="add_product"/>
+                    <!-- Botón para agregar una nueva nota -->
+                    <create string="Agregar nota" name="add_note" context="{'default_display_type': 'line_note'}"/>
+                </control>
+
+                <!-- Campo para mover las líneas -->
+                <field name="sequence" widget="handle" string="Orden"/>
+
+                <!-- Campo 'display_type' que indica si la línea es una sección, nota o producto -->
+                <field name="display_type" invisible="1"/>
+
+                <!-- Si es una Nota, mostrar el campo dedicado para notas y combinar columnas -->
+                <!-- <field name="nota_taller1" 
+                    attrs="{'invisible': [('display_type', '!=', 'line_note')], 'colspan': 5}" 
+                    widget="text"/> -->
+
+                <!-- Mostrar columnas normales solo si NO es una Nota -->
+                <field name="one2manyproducttaller1" attrs="{'invisible': [('display_type', '=', 'line_note')]}" sum="True"/>
+                <field name="one2manycantidadtaller1" attrs="{'invisible': [('display_type', '=', 'line_note')]}" sum="True"/>
+            </tree>
+        </field>
+        <!-- Aquí se usa un <group> para agrupar los campos -->
+        <group>
+            <field name="solicitar_prueba" string="Solicitar Prueba"/>
+        </group>
+
+      
+
+        <!-- Vista de árbol para el campo One2many - repair.order.line.taller (order_line_ids) -->
+        <field name="order_line_ids" widget="one2many_list">
+            <tree editable="bottom">
+                <control>
+                    <!-- Botón para agregar una nueva línea de producto -->
+                    <create string="Agregar línea" name="add_product"/>
+                    <!-- Botón para agregar una nueva nota -->
+                    <create string="Agregar nota" name="add_note" context="{'default_display_type': 'line_note'}"/>
+                </control>
+
+                <!-- Campo para mover las líneas -->
+                <field name="sequence" widget="handle" string="Orden"/>
+
+                <!-- Campo 'display_type' que indica si la línea es una sección, nota o producto -->
+                <field name="display_type" invisible="1"/>
+
+                <!-- Si es una Nota, mostrar el campo dedicado para notas y combinar columnas -->
+                <field name="nota_taller" 
+                    attrs="{'invisible': [('display_type', '!=', 'line_note')], 'colspan': 5}" 
+                    widget="text"/>
+
+                <!-- Mostrar columnas normales solo si NO es una Nota -->
+                <field name="one2manyproduct" attrs="{'invisible': [('display_type', '=', 'line_note')]}"/>
+                <field name="one2manycantidad" attrs="{'invisible': [('display_type', '=', 'line_note')]}"/>
+
+                <!-- Mostrar el campo 'cotizacion' para todos, tanto para productos como notas -->
+                <field name="cotizacion"/>
+                <field name="statuslineataller"/>
+            </tree>
+        </field>
+    </page>
+      
+</xpath>
+
+<xpath expr="//notebook/page[@name='taller_notes']" position="before">
+    <page string="Reporte Previo" name="reporte_previo">
+        <group>
+            <field name="reporte_previo" widget="html" string="Notas"/>
+        </group>
+    </page>
+</xpath>
+
+
+
+<!-- SECCION CIERRE TALLER -->
+<xpath expr="//notebook/page[@name='taller_notes']" position="after">
+    <page string="Cierre Taller" name="cierre_taller">
+    <!--   <group>
+           <field name= "cierre_taller" string="Cierre Taller"/>  
+           </group>-->
+     <label string="Notas de Cierre" for="order_line_ids_taller1" style="font-weight: bold; font-size: 14px; margin-top: 20px;"/>
+        <field name="notas_internal_cierre" widget="html" string="Notas Internas Cierre"/>
+            <label string="Taller Cierre" for="order_line_ids_taller1" style="font-weight: bold; font-size: 14px; margin-top: 20px;"/>
+
+            <!-- Vista de árbol para el campo One2many - repair.order.table1.taller (order_line_ids_taller1) -->
+            <field name="order_line_ids_taller2" widget="one2many_list">
+                <tree editable="bottom">
+                    <control>
+                        <!-- Botón para agregar una nueva línea de producto -->
+                        <create string="Agregar línea" name="add_product"/>
+                        <!-- Botón para agregar una nueva nota -->
+                        <create string="Agregar nota" name="add_note" context="{'default_display_type': 'line_note'}"/>
+                    </control>
+
+                    <!-- Campo para mover las líneas -->
+                    <field name="sequence" widget="handle" string="Orden"/>
+
+                    <!-- Campo 'display_type' que indica si la línea es una sección, nota o producto -->
+                    <field name="display_type" invisible="1"/>
+
+                    <!-- Si es una Nota, mostrar el campo dedicado para notas y combinar columnas -->
+                    <!-- <field name="nota_taller2" 
+                        attrs="{'invisible': [('display_type', '!=', 'line_note')], 'colspan': 5}" 
+                        widget="text"/> -->
+
+                    <!-- Mostrar columnas normales solo si NO es una Nota -->
+                    <field name="one2manyproducttaller2" attrs="{'invisible': [('display_type', '=', 'line_note')]}" sum="True"/>
+                    <field name="one2manycantidadtaller2" attrs="{'invisible': [('display_type', '=', 'line_note')]}" sum="True"/>
+                </tree>
+            </field>
+
+            <!-- Agregar campo notas_internal_cierre -->
+            <!-- <field name="notas_internal_cierre" widget="html" string="Notas Internas Cierre"/> -->
+             <!-- Agregar campo notas_internal_cierre en el modelo repair.order.table2.taller -->
+         
+       
+    </page>
+</xpath>
+<!-- FIN SECCION CIERRE TALLER -->
+
+
+
+                <xpath expr="//field[@name='location_id']" position="replace">
+                    <field name="location_id" invisible="1"/>
+                </xpath>
+     
+                
+                      
+
+
+                <xpath expr="//notebook/page[@name='parts']" position="replace">
+                    <page string="Piezas" name="parts">
+                        <field name="operations" context="{'default_product_uom_qty': product_qty, 'default_company_id': company_id}" attrs="{'readonly':[('state', 'in', ['done', 'cancel'])]}">
+                            <form string="Operations">
+                                <!-- Contenido de la forma "Operations" -->
+                                <group>
+                                    <group>
+                                        <field name="company_id" invisible="1" force_save="1"/>
+                                        <field name="type"/>
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                         
+                                        <field name="product_uom_category_id" invisible="1"/>
+                                        <label for="product_uom_qty"/>
+                                        <div class="o_row">
+                                            <field name="product_uom_qty"/>
+                                            <field name="product_uom" groups="uom.group_uom"/>
+                                        </div>
+                                        <field name="price_unit"/>
+                                        <field name="tax_id" widget="many2many_tags"/>
+                                        <field name="invoiced" invisible="1"/>
+                                        <field name="price_subtotal" widget="monetary" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="lot_id" context="{'default_product_id': product_id, 'default_company_id': company_id}" groups="stock.group_production_lot"/>
+                                        <field name="location_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
+                                        <field name="location_dest_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
+                                    </group>
+                                </group>
+                                <group name="History" string="History" attrs="{'invisible':[('move_id','=', False)]}">
+                                    <field name="move_id"/>
+                                    <field name="invoice_line_id" invisible="1"/>
+                                </group>
+                            </form>
+                            <tree string="Operations" editable="bottom">
+                                <!-- Contenido del árbol "Operations" -->
+                                <field name="company_id" invisible="1" force_save="1"/>
+                                <field name="type"/>
+                                <field name="product_id"/>
+                              
+                                <field name="name" optional="show"/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="tracking" invisible="1"/>
+                                <field name="lot_id" context="{'default_product_id': product_id, 'default_company_id': company_id}" groups="stock.group_production_lot" attrs="{'readonly':[('tracking', 'not in', ['serial', 'lot'])]}"/>
+                                <field name="location_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" optional="show"/>
+                                <field name="location_dest_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" optional="show"/>
+                                <field name="product_uom_qty" string="Quantity"/>
+                                <field name="product_uom" string="UoM" groups="uom.group_uom" optional="show"/>
+                                <field name="price_unit"/>
+                                <field name="tax_id" widget="many2many_tags" optional="show"/>
+                                <field name="price_subtotal" widget="monetary" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included"/>
+                                <field name="currency_id" invisible="1"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <!-- Contenido del pie de página -->
+                            <field name="amount_untaxed" sum="Untaxed amount"/>
+                            <field name="amount_tax"/>
+                            <div class="oe_subtotal_footer_separator oe_inline">
+                                <label for="amount_total"/>
+                                <button name="button_dummy" states="draft" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" sum="Total amount" class="oe_subtotal_footer_separator"/>
+                        </group>
+                        <div class="oe_clear"/>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <!-- Agregar campos relacionados -->
+                 <field name="modelo"/>
+                 <field name="marca"/>
+                 <field name="chasis"/>
+                 <field name="placa"/>
+                 <field name="motor"/>
+                 <field name="anio"/>
+                 <field name="color"/>
+                 <!-- Otros campos relacionados según tus necesidades -->
+               
+                 </xpath>
+ 
+                 <xpath expr="//field[@name='partner_id']" position="before">
+                     <field name="propietario" string="Cliente Propietario"/>
+                   
+                 </xpath>
+                 
+                 
+                 <xpath expr="//field[@name='partner_id']" position="attributes">
+                     <attribute name="string">Cliente Facturación</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="nif" string="NIF/Identificación Fiscal"/>
+                </xpath>
+ 
+                 <!-- Mover los primeros campos al lugar deseado -->
+                 <xpath expr="//field[@name='user_id']" position="before">
+                     <field name="documentos"/>
+                     <field name="manuales"/>
+                     <field name="objetosencontrados"/>
+                 </xpath>
+ 
+                <xpath expr="//field[@name='objetosencontrados']" position="after">
+                    <field name="picking_ids" widget="many2many_tags"
+                           options="{'no_create_edit': True, 'no_create': True}"/>
+                </xpath>
+                 
+ 
+                                <xpath expr="//field[@name='picking_ids']" position="after">
+                    <field name="purchase_ids" widget="many2many_tags"
+                           options="{'no_create_edit': True, 'no_create': True}"/>
+                </xpath>
+ 
+                
+                 <!-- Dejar los últimos cinco campos en su posición actual -->
+                 <xpath expr="//field[@name='tag_ids']" position="after">
+                     <field name="herramienta"/>
+                     <field name="tricket"/>
+                     <field name="llanta_rep"/>
+                     <field name="alfombra"/>
+                     <field name="encendedor"/>
+                     <field name="extintor"/>
+                     <field name="ctrlalarma"/>
+                     <field name="platosaros"/>
+                     <!-- <field name="tanque_combustible" widget="selection"/> -->
+                     <field name="tanque_combustible" widget="slider"/>
+                     <field name="kilometrajebd" string="Kilometraje Inicial"/>
+                 </xpath>
+ 
+               
+   <!-- Crear nueva Página Chequeo de Cortesía -->
+<xpath expr="//notebook/page[@name='operations']" position="after">
+    <page string="Chequeo de Cortesía" name="chequeo_iluminacion">
+        <sheet>
+            <group>
+                <!-- Grupo de Iluminación (Primera columna) -->
+                <group>
+                    <label for="media" string="Iluminación" class="o_form_label"/>
+                    <field name="media" string="Media"/>
+                    <field name="baja" string="Baja"/>
+                    <field name="alta" string="Alta"/>
+                    <field name="neblinera" string="Neblinera Delanteras y Traseras"/>
+                    <field name="retroceso" string="Retroceso"/>
+                    <field name="defrenos" string="De Frenos"/>
+                    <field name="pidevias" string="Pide Vías"/>
+                    <field name="notasrecepcion" string="Notas" widget="html"/>
+                     <field name="vbtaller" />
+                </group>
+
+                <!-- Grupo de Niveles (Segunda columna) -->
+                <group>
+                    <label for="aceitemootor" string="Niveles" class="o_form_label"/>
+                    <field name="aceitemootor" string="Aceite de Motor"/>
+                    <field name="refrigerante" string="Refrigerante"/>
+                    <field name="liquidofrenos" string="Líquido de Frenos"/>
+                    <field name="timonhidraulico" string="Timón Hidráulico"/>
+                    <!-- Timón Hidráulico y No Aplica en la misma fila -->
+                    <div>
+                          <label for="noaplicatimon" string="No Aplica Timón"/>
+                        <field name="noaplicatimon" string="No Aplica"/>
+                    </div>
+                    
+                    <field name="liquidochorritos" string="Líquido de Chorritos"/>
+                    <field name="plumillas" string="Plumillas"/>
+                    <field name="chorritos" string="Chorritos"/>
+                    <field name="taponesdellantas" string="Tapones de Llantas"/>
+                    <field name="presiondellantas" string="Presión de Llantas"/>
+                    <field name="llantaderepuesto" string="Llanta de Repuesto"/>
+                    
+                    <!-- Llanta de Repuesto y No Aplica en la misma fila -->
+                    <div>
+                          <label for="noaplicallanta" string="No Aplica Llanta"/>
+                       <field name="noaplicallanta" string="No Aplica"/>
+                    </div>
+
+                    <field name="copaseguridad" string="Copia de Seguridad"/>
+                    
+                    <!-- Copia de Seguridad y No Aplica en la misma fila -->
+                   <div>
+                          <label for="noaplicacopia" string="No Aplica Copia de Seguridad"/>
+                       <field name="noaplicacopia" string="No Aplica"/>
+                    </div>
+
+                    <field name="herramienta" string="Herramienta"/>
+                    <field name="testigosadvertencia" string="Testigos y Advertencias"/>
+                    <field name="bornesbateria" string="Bornes de Batería"/>
+                    <field name="cierrecentral" string="Cierre Central"/>
+                </group>
+            </group>
+        </sheet>
+    </page>
+</xpath>
+
+                  <!-- Crear nueva Pagina CarWash PESTAÑA 7 -->
+<xpath expr="//notebook/page[@name='chequeo_iluminacion']" position="after">
+    <page string="Lavado" name="CarWash">
+      
+            <group>
+                <field name="kmfinal" string="Km/Ml Final"/>
+                <field name="horacarwash" string="Fecha y Hora"/>
+                <field name="firma_carwash" string="Firma Carwash" widget="signature"/>
+                <field name="observaciones" string="Observaciones" widget="html"/>
+            </group>
+          
+<field name="wash_ids" widget="one2many_list">
+    <tree editable="bottom">
+        <field name="name" string="Lavado"/>
+        <field name="start_date" string="Fecha Inicio"/>
+        <field name="end_date" string="Fecha Final"/>
+        <field name="comments" string="Comentarios"/>
+    </tree>
+</field>
+                
+                
+                
+   
+    </page>
+</xpath>
+
+                <!-- ESTE CODIGO SIRVE PARA RENOMBRAR UNA PESTAÑA -->
+                <xpath expr="//page[@name='operations']" position="attributes">
+                    <attribute name="string">Servicios M.O.</attribute>
+                </xpath>
+
+              
+
+                          
+                         
+                            <xpath expr="//notebook/page[@name='extra_info']" position="after">
+                                <page string="Marca de Golpes" name="marcagolpes">
+                                    <sheet>
+                                        <div style="position: relative; width: 300px; height: 200px;">
+                                            <!-- Contenedor para la imagen y el campo de firma -->
+                                            <div style="position: relative; width: 100%; height: 100%;">
+                                                <!-- Imagen del vehículo -->
+                                                <img src="/addon_makan_fields_products/static/img/vehiculo.png" style="position: absolute; left: 0; top: 0; width: 80%; height: 80%;" />
+                                                <!-- Campo de firma -->
+                                                <field name="firma_golpescarwash" string="Firma Carwash" widget="signature" style="position: absolute; left: 0; top: 0; width: 300%; height: 800%; z-index: 1;" />
+                                            </div>
+                                        </div>
+                                    </sheet>
+                                </page>
+                            </xpath>
+
+               <xpath expr="//notebook/page[@name='marcagolpes']" position="after">
+    <page string="Proceso de Pruebas" name="proceso_pruebas">
+        <group>
+            <field name="chkmotor" string="Motor"/>
+            <field name="chksuspension" string="Suspensión"/>
+            <field name="chktransmision" string="Transmisión"/>
+            <field name="chkaveriasentabler" string="Averias en Tablero"/>
+            <field name="chkconfort" string="Confort"/>
+
+        </group>
+
+        <!-- Grid para el Proceso de Pruebas -->
+        <field name="test_ids" widget="one2many_list">
+            <tree editable="bottom">
+                <field name="name" string="Prueba"/>
+                <field name="start_date" string="Fecha Inicio"/>
+                <field name="end_date" string="Fecha Final"/>
+                <field name="comments" string="Comentarios"/>
+            </tree>
+        </field>
+    </page>
+</xpath>
+             
+                           
+            </field>
+        </record>
+
+         <!-- Vista de búsqueda -->
+    <record id="view_repair_order_search_inherited" model="ir.ui.view">
+        <field name="name">repair.order.search.inherited</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="propietario" string="Propietario"/>
+                 <field name="placa" string="Placa"/>
+            </xpath>
+        </field>
+    </record>
+
+   
+
+    <record id="view_repair_order_form_inherit_report" model="ir.ui.view">
+        <field name="name">repair.order.form.report.inherit</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(addon_makan_fields_products.action_repair_line_wizard)d" type="action" string="Seleccionar Cotizaciones" class="btn-primary"/>
+              
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_repair_order_form_inherit_report_nuevo" model="ir.ui.view">
+        <field name="name">repair.order.form.report.inherit</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(addon_makan_fields_products.action_repair_line_wizard_nuevo)d" type="action" string="Seleccionar Nuevas Cotizaciones" class="btn-secondary"/>
+               
+              
+            </xpath>
+        </field>
+    </record>
+
+
+     <record id="view_repair_order_form_inherit_report_manoobra" model="ir.ui.view">
+        <field name="name">repair.order.form.report.inherit</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+               
+                
+                <button name="%(addon_makan_fields_products.action_repair_line_wizard_manoobra)d" type="action" string="Seleccionar Nuevas Cotizaciones M.O." class="btn-info"/>
+              
+            </xpath>
+        </field>
+    </record>
+
+    
+
+
+
+<record id="view_repair_order_form_inherit_purchase" model="ir.ui.view">
+    <field name="name">repair.order.form.inherit.purchase</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+            <button name="action_redirect_to_purchase"
+                    type="object"
+                    string="Crear Compra"
+                    class="oe_highlight"
+                    icon="fa-shopping-cart"/>
+        </xpath>
+    </field>
+</record>
+
+
+<record id="view_repair_order_form_inherit_transfer" model="ir.ui.view">
+    <field name="name">repair.order.form.inherit.transfer</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+            <button name="action_redirect_to_transfer"
+                    type="object"
+                    string="Crear Transferencia"
+                    class="oe_highlight"
+                    icon="fa-exchange"/>
+        </xpath>
+    </field>
+</record>
+
+
+<!-- MODIFICAR VISTA TIPO LISTA REPAIR ORDER 03042025 ELDER GIRON -->
+  <record id="view_repair_order_list" model="ir.ui.view">
+        <field name="name">repair.order.list.inherited</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sale_order_id']" position="after">
+                <field name="amount_total" string="Total"/>
+                
+            </xpath>
+        </field>
+    </record>
+
+<!-- FIN MODIFICAR VISTA TIPO LISTA REPAIR ORDER 03042025 ELDER GIRON -->
+
+    </data>
+</odoo>

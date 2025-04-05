@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="DashboardView">
+        <div class="woocommerce_dashboard">
+            <div class="container-fluid o_appointment_dashboard">
+                <div class="sales-dashboard">
+                  <h1 class="text-center py-2">WOOCOMMERCE <i class="fa fa-exchange" style="color:#835777;"></i> ODOO</h1>
+                  <h4 class="text-center py-2 text-dark">There are two different platforms (Odoo and Woocommerce) Connected with the help of odoo, Now, your one or more Woocommerce instances connect with Odoo, <br />You can import, export and synchronize data Easily.</h4>
+
+                  <div class="row">
+                    <div class="col-lg-4 col-sm-6 col-12">
+                      <div style="display: flex;">
+                        <div>
+                          <i class="fa fa-cloud-download fa-adjest" style="font-size: 17px;vertical-align: middle;padding-left: 75px;color:#835777;"></i>
+                        </div>
+                        <div>
+                          <a href="https://apps.odoo.com/apps/modules/browse?search=aagam+infotech" target="_blank">
+                              <h2 class="text-dark ml-3" style="font-weight: 200">CONNECT(Apps)</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div style="display: flex;">
+                        <div>
+                          <i class="fa fa-life-ring fa-adjest" style="font-size: 17px;vertical-align: middle;padding-left: 75px;color:#835777;"></i>
+                        </div>
+                        <div>
+                          <a href="http://www.aagaminfotech.com/">
+                              <h2 class="text-dark ml-3" style="font-weight: 200"> SUPPORT OR HELP</h2>
+                          </a>
+                        </div>
+                      </div>
+               </div>
+
+                <div class="col-lg-4 col-sm-6 col-12">
+                  <div style="display: flex;">
+                      <div>
+                        <i class="fa fa-star fa-adjest" style="font-size: 17px;vertical-align: middle;padding-left: 75px;color:#835777;"></i>
+                      </div>
+                      <div>
+                        <a href="#">
+                            <h2 class="text-dark ml-3" style="font-weight: 200"> FEEDBACK</h2>
+                        </a>
+                      </div>
+                    </div>
+               </div>
+             </div>
+
+
+                  <div class="container">
+                    <div class="appointment-cards pb-5">                    
+                      <h1 class="text-primary text-center py-5">Quick Access</h1>
+                      <div class="row">
+                         <div class="col-lg-4 col-sm-6 col-12">
+                  <div class="appointment_cards position-relative overflow-hidden appointment_cards1 rounded p-sm-4 p-3 import-data" style="">
+                    <i class="fa fa-cloud-download position-absolute opacity_icon"></i>
+                    <div class="row align-items-center">
+                      <div class="col-12">
+                        <h2 class="text-white card_main_title" style="">Import</h2>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+
+                       <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="appointment_cards position-relative overflow-hidden appointment_cards2 rounded p-sm-4 p-3 import-data" style="">
+                      <i class="fa fa-cloud-upload position-absolute opacity_icon"></i>
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <h2 class="text-white card_main_title" style="">Export</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                                      <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="appointment_cards position-relative overflow-hidden appointment_cards3 rounded p-sm-4 p-3 import-data" style="">
+                      <i class="fa fa-cubes position-absolute opacity_icon"></i>
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <h2 class="text-white card_main_title" style="">Instance</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                                     <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="appointment_cards position-relative overflow-hidden appointment_cards4 rounded p-sm-4 p-3 import-data" style="">
+                      <i class="fa fa-refresh position-absolute opacity_icon"></i>
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <h2 class="text-white card_main_title" style="">Syncronization</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                                      <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="appointment_cards position-relative overflow-hidden appointment_cards5 rounded p-sm-4 p-3 import-data" style="">
+                      <i class="fa fa-sitemap position-absolute opacity_icon"></i>
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <h2 class="text-white card_main_title" style="">Data mapping</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                                       <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="appointment_cards position-relative overflow-hidden appointment_cards6 rounded p-sm-4 p-3 import-data" style="">
+                      <i class="fa fa-cog position-absolute opacity_icon"></i>
+                      <div class="row align-items-center">
+                        <div class="col-12">
+                          <h2 class="text-white card_main_title" style="">Configuration</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                         <div class="col-lg-4 col-sm-6 col-12">
+                          <div class="appointment_cards position-relative overflow-hidden appointment_card7 rounded p-sm-4 p-3 total_order">
+                            <i class="fa fa-info-circle position-absolute opacity_icon"></i>
+                            <div class="row align-items-center">
+                             
+                              <div class="col-9">
+                                <h2 class="m-0 text-white card_main_title">Orders</h2>
+                              </div>
+                               <div class="col-3 pr-0">
+                                <h1 class="card_number_text m-0 text-white"><b class="total-order"></b></h1>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                         <div class="col-lg-4 col-sm-6 col-12">
+                          <div class="appointment_cards position-relative overflow-hidden appointment_card8 rounded p-sm-4 p-3 total_category">
+                            <i class="fa fa-info-circle position-absolute opacity_icon"></i>
+                            <div class="row align-items-center">
+                              
+                              <div class="col-9">
+                                <h2 class="m-0 text-white card_main_title">Categories</h2>
+                              </div>
+                              <div class="col-3 pr-0">
+                                <h1 class="card_number_text m-0 text-white"><b class="total-category"></b></h1>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                         <div class="col-lg-4 col-sm-6 col-12">
+                          <div class="appointment_cards position-relative overflow-hidden appointment_card9 rounded p-sm-4 p-3 total_customer">
+                            <i class="fa fa-info-circle position-absolute opacity_icon"></i>
+                            <div class="row align-items-center">
+                             
+                              <div class="col-9">
+                                <h2 class="m-0 text-white card_main_title">Customers</h2>
+                              </div>
+                               <div class="col-3 pr-0">
+                                <h1 class="card_number_text m-0 text-white"><b class="total-customer"></b></h1>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End: Appointment Cards -->
+                      <!-- Start: Appointment Charts -->
+                      <h1 class="text-primary text-center py-5">Analytics and Insight</h1>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="appontment_chart_cards p-sm-3 p-2 shadow-sm text-center border rounded">
+                            <div class="card-body shadow">
+                              <div class="panel">
+                                  <div class="panel-heading">
+                                  </div>
+                                  <div class="panel-body">
+                                        <canvas id="month_sale_order" width="500px" height="200px"/>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                       <div class="row">
+                        <div class="col-md-6">
+                          <div class="appontment_chart_cards p-sm-3 shadow-sm text-center border rounded mt-5">
+                            <h4 class="mb-2 text-dark">Import Operation</h4>
+                            <div class="card-body shadow">
+                              <div class="panel">
+                                  <div class="panel-heading">
+                                  </div>
+                                  <div class="panel-body">
+                                        <canvas id="operation_data" width="500px" height="200px"/>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="appontment_chart_cards p-sm-3 shadow-sm text-center border rounded mt-5">
+                            <h4 class="mb-2 text-dark">Export Operation</h4>
+                            <div class="card-body shadow">
+                              <div class="panel">
+                                  <div class="panel-heading">
+                                  </div>
+                                  <div class="panel-body">
+                                        <canvas id="export_data" width="500px" height="200px"/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>

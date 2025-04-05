@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="journal_ledger_layout">
+            <div t-attf-class="o_company_#{company}_layout header" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h3>
+                                <span t-esc="company_name"/>
+                            </h3>
+                        </center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h4>
+                                <span t-esc="report"/>
+                            </h4>
+                        </center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h4>
+                                <span t-esc="dates"/>
+                            </h4>
+                        </center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <center>
+                            <h6>
+                                (CIFRAS EXPRESADAS EN QUETZALES)
+                            </h6>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

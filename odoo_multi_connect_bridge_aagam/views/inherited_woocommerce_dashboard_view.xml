@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="woo_commerce_channel_sale_kanban_view" model="ir.ui.view">
+            <field name="name">woo.comm.channel.sale.kanban</field>
+            <field name="model">woo.comm.channel.sale</field>
+            <field name="inherit_id" ref="odoo_multi_connect_sales_aagam.woo_commerce_channel_sale_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[contains(@class,'ax_o_project_kanban_main')]//div[@class='o_kanban_card_content o_visible oe_kanban_global_click']" position="inside">
+                    <div class="o_kanban_primary_left" >
+                        <div class="o_primary">
+                            <center><span><t t-field="record.name.value"/></span></center>
+                        </div>
+                        <div t-if="record.channel.value == 'WooCommerce'" style="color:rgb(162, 70, 137)">
+                            <center style="position:relative;">
+                                <img alt="woocommerce icon" src="/odoo_multi_connect_bridge_aagam/static/src/img/woocommerce.png"/>
+                            <h3 style="position: relative;" ><t t-esc="record.name.value"/></h3></center>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

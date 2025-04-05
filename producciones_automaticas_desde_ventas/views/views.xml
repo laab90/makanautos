@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="view_production_automation_form" model="ir.ui.view">
+            <field name="name">production.automation.form</field>
+            <field name="model">production.automation</field>
+            <field name="arch" type="xml">
+                <form string="Production Automation">
+                    <sheet>
+                        <group>
+                            <field name="execution_date"/>
+                            <!-- Otros campos configurables -->
+                        </group>
+                        <footer>
+                            <button string="Execute Production" type="object" name="execute_production" class="btn-primary"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+       
+       <!-- <record model="ir.actions.act_window" id="production_automation.action_view_p">
+            <field name="name">Producciones automaticas</field>
+            <field name="res_model">production.automation</field>
+       </record>
+
+       <menuitem name="Producciones automaticas" parent="" 
+       id="menu_main_producciones_automaticas" 
+       action="production_automation.action_view_p" 
+       /> -->
+
+
+
+    </data>
+</odoo>

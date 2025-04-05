@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="invoice_wizards_rq_menu"
+        name="Reportes Honduras"
+        parent="account.menu_finance_reports"
+        sequence="0"
+    />
+
+    <menuitem
+        id="invoice_sale_wizard_rq_menu"
+        name="Libro de Ventas"
+        action="account_invoice_report_excel_rq.invoice_sale_wizard_rq_action"
+        parent="account_invoice_report_excel_rq.invoice_wizards_rq_menu"
+        sequence="10"
+    />
+
+    <menuitem
+        id="invoice_purchase_wizard_rq_menu"
+        name="Libro de Compras"
+        action="account_invoice_report_excel_rq.invoice_purchase_wizard_rq_action"
+        parent="account_invoice_report_excel_rq.invoice_wizards_rq_menu"
+        sequence="20"
+    />
+
+</odoo>

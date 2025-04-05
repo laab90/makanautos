@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <!-- Heredar la vista de árbol de órdenes de reparación -->
+        <record id="view_repair_order_tree_inherit" model="ir.ui.view">
+            <field name="name">repair.order.tree.inherit</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_tree"/>
+            <field name="arch" type="xml">
+                <!-- Añadir el campo propietario antes del campo existente -->
+                <xpath expr="//tree/field[@name='name']" position="before">
+                    <field name="propietario"/>
+                </xpath>
+                
+                <!-- Renombrar el campo location_id -->
+                <xpath expr="//tree/field[@name='location_id']" position="attributes">
+                    <attribute name="string">Asignado a</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

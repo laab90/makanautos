@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_company_view_corposistemas_form" model="ir.ui.view">
+        <field name="name">res.company.corposistemas.view</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page id="page_fel_company" string="Información FEL" groups="account_invoice_fel_corposistemas.group_request_response_fel_manager">
+                    <group col="2" colspan="2">
+                        <field name="request_id"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="regimen_iva"/>
+                            <field name="codigo_est"/>
+                            <field name="frase_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
+                        </group>
+                        <group>
+                            <field name="nombre_est"/>
+                            <field name="nombre_comercial"/>
+                            <field name="export_code"/>
+                        </group>
+                    </group>
+                </page>
+                <page id="page_token_access" string="FEL Token" groups="account_invoice_fel_corposistemas.group_request_response_fel_manager">
+                    <!--<button string="Generar Token" name="action_get_token" icon="fa-refresh" type="object" class="btn-primary"/>-->
+                    <group string="URL's">
+                        <group>
+                            <label for="url_request" string="URL Requests"/>
+                            <div>
+                                <field name="url_request" groups="account_invoice_fel_corposistemas.group_request_response_fel_manager"/>
+                            </div>
+                            <label for="url_nit" string="URL Nit"/>
+                            <div>
+                                <field name="url_nit" groups="account_invoice_fel_corposistemas.group_request_response_fel_manager"/>
+                            </div> 
+                        </group>
+                        <group>
+                            
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    
+    <record id="res_partner_type_document_form" model="ir.ui.view">
+        <field name="name">res.partner.type.document.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="type_document"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

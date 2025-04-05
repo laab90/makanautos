@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_mapping_form_view" model="ir.ui.view">
+            <field name="name">template.mapping.form</field>
+            <field name="model">template.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                            </group>
+                            <group>
+                                <field name="operation"/>
+                                <field name="need_sync"/>
+                            </group>
+                        </group>
+                        <group col="4">
+                            <field name='store_product_id'/>
+                            <field name="template_name"/>
+                            <field name="default_code"/>
+                            <field name="barcode"/>
+                            <field name="odoo_template_id" invisible="1"/>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+        <record id="product_template_mapping_tree_view" model="ir.ui.view">
+            <field name="name">template.mapping.tree</field>
+            <field name="model">template.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Template Mapping"  decoration-danger="need_sync=='yes'">
+                    <field name="channel_id"/>
+                    <field name="store_product_id"/>
+                    <field name="odoo_template_id"/>
+                    <field name="template_name"/>
+                    <field name="default_code"/>
+                    <field name="barcode"/>
+                    <field name="operation"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="need_sync"/>
+                </tree>
+            </field>
+        </record>
+        <record id="product_template_search_view" model="ir.ui.view">
+            <field name="name">template.mapping.search</field>
+            <field name="model">template.mapping</field>
+            <field name="arch" type="xml">
+                <search string="Template Mapping">
+                    <field name="template_name"
+                      filter_domain="['|','|',('template_name','ilike',self),('default_code','ilike',self),('barcode','ilike',self)]"/>
+                    <field name="store_product_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                        <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                        <filter string="Need Update" name='need_sync'  domain="[]" context="{'group_by':'need_sync'}"/>
+                        <group string='Filters'>
+                            <filter icon="terp-check" name="store_selection" string="Channel"
+                                domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                                <filter icon="terp-check" name="channel_id" string="Instance"
+                                domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                        </group>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="product_template_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Product Template Mapping</field>
+            <field name="res_model">template.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_template_mapping_tree_view"/>
+             <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+        </record>
+
+        <record id="product_mapping_form_view" model="ir.ui.view">
+            <field name="name">product.mapping.form</field>
+            <field name="model">product.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                            </group>
+                            <group>
+                                <field name="operation"/>
+                                <field name="need_sync"/>
+                            </group>
+                        </group>
+                    <group col="4">
+                        <field name="product_name"/>
+                        <field name="odoo_template_id"/>
+                        <field name='store_product_id'/>
+                        <field name="store_variant_id"/>
+                        <field name="default_code"/>
+                        <field name="barcode"/>
+                        <field name="erp_product_id" invisible="1"/>
+                    </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+        <record id="product_mapping_tree_view" model="ir.ui.view">
+            <field name="name">product.mapping.tree</field>
+            <field name="model">product.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Variant Mapping" decoration-danger="need_sync=='yes'">
+                        <field name="channel_id"/>
+                        <field name="store_product_id"/>
+                        <field name="store_variant_id"/>
+                        <field name="odoo_template_id"/>
+                        <field name="product_name"/>
+                        <field name="default_code"/>
+                        <field name="barcode"/>
+                        <field name="operation"/>
+                        <field name="create_date"/>
+                        <field name="write_date"/>
+                        <field name="need_sync"/>
+                </tree>
+            </field>
+        </record>
+        <record id="product_mapping_search_view" model="ir.ui.view">
+            <field name="name">product.mapping.search</field>
+            <field name="model">product.mapping</field>
+            <field name="arch" type="xml">
+                <search string="Product Mappings">
+                  <field name="product_name"
+                      filter_domain="['|','|',('product_name','ilike',self),('default_code','ilike',self),('barcode','ilike',self)]"/>
+                  <field name="store_product_id"
+                    filter_domain="[('store_product_id','ilike',self)]"/>
+                    <field name="store_variant_id"
+                      filter_domain="[('store_variant_id','ilike',self)]"/>
+
+                    <group expand="0" string="Group By...">
+                    <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                    <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                    <filter string="Need Update" name='need_sync'  domain="[]" context="{'group_by':'need_sync'}"/>
+                        <group string='Filters'>
+                            <filter icon="terp-check" name="store_selection" string="Channel"
+                                domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                                <filter icon="terp-check" name="channel_id" string="Instance"
+                                domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                        </group>
+                    </group>
+                </search>
+
+
+                </field>
+        </record>
+        <record id="product_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Product Mappings</field>
+            <field name="res_model">product.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_mapping_tree_view"/>
+             <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,637 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_gt_fiscal_book
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 18:10+0000\n"
+"PO-Revision-Date: 2022-03-16 18:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.report,print_report_name:l10n_gt_fiscal_book.report_purchase_fiscal_book
+msgid ""
+"'Libro de Compra ' + (object.date_from.month or '') + '-' + "
+"(str(object.date_to.month) or '')"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.report,print_report_name:l10n_gt_fiscal_book.report_sale_fiscal_book
+msgid ""
+"'Libro de Ventas ' + (object.date_from.month or '') + '-' + "
+"(str(object.date_to.month) or '')"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"role=\"img\"/>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"<span class=\"o_form_label\">Impuestos Afectos Libro de Compras</span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" role=\"img\"/>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"<span class=\"o_form_label\">Impuestos Afectos Libro de Ventas</span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" role=\"img\"/>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"<span class=\"o_form_label\">Tipo de Transacciones </span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" role=\"img\"/>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_book_header_layout
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_purchase_book_header_layout
+msgid "<strong>(VALORES EXPRESADOS EN QUETZALES)</strong>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "<strong>*TOTALES*</strong>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_book_header_layout
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_purchase_book_header_layout
+msgid "<strong>Dirección:</strong>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_book_header_layout
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_purchase_book_header_layout
+msgid "<strong>NIT:</strong>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_book_header_layout
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_purchase_book_header_layout
+msgid "<strong>Período:</strong>"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.act_window,name:l10n_gt_fiscal_book.action_account_move_type
+#: model:ir.model,name:l10n_gt_fiscal_book.model_account_move_type_tr
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.account_move_type_view_tree
+msgid "Account Move Type"
+msgstr "Tipo de Transaccion"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.ui.menu,name:l10n_gt_fiscal_book.menu_account_move_type
+msgid "Account Move Types"
+msgstr "Tipo de Movimiento"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "BASE EXENTA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "BASE GRAVADA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_product_trans_tr_id
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Bienes"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.wizard_fiscal_reports_gt_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__code
+msgid "Code"
+msgstr "Código"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_combustible_trans_tr_id
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+msgid "Combustibles"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model,name:l10n_gt_fiscal_book.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__company_id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model,name:l10n_gt_fiscal_book.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.actions.act_window,help:l10n_gt_fiscal_book.action_account_move_type
+msgid "Create an account move type."
+msgstr "Crear un tipo de transaccion nueva"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__create_uid
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__create_date
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__date_from
+msgid "Date From"
+msgstr "Desde"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__date_to
+msgid "Date To"
+msgstr "Hasta"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__da
+msgid "Declaracion Unica Aduanera"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "Define los impuestos afectos al libro de compras del IVA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "Define los impuestos afectos al libro de ventas del IVA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.wizard_fiscal_reports_gt_form
+msgid "Diarios"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"Diarios de facturacion de ventas incluidos en el reporte de compras del IVA."
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid ""
+"Diarios de facturacion de ventas incluidos en el reporte de ventas del IVA."
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__display_name
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__display_name
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__display_name
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_bank_statement_line__gt_document_type_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__gt_document_type_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_payment__gt_document_type_tr
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__ep
+msgid "Escritura Publica"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.wizard_fiscal_reports_gt_form
+msgid "Excel"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fa
+msgid "FAUCA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fc
+msgid "Factura Cambiaria"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fce
+msgid "Factura Electronica"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fe
+msgid "Factura Especial"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fpc
+msgid "Factura Peq. Contribuyente"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Fecha"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__file
+msgid "File"
+msgstr "Archivo"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__file_name
+msgid "Filename"
+msgstr "Nombre de Archivo"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__type_book
+msgid "Fiscal Type"
+msgstr "Tipo de Reporte"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__fo
+msgid "Formulario SAT"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.wizard_fiscal_reports_gt_form
+msgid "Generar"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_gt_fiscal_book
+#: model:account.tax.group,name:l10n_gt_fiscal_book.tax_group_idp
+msgid "IDP"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_idp_tax_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_idp_tax_tr_ids
+msgid "IDP for Combustible Taxes"
+msgstr "IDP de Combustibles"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "IVA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "IVA Compras"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "IVA Ventas"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_iva_purchase_tax_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_iva_purchase_tax_tr_ids
+msgid "IVA for Purchase Taxes"
+msgstr "IVA Compras"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_iva_sale_tax_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_iva_sale_tax_tr_ids
+msgid "IVA for Sale Taxes"
+msgstr "IVA de Ventas"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_import_trans_tr_id
+msgid "Importaciones"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+msgid "Importación"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model,name:l10n_gt_fiscal_book.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__journal_ids
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_book_header_layout
+msgid "LIBRO DE VENTAS Y SERVICIOS PRESTADOS"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move____last_update
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr____last_update
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company____last_update
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__write_uid
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__write_uid
+msgid "Last Updated by"
+msgstr "Última actualizacion por"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__write_date
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__write_date
+msgid "Last Updated on"
+msgstr "Última actualizacion el"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.act_window,name:l10n_gt_fiscal_book.action_purchase_fiscal_report_gt
+#: model:ir.ui.menu,name:l10n_gt_fiscal_book.menu_wizard_purchase_fiscal_report
+msgid "Libro de Compras"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "Libro de Compras del IVA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.act_window,name:l10n_gt_fiscal_book.action_sale_fiscal_report_gt
+#: model:ir.ui.menu,name:l10n_gt_fiscal_book.menu_wizard_sale_fiscal_report
+msgid "Libro de Ventas"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "Libro de Ventas del IVA"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.ui.menu,name:l10n_gt_fiscal_book.menu_root_fiscal_report_gt
+msgid "Libros de Ventas/Compras"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_bank_statement_line__gt_move_type_tr_id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__gt_move_type_tr_id
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_payment__gt_move_type_tr_id
+msgid "Move Type"
+msgstr "Tipo Movimiento"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "NIT"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+msgid "NIT o Cedula"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Nombre"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__nc
+msgid "Nota de Credito"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__nd
+msgid "Nota de Debito"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_bank_statement_line__gt_dte_number_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__gt_dte_number_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_payment__gt_dte_number_tr
+msgid "Numero DTE"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Número"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_other_purchase_tax_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_other_purchase_tax_tr_ids
+msgid "Other Purchase Taxes"
+msgstr "Otros impuestos de Compra"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_other_sale_tax_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_other_sale_tax_tr_ids
+msgid "Other Sale Taxes"
+msgstr "Otros Impuestos de Ventas"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move__gt_document_type_tr__onaf
+msgid "Otros No Afectos"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__wizard_fiscal_book__type_report__pdf
+msgid "PDF"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+msgid "Peq. Contribuyente"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_pqc_trans_tr_id
+msgid "Peq. Contribuyentes"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+msgid "Precio Neto"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move_type_tr__type__purchase
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__wizard_fiscal_book__type_book__purchase
+msgid "Purchase"
+msgstr "Compras"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.report,name:l10n_gt_fiscal_book.report_purchase_fiscal_book
+msgid "Purchase Fiscal Book"
+msgstr "Libro de Compras"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_purchase_journal_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_purchase_journal_tr_ids
+msgid "Purchase Journals"
+msgstr "Diarios de Compras"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.fiscal_purchase_book_header_layout
+msgid "REGISTRO DE COMPRAS Y SERVICIOS"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__type_report
+msgid "Report Type"
+msgstr "Tipo de Reporte"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__account_move_type_tr__type__sale
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__wizard_fiscal_book__type_book__sale
+msgid "Sale"
+msgstr "Ventas"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.actions.report,name:l10n_gt_fiscal_book.report_sale_fiscal_book
+msgid "Sale Fiscal Book"
+msgstr "Libro de Ventas"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_sale_journal_tr_ids
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_sale_journal_tr_ids
+msgid "Sale Journals"
+msgstr "Diarios de Ventas"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.wizard_fiscal_reports_gt_form
+msgid "Seleccione diario y periodos"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_bank_statement_line__gt_dte_serie_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move__gt_dte_serie_tr
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_payment__gt_dte_serie_tr
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Serie"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_config_settings__gt_service_trans_tr_id
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Servicios"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "TRAN"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__base_id
+msgid "Tax Base"
+msgstr "Base Imponible"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_wizard_fiscal_book__tax_id
+msgid "Taxes"
+msgstr "IVA"
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Tipo"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.res_config_fiscal_book_gt
+msgid "Tipo de Transacciones para reporte de compras"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_purchase_fiscal_book_document
+#: model_terms:ir.ui.view,arch_db:l10n_gt_fiscal_book.report_sale_fiscal_book_document
+msgid "Total"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_product_trans_tr_id
+msgid "Transacciones de Bienes"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_combustible_trans_tr_id
+msgid "Transacciones de Combustibles"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_import_trans_tr_id
+msgid "Transacciones de Importaciones"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_pqc_trans_tr_id
+msgid "Transacciones de Peq.Contribuyentes"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_res_company__gt_service_trans_tr_id
+msgid "Transacciones de Servicios"
+msgstr ""
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields,field_description:l10n_gt_fiscal_book.field_account_move_type_tr__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model,name:l10n_gt_fiscal_book.model_wizard_fiscal_book
+msgid "Wizard Fiscal Book"
+msgstr "Asistente Libro de Ventas/Compras"
+
+#. module: l10n_gt_fiscal_book
+#: model:ir.model.fields.selection,name:l10n_gt_fiscal_book.selection__wizard_fiscal_book__type_report__xls
+msgid "XLS"
+msgstr ""

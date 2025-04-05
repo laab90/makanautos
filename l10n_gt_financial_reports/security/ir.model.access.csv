@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_financial_reports_user,account.financial.reports.user,model_wizard_financial_reports,account.group_account_readonly,1,1,1,1
+account_finaicial_reports_manager,account.financial.reports.manager,model_wizard_financial_reports,account.group_account_user,1,1,1,1
+access_account_common_account_report,access_account_common_account_report,model_account_common_account_report,base.group_user,1,0,0,0
+access_account_balance_report,access.account.balance.report,model_account_balance_report,account.group_account_user,1,1,1,1
+access_wizard_folio_general_ledger,access_wizard_folio_general_ledger,model_wizard_folio_general_ledger,base.group_user,1,1,1,1

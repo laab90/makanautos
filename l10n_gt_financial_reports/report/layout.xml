@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="footer_tmp">
+        <div class="footer">
+            <div class="row">
+                <div class="col-12">
+                    <span style="float:left;margin-left:25px;font-size:14px;">Fecha y Hora de Generación:
+                        <b>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                        </b>
+                    </span>
+                    <span style="float:right;margin-right:25px;font-size:14px;">Página:
+                        <b>
+                            <span class="page"/>
+                        </b>
+                        de
+                        <b>
+                            <span class="topage"/>
+                        </b>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="header_tmp">
+        <t t-set="comp_name" t-value="company.partner_id.name"/>
+        <t t-set="date_from" t-value="period_dates['from']"/>
+        <t t-set="date_to" t-value="period_dates['to']"/>
+        <t t-set="period" t-value="'LIBRO MAYOR CORRESPONDIENTE DEL {0} AL {1}'.format(date_from, date_to)"/>
+        <thead>
+            <tr class="title_tr">
+                <td colspan="6">
+                    <span class="to_upper" t-esc="comp_name"/>
+                </td>
+            </tr>
+            <tr class="title_tr">
+                <td colspan="6">
+                    <span class="to_upper" t-esc="period"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="company_from">
+                    Compañía de:
+                    <span t-field="company.partner_id.country_id"/>
+                </td>
+                <td colspan="3" class="amount_in">
+                    (VALORES EXPRESADOS EN QUETZALES)
+                </td>
+            </tr>
+            <tr class="headers_line">
+                <th>
+                    <!--Nombre de las cuentas y grupos-->
+                </th>
+                <th>
+                    Saldo Inicial
+                </th>
+                <th>
+                    Débito
+                </th>
+                <th>
+                    Crédito
+                </th>
+                <th>
+                    Saldo Final
+                </th>
+            </tr>
+        </thead>
+    </template>
+
+    <template id="daily_header_tmp">
+        <t t-set="comp_name" t-value="company.partner_id.name"/>
+        <t t-set="date_from" t-value="period_dates['from']"/>
+        <t t-set="date_to" t-value="period_dates['to']"/>
+        <t t-set="period" t-value="'PERIODO DEL {0} AL {1}'.format(date_from, date_to)"/>
+        <thead>
+            <tr class="title_tr">
+                <td colspan="7">
+                    <span class="to_upper" t-esc="comp_name"/>
+                </td>
+            </tr>
+            <tr class="title_tr">
+                <td colspan="7">
+                    <span class="to_upper">LIBRO DIARIO MAYOR</span>
+                </td>
+            </tr>
+            <tr class="title_tr">
+                <td colspan="7">
+                    <span class="to_upper" t-esc="period"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="company_from">
+                    NIT:
+                    <span t-field="company.vat"/>
+                </td>
+                <td colspan="4" class="amount_in">
+                    (VALORES EXPRESADOS EN QUETZALES)
+                </td>
+            </tr>
+            <tr class="headers_line">
+                <th>
+                    <!--Nombre de las cuentas y grupos-->
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Saldo Inicial
+                </th>
+                <th>
+                    Débito
+                </th>
+                <th>
+                    Crédito
+                </th>
+                <th>
+                    Saldo Final
+                </th>
+            </tr>
+        </thead>
+    </template>
+</odoo>

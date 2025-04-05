@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_sale_fiscal_book_format" model="report.paperformat">
+        <field name="name">Libro de Ventas/Compras PDF</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">110</field>
+    </record>
+
+    <!--Libro Compras y Servicios-->
+    <record id="report_purchase_fiscal_book" model="ir.actions.report">
+        <field name="model">wizard.fiscal.book</field>
+        <field name="name">Purchase Fiscal Book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_gt_fiscal_book.report_purchase_fiscal_book_document</field>
+        <field name="report_file">l10n_gt_fiscal_book.report_purchase_fiscal_book_document</field>
+        <field name="print_report_name">'Libro de Compra ' + (object.date_from.month or '') + '-' + (str(object.date_to.month) or '')</field>
+        <field name="paperformat_id" ref="l10n_gt_fiscal_book.report_sale_fiscal_book_format"/>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+    <!--Libro Ventas y Servicios-->
+    <record id="report_sale_fiscal_book" model="ir.actions.report">
+        <field name="model">wizard.fiscal.book</field>
+        <field name="name">Sale Fiscal Book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_gt_fiscal_book.report_sale_fiscal_book_document</field>
+        <field name="report_file">l10n_gt_fiscal_book.report_sale_fiscal_book_document</field>
+        <field name="print_report_name">'Libro de Ventas ' + (object.date_from.month or '') + '-' + (str(object.date_to.month) or '')</field>
+        <field name="paperformat_id" ref="l10n_gt_fiscal_book.report_sale_fiscal_book_format"/>
+        <field name="attachment_use" eval="False"/>
+    </record>
+
+    
+</odoo>

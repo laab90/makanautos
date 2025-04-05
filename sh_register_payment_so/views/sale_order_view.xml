@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    <record id="view_order_form_inherited_payment_advance" model="ir.ui.view">
+        <field name="name">sale.order.form.change_button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Advance Payment Button -->
+            <button name="action_confirm" position="after">
+                <button name="%(action_view_sale_payment_wizard_view)d" string="Registrar pago"
+                    type="action" icon="fa-money" class="btn-primary" attrs="{'invisible': ['|',('state', 'in', ['draft','cancel']),('invoice_status', 'in', ['invoiced'])]}" groups="sh_register_payment_so.group_advance_payment"/>
+            </button>
+
+             <!-- Advance Payment Informationn Tab -->
+            <notebook position="inside">
+                <page string="Pagos" groups="sh_register_payment_so.group_advance_payment">
+                    <field name="sh_account_payment_ids" nolabel="1" colspan="4" context="{'form_view_ref': 'account.view_account_payment_form','tree_view_ref': 'account.view_account_payment_tree'}"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,7 @@
+<odoo>
+    <template id="CodigoPuntosButton" name="Código Puntos Button">
+        <div class="button" t-on-click="button_click">
+            <span>Código Puntos</span>
+        </div>
+    </template>
+</odoo>

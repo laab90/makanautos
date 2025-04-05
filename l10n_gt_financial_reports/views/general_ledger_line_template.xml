@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="line_template_general_ledger_report" inherit_id="account_reports.line_template_general_ledger_report">
+            <xpath expr="//a[@action='view_all_journal_items']" position="attributes">
+                <attribute name="t-if">'hierarchy' not in str(line.get('id')) and line.get('unfolded') and  '__group_' not in str(line.get('id'))</attribute>
+            </xpath>
+        </template>
+    </data>
+</odoo>

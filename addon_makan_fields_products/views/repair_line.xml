@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_repair_line_operations_tree_inherit" model="ir.ui.view">
+            <field name="name">repair.line.operations.tree.inherit</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fees_lines']//tree" position="inside">
+                    <field name="cotizacion"/>
+                    <field name="statuspiezas"/>
+                    <field name="horas"/>
+                </xpath>
+            </field>
+        </record>
+
+
+       <record id="view_repair_order_operations_tree_inherit_operations" model="ir.ui.view">
+    <field name="name">repair.order.operations.tree.inherit.operations</field>
+    <field name="model">repair.order</field>
+    <field name="inherit_id" ref="repair.view_repair_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='operations']//tree//field[@name='product_uom']" position="after">
+            <field name="tipo_proveedor"/>
+            <field name="precio_temporal"/>
+            <field name="cotizacion"/>
+            <field name="statuspiezas"/>
+        </xpath>
+    </field>
+</record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="journal_ledger_document">
+        <t t-call="web.html_container">
+           <t t-set="data_report_margin_top" t-value="35"/>
+            <t t-set="data_report_header_spacing" t-value="33"/>
+            <t t-call="web.basic_layout">
+                <div class="header">
+                    <br/>
+                      <link href="/l10n_gt_financial_reports/static/src/css/style.css" rel="stylesheet"/>
+                     <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                            <h4><b><span t-esc="res_company.name"/></b></h4>
+                        </div>
+                        <div class="col-2 offset-2 text-right">
+                            <t t-set="od" t-value="folio"/>
+                            <ul class="list-inline">
+									<b>Folio: <t t-call="l10n_gt_financial_reports.counter_folio"></t></b>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                                <h5><b><span t-esc='report'/></b></h5>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5 offset-2 text-center">
+                            <b><span t-esc='dates'/></b>
+                        </div>
+                        <div class="col-2 offset-3 text-right">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><b>NIT:  <span t-esc="res_company.vat"/></b>
+                        </div>
+                        <div class="col-5 offset-3 text-right">
+                            <b>(CIFRAS EXPRESADAS EN QUETZALES)</b>
+                        </div>
+                    </div>
+                        <table class='table-header'>
+                        <thead>
+                            <tr>
+                                <th class="th-code">CUENTA</th>
+                                <th class="th-account">DESCRIPCION DE LA CUENTA</th>
+                                <th class="th-debit">DEBE</th>
+                                <th class="th-credit">HABER</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="page">
+                    <link href="/l10n_gt_financial_reports/static/src/css/style.css" rel="stylesheet"/>
+                    <!--<t t-call="l10n_gt_financial_reports.journal_ledger_layout"/>-->
+                    <!--Table contains Company VAT and Page Number-->
+                    <table class='table-header'>
+                        <thead>
+                            
+                        </thead>
+                    </table>
+                    <!--Table contains Journal Entries-->
+                    <table class='table-values'>
+                        
+                        <tbody>
+                            <t t-foreach="values" t-as="val">
+                                <tr>
+                                    <td class="td-name">
+                                        <strong>
+                                            Poliza No.:<span t-esc="val.get('name', False)"/>
+                                        </strong>
+                                    </td>
+                                    <td class="td-date">
+                                        <strong>
+                                            --------<span t-esc="val.get('date', False)"/>--------
+                                        </strong>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <t t-set="sum_debit" t-value="0.0"/>
+                                <t t-set="sum_credit" t-value="0.0"/>
+                                <t t-foreach="val.get('lines', [])" t-as="line">
+                                    <tr>
+                                        <td class="td-code">
+                                            <span t-esc="line.get('account_code', False)"/>
+                                        </td>
+                                        <td class="td-account">
+                                            <span t-esc="line.get('account_name', False)"/>
+                                        </td>
+                                        <td class="td-debit">
+                                            <span t-esc="line.get('debit', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                            <t t-set="sum_debit" t-value="sum_debit + line.get('debit', 0.0)"/>
+                                        </td>
+                                        <td class="td-credit">
+                                            <span t-esc="line.get('credit', 0.00)" t-options='{"widget": "float", "precision": 2}'/>
+                                            <t t-set="sum_credit" t-value="sum_credit + line.get('credit', 0.0)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td class="td-code"></td>
+                                    <td class="td-total">
+                                        <strong>TOTAL:</strong>
+                                    </td>
+                                    <td class="td-sum">
+                                        <span t-esc="sum_debit" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                    <td class="td-sum">
+                                        <span t-esc="sum_credit" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tr><td colspan="4"></td></tr>
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                                <td class="td-total">
+                                    <strong>GRAN TOTAL:</strong>
+                                </td>
+                                <td class="td-code"></td>
+                                <td class="td-sum">
+                                    <span t-esc="total_debit" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td class="td-sum">
+                                    <span t-esc="total_credit" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="footer">
+                 <div class="row">
+                <div class="col-12">
+                    <span style="float:left;margin-left:25px;font-size:14px;">Fecha y Hora de Generación:
+                        <b>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                        </b>
+                    </span>
+                    <span style="float:right;margin-right:25px;font-size:14px;">Página:
+                        <b>
+                            <span class="page"/>
+                        </b>
+                        de
+                        <b>
+                            <span class="topage"/>
+                        </b>
+                    </span>
+                </div>
+            </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

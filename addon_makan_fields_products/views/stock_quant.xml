@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Extender la vista de lista de stock.quant para permitir agrupar por repair_order_id -->
+        <!-- <record id="view_stock_quant_tree_inherit_group" model="ir.ui.view">
+            <field name="name">stock.quant.tree.inherit.group</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                Permitir agrupar por repair_order_id
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="group_by">repair_order_id</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+         <!-- <record id="view_stock_quant_tree_editable_group" model="ir.ui.view">
+            <field name="name">stock.quant.tree.editable.inherit.group</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+               
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="group_by">repair_order_id,product_id_order</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="view_stock_quant_tree_custom" model="ir.ui.view">
+    <field name="name">stock.quant.tree.custom</field>
+    <field name="model">stock.quant</field>
+    <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+    <field name="arch" type="xml">
+        <xpath expr="//tree" position="inside">
+            <field name="repair_order_id"/>
+            <field name="product_id_order"/>
+          
+        </xpath>
+    </field>
+</record>
+
+
+<!-- AGREGAR A LA VISTA DE INFORME DE INVENTARIO ESTOS CAMPOS -->
+  <record id="view_stock_quant_tree_informe_inventario" model="ir.ui.view">
+    <field name="name">stock.quant.tree.custom</field>
+    <field name="model">stock.quant</field>
+    <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+    <field name="arch" type="xml">
+        <xpath expr="//tree" position="inside">
+            <field name="repair_order_id"/>
+            <field name="product_id_order"/>
+          
+        </xpath>
+    </field>
+</record>
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="woo_commerce_account_mapping_form_view" model="ir.ui.view">
+            <field name="name">woo.comm.account.mapping.form</field>
+            <field name="model">woo.comm.account.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                            </group>
+                            <group>
+                                <field name="need_sync"/>
+                                <field name="operation"/>
+                            </group>
+                        </group>
+                        <group >
+                            <group>
+                                <field name="account_tax_id"/>
+                            </group>
+                            <group>
+                                <field name="wc_tax_id"/>
+                            </group>
+                            <field name="tax_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="tax_type" />
+                            </group>
+                            <group>
+                                <field name="is_tax_include_in_price"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+    	<record id="woo_commerce_account_mapping_tree_view" model="ir.ui.view">
+            <field name="name">woo.comm.account.mapping.tree</field>
+            <field name="model">woo.comm.account.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Account Mapping" decoration-danger="need_sync=='yes'">
+                    <field name="channel_id"/>
+                    <field name="wc_tax_id"/>
+                    <field name="tax_id"/>
+                    <field name="account_tax_id"/>
+                    <field name="operation"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="need_sync"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="woo_commerce_account_mappings_search_view" model="ir.ui.view">
+            <field name="name">woo.comm.account.mapping.search</field>
+            <field name="model">woo.comm.account.mapping</field>
+            <field name="arch" type="xml">
+            <search string="Account Mapping">
+                <group string="Group By...">
+                  <field name="account_tax_id"/>
+                  <field name="wc_tax_id"/>
+
+                    <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                    <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                    <filter string="Need Update" name='need_sync'  domain="[]" context="{'group_by':'need_sync'}"/>
+                    <group string='Filters'>
+                        <filter icon="terp-check" name="store_selection" string="Channel"
+                            domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                            <filter icon="terp-check" name="channel_id" string="Instance"
+                            domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                    </group>
+
+                 </group>
+            </search>
+            </field>
+        </record>
+
+        <record id="woo_commerce_account_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Account Mapping</field>
+            <field name="res_model">woo.comm.account.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+            <field name="view_id" ref="woo_commerce_account_mapping_tree_view"/>
+        </record>
+
+
+
+        <record id="woo_commerce_journal_mapping_form_view" model="ir.ui.view">
+            <field name="name">woo.comm.journal.mapping.form</field>
+            <field name="model">woo.comm.journal.mapping</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='channel_id'/>
+                                <field name='store_selection'/>
+                            </group>
+                            <group>
+                                
+                                <field name="need_sync"/>
+                                <field name="operation"/>
+                            </group>
+                        </group>
+                        <group col="4">
+
+                            <field name="journal_id"/>
+                            <field name="wc_journal_name"/>
+                            <field name="journal_code"/>
+                             <field name="operation"/>
+                            <field name="ref_odoo_journal_id" invisible="1"/>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="woo_commerce_journal_mapping_tree_view" model="ir.ui.view">
+            <field name="name">woo.comm.journal.mapping.tree</field>
+            <field name="model">woo.comm.journal.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Mapping" decoration-danger="need_sync=='yes'">
+                    <field name="channel_id"/>
+                    <field name="store_selection"/>
+                    <field name="wc_journal_name"/>
+                    <field name="journal_code"/>
+                    <field name="ref_odoo_journal_id"/>
+                    <field name="journal_id"/>
+                    <field name="need_sync"/>
+                    <field name="operation"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="woo_commerce_journal_mappings_search_view" model="ir.ui.view">
+            <field name="name">woo.comm.journal.mapping.search</field>
+            <field name="model">woo.comm.journal.mapping</field>
+            <field name="arch" type="xml">
+            <search string="Account Journal Mapping">
+                 <group expand="0" string="Group By...">
+                   <field name="journal_code"/>
+                   <field name="wc_journal_name"/>
+
+                    <filter string="Channel" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                    <filter string="Instance" name="filter_by_channel_id" context="{'group_by':'channel_id'}"/>
+                    <filter string="Need Update" name='need_sync'  domain="[]" context="{'group_by':'need_sync'}"/>
+                    <group string='Filters'>
+                        <filter icon="terp-check" name="store_selection" string="Channel"
+                            domain="[]" help="Channel" context="{'group_by':'store_selection'}"/>
+                            <filter icon="terp-check" name="channel_id" string="Instance"
+                            domain="[]" help="Instance" context="{'group_by':'channel_id'}"/>
+                    </group>
+
+                 </group>
+            </search>
+            </field>
+        </record>
+
+        <record id="woo_commerce_journal_mapping_action_id" model="ir.actions.act_window">
+            <field name="name">Journal Mapping</field>
+            <field name="res_model">woo.comm.journal.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_channel_id":1}</field>
+            <field name="view_id" ref="woo_commerce_journal_mapping_tree_view"/>
+        </record>
+
+
+ 	</data>
+</odoo>

@@ -1,0 +1,75 @@
+.table-header {
+    width: 100%;
+    font-size: 13px; 
+    font-family:"Courier New", Courier, monospace;
+}
+.table-values {
+    width: 100%;
+    font-size: 13px; 
+    font-family:"Courier New", Courier, monospace;
+}
+.td-vat {
+    width: 50%;
+    text-align: left;
+}
+.td-number {
+    width: 50%;
+    text-align: right;
+}
+.td-title {
+    text-align: center;
+}
+
+/*Table contains Journal Entries*/
+.th-code {
+    width: 20%;
+    text-align: left;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+}
+.th-account {
+    width: 50%;
+    text-align: left;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.th-debit {
+    width: 15%;
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.th-credit {
+    width: 15%;
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+}
+.td-name {
+    text-align: left;
+}
+.td-date {
+    text-align: center;
+}
+.td-code {
+    text-align: center;
+}
+.td-account {
+    text-align: left;
+}
+.td-debit {
+    text-align: right;
+}
+.td-credit {
+    text-align: right;
+}
+.td-total {
+    text-align: right;
+}
+.td-sum {
+    text-align: right;
+    border-top: 2px solid black;
+    border-bottom: double;
+}

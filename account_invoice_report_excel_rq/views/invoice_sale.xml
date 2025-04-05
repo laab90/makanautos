@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- context='default_id': self.env['account.journal'].search(('type', '=', 'sale')) -->
+    <record id="invoice_sale_wizard_rq_view_form" model="ir.ui.view">
+        <field name="name">invoice.sale.wizard.rq.view.form</field>
+        <field name="model">invoice.sale.wizard.rq</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <group>
+                    <group col='2'>
+                        <field name="date_ini" />
+                        <field name="date_fin" />
+                    </group>
+                    <group col='2'>
+                        <field name="company" readonly="1" />
+                    </group>
+                </group>
+                <group>
+                    <notebook>
+                        <page string="Diarios">
+                            <field name="journal_ids" nolabel="1" options="{'no_create_edit': True}"/>
+                        </page>
+                    </notebook>
+                </group>
+                <center>
+                    <footer>
+                        <button string="EXPORTAR" name="export_invoice_sale_excel" type="object" class="oe_highlight" />
+                        <button string="CANCELAR" class="oe_link" special="cancel"/>
+                    </footer>
+                </center>
+            </form>
+        </field>
+    </record>
+
+    <record id="invoice_sale_wizard_rq_action" model="ir.actions.act_window">
+        <field name="name">Libro de Ventas Honduras</field>
+        <field name="res_model">invoice.sale.wizard.rq</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

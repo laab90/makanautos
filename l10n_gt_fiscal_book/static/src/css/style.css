@@ -1,0 +1,53 @@
+.table-values {
+    width: 100%;
+    font-size: 12px; 
+    font-family:"Courier New", Courier, monospace;
+}
+.td-date {
+    width: 5%;
+    text-align: center;
+}
+.td-type {
+    width: 5%;
+    text-align: center;
+}
+.td-serie {
+    width: 6%;
+    text-align: center;
+}
+.td-number {
+    width: 6%;
+    text-align: center;
+}
+.td-tran {
+    width: 5%;
+    text-align: center;
+}
+.td-nit {
+    width: 5%;
+    text-align: center;
+}
+.td-customer {
+    width: 20%;
+    text-align: left;
+}
+.td-amount {
+    width: 7%;
+    text-align: right;
+}
+.th-header {
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+.td-total {
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: double;
+}
+.td-sum {
+    text-align: right;
+    border-top: 2px solid black;
+    border-bottom: double;
+}

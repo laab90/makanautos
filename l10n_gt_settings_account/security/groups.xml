@@ -1,0 +1,17 @@
+<odoo>
+
+    <data>
+        <record model="ir.module.category" id="module_fiscal_books_gt">
+            <field name="name">Localizacion Contable Guatemalteca</field>
+            <field name="description">Localizacion Contable Guatemalteca</field>
+            <field name="sequence">9</field>
+        </record>
+
+        <record id="group_fiscal_book_gt_manager" model="res.groups">
+            <field name="name">Localizacion Contable Guatemalteca</field>
+            <field name="category_id" ref="module_fiscal_books_gt"/>
+        </record>
+
+    </data>
+
+</odoo>

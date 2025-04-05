@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Extender la vista del formulario del producto -->
+        <record id="view_product_template_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='uom_po_id']" position="after">
+                    <field name="marca" string="Marca"/>
+                    <field name="modelo" string="Linea"/>
+                    <field name="kilometraje" string="Kilometraje"/>
+                    <field name="chasis" string="Chasis"/>
+                    
+                </xpath>
+                <xpath expr="//field[@name='barcode']" position="before">
+                    <field name="placa" string="Placa"/>
+                    <field name="motor" string="Motor"/>
+                    <field name="anio" string="Año"/>
+                    <field name="color" string="Color"/>
+                    <field name="cilindraje" string="Cilindraje"/>
+                </xpath>
+            </field>
+        </record>
+
+          <!-- Vista de búsqueda por Notas Internas -->
+    <record id="view_product_template_search_inherited" model="ir.ui.view">
+        <field name="name">product.template.search.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="description" string="Notas Internas"/>
+            </xpath>
+        </field>
+    </record>
+
+        
+
+        
+
+    </data>
+</odoo>

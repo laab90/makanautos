@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Extender la vista del formulario de stock.picking -->
+        <record id="view_stock_picking_form_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <!-- Usar xpath para ubicar el campo después del campo 'origin' -->
+                <xpath expr="//field[@name='origin']" position="after">
+                    <!-- Campo para mostrar el product_id de repair.order -->
+                    <field name="repair_order_id" options="{'no_create_edit': True, 'no_create': True}" context="{'show_name': True}"/>
+                    <!-- Mostrar el product_id de repair.order -->
+                   <field name="product_id_order" attrs="{'invisible': [('repair_order_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

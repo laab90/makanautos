@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sync_channel_tree" model="ir.ui.view">
+            <field name="name">sync.channel.tree</field>
+            <field name="model">sync.channel</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Synchronization Channel" create="true">
+                            <field name="channel_id"/>
+                            <field name="create_date"/>
+                            <field name="action_on"/>
+                            <field name="ecomstore_refrence"/>
+                            <field name="odoo_id"/>
+                            <field name="action_type"/>
+                            <field name="status"/>
+                </tree>
+            </field>
+        </record>
+        <record id="sync_channel_form" model="ir.ui.view">
+            <field name="name">sync_channel_form.form</field>
+            <field name="model">sync.channel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="store_selection"/>
+                            <field name="channel_id" widget='selection'/>
+                            <field name="create_date"/>
+                            <field name="action_on"/>
+                            <field name="ecomstore_refrence"/>
+                            <field name="odoo_id"/>
+                            <field name="action_type"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="summary" widget='html'/>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+        <record id="sync_channel_search" model="ir.ui.view">
+            <field name="name">sync.channel.select</field>
+            <field name="model">sync.channel</field>
+            <field name="arch" type="xml">
+            <search string="Synchronization Channel History" >
+                <field name="status" string="Status"/>
+                 <group string="Group By">
+                    <filter string="Ecom Store" name="filter_by_store_selection" context="{'group_by':'store_selection'}"/>
+                    <filter string="Action On" name="filter_by_action_on" context="{'group_by':'action_on'}"/>
+                    <filter string="Action Type" name="action_type" domain="[]" context="{'group_by':'action_type'}"/>
+                 </group>
+            </search>
+            </field>
+        </record>
+        <record id="sync_channel_action_id" model="ir.actions.act_window">
+            <field name="name">Synchronization History</field>
+            <field name="res_model">sync.channel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_filter_by_store_selection":1,"search_default_filter_by_action_on":1,"search_default_filter_by_action_type":1}</field>
+            <field name="view_id" ref="sync_channel_search"/>
+        </record>
+    </data>
+</odoo>

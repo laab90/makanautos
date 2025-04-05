@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_repair_procesopruebas" model="ir.actions.report">
+        <field name="name">Reporte de Proceso de Pruebas</field>
+        <field name="model">repair.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">addon_makan_fields_products.reporte_procesopruebas</field>
+        <field name="report_file"></field>
+        <field name="print_report_name">('CarWash - {}').format(object.name)</field>
+        <field name="binding_model_id" ref="model_repair_order" />
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="reporte_procesopruebas">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                  <div>
+    <h2 style="font-size: 24px;">REPORTE PROCESO DE PRUEBAS</h2>
+   <div>
+                        <span t-field="doc.name"/>
+                    </div>
+                        <!-- Información del Cliente -->
+                        <div class="row mt32 mb32">
+                            <div class="col-12">
+                                <h2 style="font-size: 18px;">Información del Cliente</h2>
+                                <p>
+                                    <strong>Nombre del Cliente:</strong>
+                                    <span t-field="doc.partner_id.name" />
+                                </p>
+                                <!-- Agrega más campos de cliente según sea necesario -->
+                            </div>
+                        </div>
+
+                        <h2 style="font-size: 18px;">Información del Vehículo</h2>
+                      <!-- Información del Vehículo (antes de la placa) -->
+                     <div class="row mt32 mb32">
+    <!-- Primera columna -->
+                        <div class="col-4">
+      
+        <table>
+            <tr>
+                <td>
+                    <strong>Modelo:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.modelo" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Marca:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.marca" />
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    <strong>Kilometraje:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.kilometrajebd" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- Segunda columna -->
+    <div class="col-4">
+        <table>
+            <tr>
+                <td>
+                    <strong>Chasis:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.chasis" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Placa:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.placa" />
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    <strong>Tanque:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.tanque_combustible" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- Tercera columna -->
+    <div class="col-4">
+        <table>
+            <tr>
+                <td>
+                    <strong>Motor:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.motor" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Año:</strong>
+                </td>
+                <td>
+                    <span t-field="doc.product_id.anio" />
+                </td>
+            </tr>
+           <tr>
+    <td >
+        <strong>Color:</strong>
+    </td>
+    <td style="margin-right: 40px;">
+        <span t-field="doc.product_id.color" />
+    </td>
+</tr>
+            <!-- Puedes agregar más campos del vehículo aquí según sea necesario -->
+        </table>
+    </div>
+</div>
+
+
+   
+    <table style="width: 100%; margin-top: 20px;">
+        <tr>
+            <!-- Primera columna -->
+            <td style="vertical-align: top; width: 50%; padding-right: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <strong>Motor</strong>
+                    <input type="checkbox" t-att-checked="doc.chkmotor"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Suspensión</strong>
+                    <input type="checkbox" t-att-checked="doc.chksuspension"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Transmisión</strong>
+                    <input type="checkbox" t-att-checked="doc.chktransmision"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Averías Tablero</strong>
+                    <input type="checkbox" t-att-checked="doc.chkaveriasentabler"/>
+                </div>
+                
+                 <div style="margin-bottom: 20px;">
+                    <strong>Confort</strong>
+                    <input type="checkbox" t-att-checked="doc.chkconfort"/>
+                </div>
+            </td>
+
+            <!-- Segunda columna -->
+            <td style="vertical-align: top; width: 50%;">
+               
+                <div style="margin-bottom: 20px;">
+                    <strong>Comentarios</strong>
+                    <span t-field="doc.comentariospruebas"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Notas</strong>
+                    <span t-field="doc.notaspruebas"/>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Firma CarWash</strong>
+                    <img t-att-src="'data:image/png;base64,%s' % to_text(doc.firma_carwash)" style="max-width: 100px; max-height: 100px; display: inline-block;" />
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong>Observaciones</strong>
+                    <span t-field="doc.observaciones"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+                        <!-- Agrega más secciones según sea necesario -->
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

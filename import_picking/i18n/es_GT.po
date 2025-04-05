@@ -1,0 +1,221 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* import_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-25 22:58+0000\n"
+"PO-Revision-Date: 2023-05-25 17:08-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_GT\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__import_prod_option__barcode
+msgid "Barcode"
+msgstr "Código de Barras"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__sample_option__csv
+msgid "CSV"
+msgstr "CSV"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__import_option__csv
+msgid "CSV File"
+msgstr "Archivo CSV"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Cannot find file"
+msgstr "Archivo no encontrado"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__import_prod_option__code
+msgid "Code"
+msgstr "Código Interno"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid ""
+"Customer name is different for \"%s\" .\n"
+" Please define same."
+msgstr ""
+"El nombre del cliente es diferente para \"%s\" .\n"
+"Por favor define el mismo"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__location_dest_id
+msgid "Destination Location Zone"
+msgstr "Ubicación de Destino"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: import_picking
+#: model_terms:ir.ui.view,arch_db:import_picking.bi_import_picking_wizard
+msgid "Download Sample File"
+msgstr "Descargar Archivo de Muestra"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__down_samp_file
+msgid "Download Sample Files"
+msgstr "Descargar Archivos de Muestra"
+
+#. module: import_picking
+#: model_terms:ir.ui.view,arch_db:import_picking.bi_import_picking_wizard
+msgid "Download Sample XLS and CSV Files"
+msgstr "Descargar Archivos XLS y CSV de Muestra"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__file
+msgid "File"
+msgstr "Archivo"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__file_name
+msgid "File Name"
+msgstr "Nombre del Archivo"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: import_picking
+#: model_terms:ir.ui.view,arch_db:import_picking.bi_import_picking_wizard
+msgid "Import"
+msgstr "Importar"
+
+#. module: import_picking
+#: model_terms:ir.ui.view,arch_db:import_picking.bi_import_picking_wizard
+msgid "Import Picking"
+msgstr "Importar Picking"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__import_prod_option
+msgid "Import Product By "
+msgstr "Importar Producto Por"
+
+#. module: import_picking
+#: model:ir.actions.act_window,name:import_picking.bi_gen_picking_wizard_action
+#: model:ir.ui.menu,name:import_picking.bi_gen_picking_wizard_import
+msgid "Import Shipments And Delivery Orders"
+msgstr "Importar Ordenes de Entrega y Transferencias Internas"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking____last_update
+msgid "Last Modified on"
+msgstr "Ultima Modificación el"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización el"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__import_prod_option__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Not a valid file!"
+msgstr "Archivo No Válido!"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__picking_type_id
+msgid "Picking Type"
+msgstr "Tipo de Picking"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Please select a file first then proceed"
+msgstr "Seleccione un archivo primero y luego continúe"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Please upload only csv file.!"
+msgstr "Por favor cargue un archivo csv!"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Please upload only xls file.!"
+msgstr "Por favor cargue un archivo xls!"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Product is not available \"%s\"."
+msgstr "El producto no está disponible \"%s\"."
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__sample_option
+msgid "Sample Type"
+msgstr "Tipo de Ejemplo"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__import_option
+msgid "Select"
+msgstr "Seleccionar"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__location_id
+msgid "Source Location Zone"
+msgstr "Ubicación de Origen"
+
+#. module: import_picking
+#: model:ir.model.fields,field_description:import_picking.field_import_picking__picking_type_code
+msgid "Type of Operation"
+msgstr "Tipo de Operación"
+
+#. module: import_picking
+#: code:addons/import_picking/model/picking.py:0
+#, python-format
+msgid "Wrong Date Format. Date Should be in format YYYY-MM-DD."
+msgstr "Formato de fecha incorrecto. El formato debe de ser YYYY-MM-DD."
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__sample_option__xls
+msgid "XLS"
+msgstr "XLS"
+
+#. module: import_picking
+#: model:ir.model.fields.selection,name:import_picking.selection__import_picking__import_option__xls
+msgid "XLS File"
+msgstr "Archivo XLS"
+
+#. module: import_picking
+#: model:ir.model,name:import_picking.model_import_picking
+msgid "import.picking"
+msgstr ""

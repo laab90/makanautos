@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_res_partner_form_megaprint" model="ir.ui.view">
+        <field name="name">res.partner.form.megaprint</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <attribute name="placeholder">Ingresar nit sin guiones.</attribute>
+                <attribute name="string">Nit/Cui/Pasaporte</attribute>
+            </field>
+            <field name="vat" position="after">
+                <field name="type_document"/>
+            </field>
+        </field>
+    </record>
+    </data>
+</odoo>

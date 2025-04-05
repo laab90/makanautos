@@ -1,0 +1,31 @@
+<odoo>
+    <report
+        id="action_report_cotizaciones"
+        model="repair.line.wizard"
+        string="Reporte de Cotizaciones"
+        report_type="qweb-pdf"
+        name="addon_makan_fields_products.report_cotizaciones_template"
+        file="addon_makan_fields_products.report_cotizaciones_template"
+        print_report_name="'Reporte Cotizaciones - %s' % (object.repair_id.name)"
+    />
+
+     <report
+        id="action_report_cotizaciones_taller"
+        model="repair.line.wizard.nuevo"
+        string="Cotizaciones de Taller"
+        report_type="qweb-pdf"
+        name="addon_makan_fields_products.report_cotizaciones_template_taller"
+        file="addon_makan_fields_products.report_cotizaciones_template_taller"
+        print_report_name="'Cotizacion de Taller N. - %s' % (object.repair_id.name)"
+    />
+
+      <report
+        id="action_report_cotizaciones_manoobra"
+        model="repair.line.wizard"
+        string="Cotizaciones de Mano de Obra"
+        report_type="qweb-pdf"
+        name="addon_makan_fields_products.report_cotizaciones_template_manodeobra"
+        file="addon_makan_fields_products.report_cotizaciones_template_manodeobra"
+        print_report_name="'Cotizacion de M.O N. - %s' % (object.repair_id.name)"
+    />
+</odoo>

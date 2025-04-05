@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--vista de formulario pago de proveedores-->
+        <record id="account_payment_check_beneficiario_inherited" model="ir.ui.view">
+            <field name="name">account.payment.check.beneficiario</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="activa_benef" attrs="{'invisible':[('payment_method_code', '!=', 'check_printing')], 'readonly': [('state', '!=', 'draft')]}" />
+
+                    <field name="beneficiario" attrs="{'invisible': ['|',('payment_type', 'not in', 'outbound'), ('activa_benef', '=', False)]}" />
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="type_checkp" attrs="{'invisible':[('payment_method_code', '!=', 'check_printing')], 'readonly': [('state', '!=', 'draft')]}" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- vista de lista en menú pagos de proveedor-->
+        <record id="account_payment_check_beneficiario_inherited_tree" model="ir.ui.view">
+            <field name="name">account.payment.check.beneficiario.tree</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="beneficiario" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
