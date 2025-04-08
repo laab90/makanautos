@@ -121,12 +121,49 @@ class RepairOrder(models.Model):
         store=True
     )
 
+    count_approved_lines = fields.Monetary(
+        string='Líneas Aprobadas',
+        compute='_compute_total_approved_lines_amount',
+        store=True
+    )
+    
     @api.depends('fees_lines.price_subtotal')
     def _compute_total_fees(self):
         for record in self:
             record.total_fees = sum(line.price_subtotal for line in record.fees_lines)
 
     #AQUI TERMINO ----------------------------------------------------------------------------------
+
+    #SE AGREGA CALCULO SUMA DE AMBOS CAMPOS
+    total_pieces_and_fees = fields.Float(string="Gran Total", compute='_compute_total_pieces_and_fees', store=True)
+
+    @api.depends('amount_total', 'total_fees')
+    def _compute_total_pieces_and_fees(self):
+        for record in self:
+            record.total_pieces_and_fees = record.amount_total + record.total_fees
+    #AQUI TERMINO
+
+    #METODO PARA CALCULAR LINEAS APROBADAS
+    @api.depends('repair_line_ids.statuspiezas', 'repair_line_ids.price_subtotal')
+    def _compute_total_approved_lines_amount(self):
+        for order in self:
+            # Inicializamos la suma del precio
+            total_amount = 0.0
+
+            # Buscamos las líneas de reparación con estado 'Aprobado' (statuspiezas = '2')
+            approved_lines = self.env['repair.line'].search([
+                ('repair_id', '=', order.id),
+                ('statuspiezas', '=', '2')  # Estado Aprobado
+            ])
+
+            # Sumamos el price_subtotal de las líneas aprobadas
+            for line in approved_lines:
+                total_amount += line.price_subtotal  # Sumar el subtotal de cada línea aprobada
+
+            # Asignamos la suma al campo total_approved_lines_amount
+            order.count_approved_lines = total_amount
+    #FIN DE METODO
+    
 
     # Métodos
     @api.onchange('location_id')

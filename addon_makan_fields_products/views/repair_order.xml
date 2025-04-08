@@ -574,6 +574,8 @@
             <xpath expr="//field[@name='sale_order_id']" position="after">
                 <field name="amount_total" string="Total Piezas"/>
                  <field name="total_fees" string="Total M.O."/> <!-- AGREGADO 05042025 POR ELDER GIRON -->
+                  <field name="total_pieces_and_fees" string="Total General"/> <!-- AGREGADO 08042025 POR ELDER GIRON -->
+                   <field name="count_approved_lines" string="Total Aprobado"/> 
             </xpath>
         </field>
     </record>
